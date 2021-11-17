@@ -1,1 +1,50 @@
 @import "./common/variables"
+@import "./common/reset"
+
+body
+  background-color: var(--gray-1)
+
+.App
+
+.container
+  margin: 0 auto
+  width: 100%
+  max-width: 1140px
+  display: grid
+  grid-template-columns: repeat(12, 1fr)
+  gap: 30px
+
+// Header
+.header
+  background-color: var(--gray-0)
+  height: var(--header-height)
+  display: flex
+  &__container
+    grid-template-areas: "logo logo logo search search search search search header-buttons header-buttons header-buttons header-buttons header-buttons"
+    align-items: center
+
+  // Header-buttons
+  &-buttons
+    grid-area: header-buttons
+    display: flex
+    justify-content: flex-end
+
+// Logo
+.logo
+  grid-area: logo
+  &__svg
+    width: 141px
+    height: 15px
+
+// Search
+.search
+  position: relative
+  grid-area: search
+  &__icon
+  &__input
+
+.button
+  &-icon
+    &-icon
+
+// ./Header
