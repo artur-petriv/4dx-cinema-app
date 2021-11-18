@@ -19,6 +19,7 @@ body
   background-color: var(--gray-0)
   height: var(--header-height)
   display: flex
+  box-shadow: var(--box-shadow)
   &__container
     grid-template-areas: "logo logo logo search search search search search header-buttons header-buttons header-buttons header-buttons header-buttons"
     align-items: center
@@ -29,12 +30,6 @@ body
     display: flex
     justify-content: flex-end
 
-// Logo
-.logo
-  grid-area: logo
-  &__svg
-    width: 141px
-    height: 15px
 
 // Search
 .search
