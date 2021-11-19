@@ -65,4 +65,5 @@ const FilterRadioItem = styled.div`
 const FilterRadioName = styled.span`
   padding-left: 8px;
   font-weight: 600;
+  color: var(--gray-8);
 `;

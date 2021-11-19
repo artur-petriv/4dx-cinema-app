@@ -2,6 +2,16 @@ import React from 'react';
 import SearchSvg from '../../svg/SearchSvg';
 import styled from 'styled-components';
 
+export default function index() {
+  return (
+    <Search>
+      <SearchIcon />
+      <SearchInput />
+    </Search>
+  );
+}
+
+// Styled Components
 const SearchIcon = styled(SearchSvg)`
   width: 15px;
   height: 16px;
@@ -28,12 +38,3 @@ const SearchInput = styled.input.attrs({
   background-color: var(--gray-1);
   color: var(--gray-8);
 `;
-
-export default function index() {
-  return (
-    <Search>
-      <SearchIcon />
-      <SearchInput />
-    </Search>
-  );
-}

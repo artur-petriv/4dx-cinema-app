@@ -1,6 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
 
+export default function FilterSelectList({ items, isVisible, toggleVisibility }) {
+  const listRef = React.useRef();
+
+  React.useEffect(() => {
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+
+    function handleClick(e) {
+      if (listRef && listRef.current) {
+        const ref = listRef.current;
+        if (!ref.contains(e.target)) {
+          toggleVisibility();
+        }
+      }
+    }
+  }, []);
+
+  function handleOptionClick(optionName, e) {
+    e.stopPropagation();
+    toggleVisibility(optionName);
+  }
+
+  return (
+    <List ref={listRef} className={`${isVisible ? 'visible' : ''}`}>
+      {items.map((option) => (
+        <Option onClick={(e) => handleOptionClick(option.name, e)} key={option.value}>
+          {option.name}
+        </Option>
+      ))}
+    </List>
+  );
+}
+
+// Styled Components
+
 const List = styled.div`
   margin-top: 8px;
   padding: 8px;
@@ -34,36 +69,3 @@ const Option = styled.div`
     background-color: var(--gray-2);
   }
 `;
-
-export default function FilterSelectList({ items, isVisible, toggleVisibility }) {
-  const listRef = React.useRef();
-
-  React.useEffect(() => {
-    document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
-
-    function handleClick(e) {
-      if (listRef && listRef.current) {
-        const ref = listRef.current;
-        if (!ref.contains(e.target)) {
-          toggleVisibility();
-        }
-      }
-    }
-  }, []);
-
-  function handleOptionClick(optionName, e) {
-    e.stopPropagation();
-    toggleVisibility(optionName);
-  }
-
-  return (
-    <List ref={listRef} className={`${isVisible ? 'visible' : ''}`}>
-      {items.map((option) => (
-        <Option onClick={(e) => handleOptionClick(option.name, e)} key={option.value}>
-          {option.name}
-        </Option>
-      ))}
-    </List>
-  );
-}

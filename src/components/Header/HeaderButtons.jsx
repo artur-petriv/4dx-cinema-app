@@ -2,6 +2,17 @@ import React from 'react';
 import ButtonIconSvg from './../../svg/ButtonIconSvg';
 import styled from 'styled-components';
 
+export default function HeaderButtons() {
+  return (
+    <HeaderButtonsWrapper>
+      <ButtonIcon>
+        <ButtonIconIcon />
+      </ButtonIcon>
+    </HeaderButtonsWrapper>
+  );
+}
+
+// Styled Components
 const HeaderButtonsWrapper = styled.div`
   grid-area: header-buttons;
   display: flex;
@@ -28,13 +39,3 @@ const ButtonIconIcon = styled(ButtonIconSvg)`
   width: 18px;
   fill: var(--gray-4);
 `;
-
-export default function HeaderButtons() {
-  return (
-    <HeaderButtonsWrapper>
-      <ButtonIcon>
-        <ButtonIconIcon />
-      </ButtonIcon>
-    </HeaderButtonsWrapper>
-  );
-}

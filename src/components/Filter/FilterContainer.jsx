@@ -8,7 +8,7 @@ export default function FilterContainer({ children }) {
 // Styled Components
 const Container = styled.div`
   display: flex;
-  row-gap: 12px;
+  row-gap: 8px;
   flex-direction: column;
   align-items: flex-start;
 `;

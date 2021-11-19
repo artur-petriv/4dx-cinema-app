@@ -7,13 +7,6 @@ import styled from 'styled-components';
 
 import './scss/App.sass';
 
-const Application = styled.div`
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: var(--header-height) 1fr var(--footer-height);
-  row-gap: 40px;
-`;
-
 export default function App() {
   return (
     <Application>
@@ -28,3 +21,11 @@ export default function App() {
     </Application>
   );
 }
+
+// Styled Components
+const Application = styled.div`
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: var(--header-height) 1fr var(--footer-height);
+  row-gap: 40px;
+`;

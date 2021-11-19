@@ -3,6 +3,17 @@ import { Link } from 'react-router-dom';
 import LogoSvg from './../../svg/LogoSvg';
 import styled from 'styled-components';
 
+export default function index() {
+  return (
+    <Logo>
+      <LogoLink to="/">
+        <LogoIcon />
+      </LogoLink>
+    </Logo>
+  );
+}
+
+// Styled Components
 const LogoIcon = styled(LogoSvg)`
   width: 141px;
   height: 15px;
@@ -17,13 +28,3 @@ const Logo = styled.div`
   display: flex;
   grid-area: logo;
 `;
-
-export default function index() {
-  return (
-    <Logo>
-      <LogoLink to="/">
-        <LogoIcon />
-      </LogoLink>
-    </Logo>
-  );
-}
