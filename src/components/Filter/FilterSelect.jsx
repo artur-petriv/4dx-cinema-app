@@ -44,12 +44,12 @@ const DropdownArrow = styled(ArrowDropdownSvg)`
   }
 `;
 
-export default function FilterSelect() {
+export default function FilterSelect({ items }) {
   const [isVisible, setIsVisible] = React.useState(false);
   const [selected, setSelected] = React.useState('');
 
   React.useEffect(() => {
-    setSelected(sortData[0].name);
+    setSelected(items[0].name);
   }, []);
 
   function showFilterList() {
@@ -71,7 +71,7 @@ export default function FilterSelect() {
 
       {isVisible && (
         <FilterSelectList
-          sortData={sortData}
+          items={items}
           isVisible={isVisible}
           toggleVisibility={(sortName) => hideFilterList(sortName)}
         />

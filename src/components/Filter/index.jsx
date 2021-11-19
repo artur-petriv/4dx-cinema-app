@@ -1,6 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
+import FilterCheckboxList from './FilterCheckboxList';
+import FilterRadio from './FilterRadio';
+import FilterSelect from './FilterSelect';
 
+export default function index({ title, type, items }) {
+  let FilterType = <FilterSelect items={items} />;
+
+  if (type === 'checkbox') FilterType = <FilterCheckboxList items={items} />;
+  if (type === 'radio') FilterType = <FilterRadio items={items} />;
+
+  return (
+    <Filter>
+      <FilterTitle>{title}</FilterTitle>
+      {FilterType}
+    </Filter>
+  );
+}
+
+// Styled Components
 const Filter = styled.div`
   padding-bottom: 24px;
   display: grid;
@@ -17,12 +35,3 @@ const FilterTitle = styled.div`
   color: var(--gray-5);
   font-size: var(--small-font-size);
 `;
-
-export default function index({ title, children }) {
-  return (
-    <Filter>
-      <FilterTitle>{title}</FilterTitle>
-      {children}
-    </Filter>
-  );
-}

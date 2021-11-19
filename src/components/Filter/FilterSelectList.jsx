@@ -35,7 +35,7 @@ const Option = styled.div`
   }
 `;
 
-export default function FilterSelectList({ sortData, isVisible, toggleVisibility }) {
+export default function FilterSelectList({ items, isVisible, toggleVisibility }) {
   const listRef = React.useRef();
 
   React.useEffect(() => {
@@ -52,14 +52,14 @@ export default function FilterSelectList({ sortData, isVisible, toggleVisibility
     }
   }, []);
 
-  function handleOptionClick(sortName, e) {
+  function handleOptionClick(optionName, e) {
     e.stopPropagation();
-    toggleVisibility(sortName);
+    toggleVisibility(optionName);
   }
 
   return (
     <List ref={listRef} className={`${isVisible ? 'visible' : ''}`}>
-      {sortData.map((option) => (
+      {items.map((option) => (
         <Option onClick={(e) => handleOptionClick(option.name, e)} key={option.value}>
           {option.name}
         </Option>
