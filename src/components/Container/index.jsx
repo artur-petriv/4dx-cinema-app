@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 export default function index({ children, className }) {
   return <Container className={className}>{children}</Container>;
@@ -12,5 +12,5 @@ const Container = styled.div`
   max-width: 1140px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 30px;
+  gap: 32px;
 `;
