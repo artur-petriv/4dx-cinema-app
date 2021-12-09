@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import ImdbSvg from "../../svg/ImdbSvg";
+import Poster from "../Poster";
 
 export default function index() {
   return (
     <Card>
       <Link to="/film/venom-2">
-        <CardImg src="https://noar.pp.ua/4dx/img/card.jpg" alt="Film" />
+        {/* <CardImg src="https://noar.pp.ua/4dx/img/card.jpg" alt="Film" /> */}
+        <Poster imageUrl="https://noar.pp.ua/4dx/img/card.jpg" />
       </Link>
       <CardInfo>
         <CardTitleLink to="/film/venom-2">Веном 2</CardTitleLink>
@@ -69,8 +71,8 @@ const CardRating = styled.div`
 `;
 
 const CardRatingSvg = styled(ImdbSvg)`
-  width: 50px;
-  height: 25px;
+  width: 48px;
+  height: 24px;
 `;
 
 const CardRatingNumbers = styled.span`

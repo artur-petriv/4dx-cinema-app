@@ -26,6 +26,6 @@ const Header = styled.header`
 `;
 
 const HeaderContainer = styled(Container)`
-  grid-template-areas: 'logo logo logo search search search search search header-buttons header-buttons header-buttons header-buttons header-buttons';
+  grid-template-areas: 'logo logo logo logo search search search search header-buttons header-buttons header-buttons header-buttons';
   align-items: center;
 `;

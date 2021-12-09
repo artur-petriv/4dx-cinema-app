@@ -8,14 +8,17 @@ export default function PaginationButton({ page: { page, selected = false } }) {
 }
 
 const Button = styled.button`
-  padding: 12px 16px;
+  padding: 8px 12px;
+  min-width: 42px;
+  font-weight: 400;
   font-size: var(--button-font-size);
   color: var(--gray-8);
-  line-height: var(--line-base);
+  line-height: var(--line-normal);
   border-radius: var(--border-radius-medium);
   &.selected {
     background-color: var(--gray-0);
     box-shadow: var(--box-shadow);
     cursor: default;
+    font-weight: 600;
   }
 `;
