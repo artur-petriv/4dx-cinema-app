@@ -1,6 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import Card from './../Card';
+import React from "react";
+import styled from "styled-components";
+import Pagination from "../Pagination";
+import Card from "./../Card";
 
 export default function HomeContent() {
   return (
@@ -12,7 +13,7 @@ export default function HomeContent() {
         <Card />
         <Card />
       </CardsList>
-      <CardsPagination></CardsPagination>
+      <Pagination />
     </Content>
   );
 }
@@ -20,19 +21,14 @@ export default function HomeContent() {
 // Styled Components
 const Content = styled.div`
   border-radius: var(--border-radius-medium);
-  box-shadow: var(--box-shadow);
   grid-area: content;
   display: grid;
-  grid-template-rows: 1fr 60px;
-  row-gap: 28px;
+  grid-template-rows: 1fr auto;
+  row-gap: 20px;
 `;
 
 const CardsList = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-`;
-
-const CardsPagination = styled.div`
-  background-color: #fff;
 `;
