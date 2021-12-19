@@ -8,7 +8,6 @@ export default function index() {
   return (
     <Card>
       <Link to="/film/venom-2">
-        {/* <CardImg src="https://noar.pp.ua/4dx/img/card.jpg" alt="Film" /> */}
         <Poster imageUrl="https://noar.pp.ua/4dx/img/card.jpg" />
       </Link>
       <CardInfo>
