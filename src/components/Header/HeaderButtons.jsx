@@ -1,6 +1,6 @@
-import React from 'react';
-import ButtonIconSvg from './../../svg/ButtonIconSvg';
-import styled from 'styled-components';
+import React from "react";
+import ButtonIconSvg from "./../../svg/ButtonIconSvg";
+import styled from "styled-components";
 
 export default function HeaderButtons() {
   return (
@@ -18,7 +18,6 @@ const HeaderButtonsWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  box-shadow: var(--box-shadow);
 `;
 
 const ButtonIcon = styled.button`

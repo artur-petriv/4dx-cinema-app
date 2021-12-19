@@ -33,7 +33,7 @@ const SearchInput = styled.input.attrs({
   placeholder: 'Поиск',
 })`
   padding: 12px 32px 12px 52px;
-  width: 300px;
+  width: 100%;
   border-radius: 8px;
   background-color: var(--gray-1);
   color: var(--gray-8);
