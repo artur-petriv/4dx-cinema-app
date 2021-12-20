@@ -20,12 +20,12 @@ export default function index({ title, type, items }) {
 
 // Styled Components
 const Filter = styled.div`
-  padding-bottom: 24px;
+  /* padding-bottom: 24px; */
   display: grid;
   row-gap: 12px;
   border-bottom: 1px solid var(--gray-1);
   &:last-child {
-    padding-bottom: 0;
+    /* padding-bottom: 0; */
     border-bottom: none;
   }
 `;

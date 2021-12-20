@@ -6,6 +6,28 @@ import FilmTitle from '../components/Film/Title';
 import Poster from '../components/Poster';
 import FilmRating from '../components/Film/Rating';
 import FilmDatepicker from '../components/Film/Datepicker';
+import Filter from '../components/Filter';
+
+const FiltersData = [
+  {
+    name: 'Формат',
+    type: 'select',
+    options: [
+      { name: '4DX', value: '4dx' },
+      { name: '3D', value: '3d' },
+      { name: '2D', value: '2d' },
+    ],
+  },
+  {
+    name: 'Время',
+    type: 'select',
+    options: [
+      { name: '11:45', value: '11:45' },
+      { name: '13:00', value: '13:00' },
+      { name: '17:45', value: '17:45' },
+    ],
+  },
+];
 
 export default function Film() {
   return (
@@ -38,7 +60,16 @@ export default function Film() {
         <FilmContent>
           <FilmOptions>
             <FilmDatepicker />
-            <div className="film-filters"></div>
+            <FilmFilters>
+              {FiltersData.map((filter, index) => (
+                <Filter
+                  key={`${filter.type}_${index}`}
+                  title={filter.name}
+                  type={filter.type}
+                  items={filter.options}
+                />
+              ))}
+            </FilmFilters>
           </FilmOptions>
         </FilmContent>
       </FilmContainer>
@@ -67,6 +98,7 @@ const FilmCard = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  box-shadow: var(--box-shadow);
 `;
 
 const FilmTrailer = styled.div`
@@ -77,6 +109,7 @@ const FilmTrailer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: var(--box-shadow);
 `;
 
 const FilmInfo = styled.div``;
@@ -84,6 +117,12 @@ const FilmInfo = styled.div``;
 const PosterImage = styled.div``;
 
 const FilmContent = styled.div``;
+
+const FilmFilters = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 24px;
+`;
 
 const FilmOptions = styled.div`
   padding: 0 20px;

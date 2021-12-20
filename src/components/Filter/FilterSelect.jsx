@@ -47,6 +47,7 @@ const FilterContainer = styled.div`
 
 const FilterSelectWrap = styled.div`
   padding: 12px 20px;
+  min-width: 120px;
   background-color: var(--gray-1);
   border-radius: var(--border-radius-medium);
   color: var(--gray-8);
@@ -67,6 +68,7 @@ const FilterSelectWrap = styled.div`
 `;
 
 const DropdownArrow = styled(ArrowDropdownSvg)`
+  margin-left: 12px;
   width: 12px;
   height: 6px;
   transition: transform 0.25s;
