@@ -6,6 +6,8 @@ import FilmTitle from '../components/Film/Title';
 import Poster from '../components/Poster';
 import FilmRating from '../components/Film/Rating';
 import FilmDatepicker from '../components/Film/Datepicker';
+import FilmTicket from '../components/Film/Ticket';
+import FilmHall from '../components/Film/Hall';
 import Filter from '../components/Filter';
 
 const FiltersData = [
@@ -71,6 +73,12 @@ export default function Film() {
               ))}
             </FilmFilters>
           </FilmOptions>
+
+          <FilmContainerMain>
+            <FilmTicket />
+            <FilmHall />
+          </FilmContainerMain>
+
         </FilmContent>
       </FilmContainer>
     </FilmSection>
@@ -116,7 +124,14 @@ const FilmInfo = styled.div``;
 
 const PosterImage = styled.div``;
 
-const FilmContent = styled.div``;
+const FilmContent = styled.div`
+  display: grid;
+  gap: 28px;
+`;
+
+const FilmContainerMain = styled(Container)`
+  grid-template-areas: 'ticket ticket ticket hall hall hall hall hall hall hall hall hall';
+`;
 
 const FilmFilters = styled.div`
   display: flex;

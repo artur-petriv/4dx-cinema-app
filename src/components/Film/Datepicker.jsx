@@ -169,7 +169,7 @@ const Month = styled.div`
 `;
 const Number = styled.div`
   padding: 8px;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--gray-8);
   line-height: 1;
