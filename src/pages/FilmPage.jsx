@@ -6,9 +6,9 @@ import FilmTitle from '../components/Film/Title';
 import Poster from '../components/Poster';
 import FilmRating from '../components/Film/Rating';
 import FilmDatepicker from '../components/Film/Datepicker';
+import Filter from '../components/Filter';
 import FilmTicket from '../components/Film/Ticket';
 import FilmHall from '../components/Film/Hall';
-import Filter from '../components/Filter';
 
 const FiltersData = [
   {
@@ -74,11 +74,10 @@ export default function Film() {
             </FilmFilters>
           </FilmOptions>
 
-          <FilmContainerMain>
+          <FilmMain>
             <FilmTicket />
             <FilmHall />
-          </FilmContainerMain>
-
+          </FilmMain>
         </FilmContent>
       </FilmContainer>
     </FilmSection>
@@ -124,13 +123,15 @@ const FilmInfo = styled.div``;
 
 const PosterImage = styled.div``;
 
-const FilmContent = styled.div`
+const FilmMain = styled.div`
   display: grid;
-  gap: 28px;
+  grid-template-areas: 'ticket ticket ticket hall hall hall hall hall hall hall hall hall';
+  gap: 32px;
 `;
 
-const FilmContainerMain = styled(Container)`
-  grid-template-areas: 'ticket ticket ticket hall hall hall hall hall hall hall hall hall';
+const FilmContent = styled.div`
+  display: grid;
+  gap: 32px;
 `;
 
 const FilmFilters = styled.div`
@@ -143,7 +144,7 @@ const FilmOptions = styled.div`
   padding: 0 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 32px;
   background-color: var(--gray-0);
   border-radius: var(--border-radius-medium);
   box-shadow: var(--box-shadow);

@@ -1,0 +1,36 @@
+const films = [
+  {
+    id: 1000,
+    name: 'Человек-паук: Нет пути домой',
+    year: 2021,
+    limitation: 12,
+    country: 'США',
+    genres: ['боевик', 'фантастика'],
+    language: 'Украинский (дублированный)',
+    rentalStart: '16.12.21',
+    rentalEnd: '12.01.12',
+    duration: 148,
+    posterUrl: 'https://noar.pp.ua/4dx/films/WQ3XA0T42.jpg',
+    trailerUrl: 'https://youtube.com/watch?v=WQ3XA0T42',
+    IMDb: 9,
+    schedule: [
+      {
+        date: '16.12.12',
+        '4DX': {
+          '10:30': 100,
+          '13:30': 120,
+          '16:30': 140,
+        },
+        '3D': {
+          '14:00': 90,
+        },
+        '2D': {
+          '10:00': 70,
+          '12:05': 80,
+          '22:00': 90,
+        }
+      },
+    ],
+  },
+  {},
+];
