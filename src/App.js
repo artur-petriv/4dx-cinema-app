@@ -27,5 +27,5 @@ const Application = styled.div`
   min-height: 100vh;
   display: grid;
   grid-template-rows: var(--header-height) 1fr var(--footer-height);
-  row-gap: 40px;
+  row-gap: 28px;
 `;
