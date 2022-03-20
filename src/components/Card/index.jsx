@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import ImdbSvg from "../../svg/ImdbSvg";
-import Poster from "../Poster";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import ImdbSvg from '../../svg/ImdbSvg';
+import Poster from '../Poster';
 
 export default function index() {
   return (
     <Card>
       <Link to="/film/venom-2">
-        <Poster imageUrl="https://noar.pp.ua/4dx/img/card.jpg" />
+        <Poster imageUrl="https://razborkatesla.com.ua/o/card.jpg" />
       </Link>
       <CardInfo>
         <CardTitleLink to="/film/venom-2">Веном 2</CardTitleLink>

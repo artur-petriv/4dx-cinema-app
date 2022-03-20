@@ -37,7 +37,7 @@ export default function Film() {
       <FilmContainer>
         <FilmHead>
           <FilmCard>
-            <Poster imageUrl="https://noar.pp.ua/4dx/img/card.jpg" />
+            <Poster imageUrl="https://razborkatesla.com.ua/o/card.jpg" />
             <FilmInfo>
               <FilmTitle name="Веном 2" />
               <FilmGenres />
