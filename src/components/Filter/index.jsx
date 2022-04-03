@@ -4,11 +4,11 @@ import FilterCheckboxList from './FilterCheckboxList';
 import FilterRadio from './FilterRadio';
 import FilterSelect from './FilterSelect';
 
-export default function index({ title, type, items }) {
-  let FilterType = <FilterSelect items={items} />;
+export default function index({ title, type, items, selectedSort }) {
+  let FilterType = <FilterSelect selectedSort={selectedSort} items={items} />;
 
-  if (type === 'checkbox') FilterType = <FilterCheckboxList items={items} />;
-  if (type === 'radio') FilterType = <FilterRadio items={items} />;
+  if (type === "checkbox") FilterType = <FilterCheckboxList items={items} />;
+  if (type === "radio") FilterType = <FilterRadio items={items} />;
 
   return (
     <Filter>
@@ -20,7 +20,7 @@ export default function index({ title, type, items }) {
 
 // Styled Components
 const Filter = styled.div`
-  /* padding-bottom: 24px; */
+  padding-bottom: 24px;
   display: grid;
   row-gap: 12px;
   border-bottom: 1px solid var(--gray-1);

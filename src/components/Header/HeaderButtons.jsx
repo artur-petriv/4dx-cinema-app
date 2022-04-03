@@ -1,6 +1,7 @@
 import React from "react";
 import ButtonIconSvg from "./../../svg/ButtonIconSvg";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function HeaderButtons() {
   return (
@@ -8,6 +9,8 @@ export default function HeaderButtons() {
       <ButtonIcon>
         <ButtonIconIcon />
       </ButtonIcon>
+
+      <LoginLinkButton to="login">Вход</LoginLinkButton>
     </HeaderButtonsWrapper>
   );
 }
@@ -18,6 +21,9 @@ const HeaderButtonsWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  & > :first-child {
+    margin-right: 32px;
+  }
 `;
 
 const ButtonIcon = styled.button`
@@ -25,6 +31,7 @@ const ButtonIcon = styled.button`
   border-radius: 8px;
   transition: background-color 0.3s;
   display: inline-flex;
+  line-height: 18px;
   &:hover {
     background-color: var(--gray-1);
   }
@@ -34,7 +41,27 @@ const ButtonIcon = styled.button`
 `;
 
 const ButtonIconIcon = styled(ButtonIconSvg)`
+  margin: 0;
   height: 18px;
   width: 18px;
   fill: var(--gray-4);
+`;
+
+const LoginLinkButton = styled(Link)`
+  padding: 8px 24px;
+  border-radius: 32px;
+  transition: background-color 0.3s, opacity 0.3s;
+  display: inline-flex;
+  line-height: 18px;
+  background-color: var(--brand-color);
+  color: var(--gray-0);
+  opacity: 0.95;
+  &:hover {
+    /* background-color: var(--gray-1); */
+    opacity: 1;
+  }
+  &:active {
+    /* background-color: var(--gray-2); */
+    opacity: 0.9;
+  }
 `;

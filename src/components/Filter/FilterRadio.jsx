@@ -1,26 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Context } from '../..';
 import FilterContainer from './FilterContainer';
 
 export default function FilterRadio({ items }) {
-  const [radioButton, setRadioButton] = React.useState('all');
+  const [radioButton, setRadioButton] = React.useState("");
+  const { films } = React.useContext(Context);
 
   function handleRadioClick(value) {
     if (radioButton === value) return;
+    films.setAgeLimitationSelected(value);
     setRadioButton(value);
   }
 
+  React.useEffect(() => {
+    if (films.ageLimitationSelected) {
+      setRadioButton(films.ageLimitationSelected);
+    }
+  }, [])
+
   return (
     <FilterContainer>
-      <FilterRadioItem onClick={() => handleRadioClick('all')}>
-        <FilterRadioButton className={radioButton === 'all' ? 'selected' : ''}></FilterRadioButton>
+      <FilterRadioItem onClick={() => handleRadioClick("")}>
+        <FilterRadioButton
+          className={radioButton === "" ? "selected" : ""}
+        ></FilterRadioButton>
         <FilterRadioName>Все</FilterRadioName>
       </FilterRadioItem>
-      {items.map((radio) => (
-        <FilterRadioItem onClick={() => handleRadioClick(radio.value)} key={radio.value}>
+      {items?.map((radio) => (
+        <FilterRadioItem
+          onClick={() => handleRadioClick(radio.age)}
+          key={radio.age}
+        >
           <FilterRadioButton
-            className={radioButton === radio.value ? 'selected' : ''}></FilterRadioButton>
-          <FilterRadioName>{radio.name}</FilterRadioName>
+            className={radioButton === radio.age ? "selected" : ""}
+          ></FilterRadioButton>
+          <FilterRadioName>{radio.title}</FilterRadioName>
         </FilterRadioItem>
       ))}
     </FilterContainer>

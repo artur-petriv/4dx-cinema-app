@@ -9,8 +9,7 @@ import FilmPage from "./../../pages/FilmPage";
 
 export default function AppRouter() {
 	const { user } = React.useContext(Context);
-
-  console.log(user)
+  
 	return (
     <Routes>
       {user.isAuth ? (

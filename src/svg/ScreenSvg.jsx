@@ -11,8 +11,8 @@ export default function ScreenSvg({ className }) {
     >
       <path
         d="M2 24C2 24 244.029 2 399.5 2C554.971 2 797 24 797 24"
-        stroke-width="4"
-        stroke-linecap="round"
+        strokeWidth="4"
+        strokeLinecap="round"
       />
     </svg>
   );

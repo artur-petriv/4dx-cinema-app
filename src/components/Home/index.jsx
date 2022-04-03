@@ -4,7 +4,7 @@ import HomeContent from "./HomeContent";
 import HomeSidebar from "./HomeSidebar";
 import Container from "./../Container";
 
-export default function index() {
+export default function Home() {
   return (
     <HomeSection>
       <HomeContainer>

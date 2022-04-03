@@ -16,7 +16,7 @@ export default function FilmHall() {
           <RowTitle>A</RowTitle>
           <RowContent>
             {new Array(10).fill(null).map((n, i) => (
-              <Seat number={i} available />
+              <Seat key={i} number={i} available />
             ))}
           </RowContent>
           <RowTitle>A</RowTitle>
@@ -26,7 +26,7 @@ export default function FilmHall() {
           <RowTitle>B</RowTitle>
           <RowContent>
             {new Array(12).fill(null).map((n, i) => (
-              <Seat number={i} available />
+              <Seat key={i} number={i} available />
             ))}
           </RowContent>
           <RowTitle>B</RowTitle>

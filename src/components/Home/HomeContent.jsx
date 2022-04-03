@@ -2,21 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import Pagination from "../Pagination";
 import Card from "./../Card";
+import { Context } from "../..";
+import { observer } from "mobx-react-lite";
 
-export default function HomeContent() {
+const HomeContent = observer(() => {
+  const { films: { films } } = React.useContext(Context);
+
   return (
     <Content>
       <CardsList>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {films?.map((film) => (
+          <Card key={film.id} film={film} />
+        ))}
       </CardsList>
       <Pagination />
     </Content>
   );
-}
+});
 
 // Styled Components
 const Content = styled.div`
@@ -32,3 +34,5 @@ const CardsList = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 `;
+
+export default HomeContent;

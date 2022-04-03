@@ -2,19 +2,22 @@ import React from 'react';
 import CheckedSvg from './../../svg/CheckedSvg';
 import styled from 'styled-components';
 import FilterContainer from './FilterContainer';
+import { Context } from '../..';
+import { observer } from 'mobx-react-lite';
 
-export default function FilterCheckboxList({ items }) {
-  const [checkboxes, setCheckboxes] = React.useState({});
+const FilterCheckboxList = ({ items }) => {
+  const { films } = React.useContext(Context);
 
   React.useEffect(() => {
-    setCheckboxes(
+    if (films.formatsSelected && Object.keys(films.formatsSelected).length === 0 && films.formatsSelected.constructor === Object
+    ) films.setFormatsSelected(
       items.reduce((acc, cur) => ({ [cur.value]: false })),
-      {},
+      {}
     );
-  }, [items]);
+  }, []);
 
   function handleCheckboxClick(value) {
-    setCheckboxes({ ...checkboxes, [value]: !checkboxes[value] });
+    films.setFormatsSelected({ ...films.formatsSelected, [value]: !films.formatsSelected[value] });
   }
 
   return (
@@ -23,7 +26,7 @@ export default function FilterCheckboxList({ items }) {
         <FilterCheckboxItem
           key={checkbox.value}
           onClick={() => handleCheckboxClick(checkbox.value)}>
-          <FilterCheckbox className={checkboxes[checkbox.value] ? 'selected' : ''}>
+          <FilterCheckbox className={films.formatsSelected[checkbox.value] ? 'selected' : ''}>
             <FilterCheckboxIcon />
           </FilterCheckbox>
           <FilterCheckboxName>{checkbox.name}</FilterCheckboxName>
@@ -71,3 +74,6 @@ const FilterCheckboxName = styled.span`
   user-select: none;
   color: var(--gray-8);
 `;
+
+
+export default observer(FilterCheckboxList);

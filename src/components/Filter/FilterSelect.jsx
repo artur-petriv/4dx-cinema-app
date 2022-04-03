@@ -1,14 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Context } from '../..';
 import ArrowDropdownSvg from '../../svg/ArrowDropdownSvg';
 import FilterSelectList from './FilterSelectList';
 
-export default function FilterSelect({ items }) {
+export default function FilterSelect({ items, selectedSort }) {
   const [isVisible, setIsVisible] = React.useState(false);
-  const [selected, setSelected] = React.useState('');
+  const [selected, setSelected] = React.useState("");
 
+  
   React.useEffect(() => {
-    setSelected(items[0].name);
+    const val = items.find(({ value }) => value === selectedSort);
+    setSelected(val?.name);
+    return;
   }, []);
 
   function showFilterList() {
@@ -25,7 +29,7 @@ export default function FilterSelect({ items }) {
     <FilterContainer>
       <FilterSelectWrap onClick={showFilterList}>
         {selected}
-        <DropdownArrow className={`${isVisible ? 'active' : ''}`} />
+        <DropdownArrow className={`${isVisible ? "active" : ""}`} />
       </FilterSelectWrap>
 
       {isVisible && (

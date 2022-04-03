@@ -1,8 +1,11 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import styled from 'styled-components';
+import { Context } from '../..';
 
-export default function FilterSelectList({ items, isVisible, toggleVisibility }) {
+const FilterSelectList = observer(({ items, isVisible, toggleVisibility }) => {
   const listRef = React.useRef();
+  const { films } = React.useContext(Context);
 
   React.useEffect(() => {
     document.addEventListener('click', handleClick);
@@ -18,21 +21,24 @@ export default function FilterSelectList({ items, isVisible, toggleVisibility })
     }
   }, []);
 
-  function handleOptionClick(optionName, e) {
+  function handleOptionClick(option, e) {
     e.stopPropagation();
-    toggleVisibility(optionName);
+    const { name, value } = option;
+
+    films.setSortSelected(value);
+    toggleVisibility(name);
   }
 
   return (
     <List ref={listRef} className={`${isVisible ? 'visible' : ''}`}>
       {items.map((option) => (
-        <Option onClick={(e) => handleOptionClick(option.name, e)} key={option.value}>
+        <Option onClick={(e) => handleOptionClick(option, e)} key={option.value}>
           {option.name}
         </Option>
       ))}
     </List>
   );
-}
+});
 
 // Styled Components
 
@@ -69,3 +75,5 @@ const Option = styled.div`
     background-color: var(--gray-2);
   }
 `;
+
+export default FilterSelectList;

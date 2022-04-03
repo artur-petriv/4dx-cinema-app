@@ -4,13 +4,15 @@ import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import UserStore from './store/UserStore';
+import FilmStore from './store/FilmStore';
 
 export const Context = React.createContext(null);
 
 ReactDOM.render(
   <React.StrictMode>
     <Context.Provider value={{
-      user: new UserStore()
+      user: new UserStore(),
+      films: new FilmStore(),
     }}>
       <Router>
         <App />
