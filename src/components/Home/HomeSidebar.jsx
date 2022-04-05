@@ -17,6 +17,7 @@ const HomeSidebar = observer(() => {
       />
       <Filter title="Формат" type="checkbox" items={films.formats} />
       <Filter title="Возраст" type="radio" items={films.ageLimitations} />
+      <Filter title="Жанры" type="checkbox" items={films.genres} />
     </HomeSidebar2>
   );
 });

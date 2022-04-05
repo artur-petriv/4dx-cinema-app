@@ -2,18 +2,31 @@ import React from "react";
 import ButtonIconSvg from "./../../svg/ButtonIconSvg";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Context } from "./../../";
+import { observer } from "mobx-react-lite";
 
-export default function HeaderButtons() {
+const HeaderButtons = observer(() => {
+  const { user } = React.useContext(Context);
+  
+  const signOut = () => {
+    user.setUser({});
+    user.setIsAuth(false);
+  }
+
   return (
     <HeaderButtonsWrapper>
       <ButtonIcon>
         <ButtonIconIcon />
       </ButtonIcon>
 
-      <LoginLinkButton to="login">Вход</LoginLinkButton>
+      {user.isAuth ? (
+        <span onClick={signOut}>Выход</span>
+        ) : (
+        <LoginLinkButton to="login">Вход</LoginLinkButton>
+      )}
     </HeaderButtonsWrapper>
   );
-}
+});
 
 // Styled Components
 const HeaderButtonsWrapper = styled.div`
@@ -65,3 +78,5 @@ const LoginLinkButton = styled(Link)`
     opacity: 0.9;
   }
 `;
+
+export default HeaderButtons;

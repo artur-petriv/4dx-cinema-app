@@ -31,15 +31,44 @@ const FiltersData = [
   },
 ];
 
+const film = {
+  id: 1,
+  name: "Веном",
+  year: "2022",
+  country: "США",
+  language: "Украинский",
+  img: "",
+  trailer: "",
+  duration: 126,
+  imgUrl: "https://razborkatesla.com.ua/o/card.jpg",
+  rating: "7.2",
+  genres: [
+    {
+      id: 1,
+      title: "Фентези",
+      value: "fantasy",
+      createdAt: "2022-07-31T21:00:00.000Z",
+      updatedAt: "2022-07-31T21:00:00.000Z",
+    },
+    {
+      id: 3,
+      title: "Трилер",
+      value: "thriller",
+      createdAt: "2022-01-07T22:00:00.000Z",
+      updatedAt: "2022-01-07T22:00:00.000Z",
+    },
+  ],
+};
+
 export default function Film() {
   return (
     <FilmSection>
       <FilmContainer>
         <FilmHead>
           <FilmCard>
-            <Poster imageUrl="https://razborkatesla.com.ua/o/card.jpg" />
+            <Poster imageUrl={film.imgUrl} />
             <FilmInfo>
-              <FilmTitle name="Веном 2" />
+              <FilmTitle name={film.name} />
               <FilmGenres />
               <FilmRating />
             </FilmInfo>

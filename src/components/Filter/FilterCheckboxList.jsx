@@ -5,31 +5,63 @@ import FilterContainer from './FilterContainer';
 import { Context } from '../..';
 import { observer } from 'mobx-react-lite';
 
-const FilterCheckboxList = ({ items }) => {
+const FilterCheckboxList = ({ items, title }) => {
   const { films } = React.useContext(Context);
 
-  React.useEffect(() => {
-    if (films.formatsSelected && Object.keys(films.formatsSelected).length === 0 && films.formatsSelected.constructor === Object
-    ) films.setFormatsSelected(
-      items.reduce((acc, cur) => ({ [cur.value]: false })),
-      {}
-    );
+  React.useEffect(() => {    
+    // TODO: Rework
+    if (title && title === "Формат") {
+      if (films.formatsSelected && Object.keys(films.formatsSelected).length === 0 && films.formatsSelected.constructor === Object
+      ) films.setFormatsSelected(
+        items.reduce((acc, cur) => ({ [cur.value]: false })),
+        {}
+      );
+    }
+
+    if (title && title === "Жанры") {
+      if (films.genresSelected && Object.keys(films.genresSelected).length === 0 && films.genresSelected.constructor === Object
+      ) films.setGenresSelected(items.reduce((acc, cur) => ({ [cur.value]: false })),
+        {}
+      );
+    }
   }, []);
 
+  
   function handleCheckboxClick(value) {
-    films.setFormatsSelected({ ...films.formatsSelected, [value]: !films.formatsSelected[value] });
+    if (title === "Формат") films.setFormatsSelected({
+      ...films.formatsSelected,
+      [value]: !films.formatsSelected[value],
+    });
+    
+    if (title === "Жанры") films.setGenresSelected({
+      ...films.genresSelected,
+      [value]: !films.genresSelected[value],
+    });
   }
 
+  if (!title || items.length === 0) return null;
+  
   return (
     <FilterContainer>
-      {items.map((checkbox) => (
+      {items?.map((checkbox) => (
         <FilterCheckboxItem
           key={checkbox.value}
-          onClick={() => handleCheckboxClick(checkbox.value)}>
-          <FilterCheckbox className={films.formatsSelected[checkbox.value] ? 'selected' : ''}>
+          onClick={() => handleCheckboxClick(checkbox.value)}
+        >
+          <FilterCheckbox
+            className={
+              title === "Формат"
+                ? films.formatsSelected[checkbox.value]
+                  ? "selected"
+                  : ""
+                : films.genresSelected[checkbox.value]
+                  ? "selected"
+                  : ""
+            }
+          >
             <FilterCheckboxIcon />
           </FilterCheckbox>
-          <FilterCheckboxName>{checkbox.name}</FilterCheckboxName>
+          <FilterCheckboxName>{checkbox.title}</FilterCheckboxName>
         </FilterCheckboxItem>
       ))}
     </FilterContainer>

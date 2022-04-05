@@ -12,8 +12,8 @@ export default class FilmStore {
       { id: 2, age: 12, title: "12+" },
     ];
     this._formats = [
-      { id: 1, name: "2D", value: "2D" },
-      { id: 2, name: "3D", value: "3D" },
+      { id: 1, title: "2D", value: "2D" },
+      { id: 2, title: "3D", value: "3D" },
     ];
     this._genres = [
       { id: 1, title: "Фентези", value: "fantasy" },
@@ -81,6 +81,7 @@ export default class FilmStore {
     this._sortSelected = "rating";
     this._formatsSelected = {};
     this._ageLimitationSelected = "";
+    this._genresSelected = {};
     makeAutoObservable(this);
   }
 
@@ -116,6 +117,10 @@ export default class FilmStore {
     this._ageLimitationSelected = age;
   }
 
+  setGenresSelected(genres) {
+    this._genresSelected = genres;
+  };
+
   get sort() {
     return this._sort;
   }
@@ -146,5 +151,9 @@ export default class FilmStore {
 
   get ageLimitationSelected() {
     return this._ageLimitationSelected;
+  }
+
+  get genresSelected() {
+    return this._genresSelected;
   }
 }

@@ -1,15 +1,38 @@
 import React from 'react'
 import Container from "./../Container";
 import styled from "styled-components";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { login, registration } from '../../http/userAPI';
+import { Context } from '../..';
+import { observer } from 'mobx-react-lite';
 
-export default function Auth() {
+const Auth = observer(() => {
+  const { user } = React.useContext(Context);
   const location = useLocation();
+  const navigate = useNavigate();
   const isLogin = location.pathname === '/login';
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
 
-	const onSubmit = (e) => e.preventDefault();
+  const signIn = async () => {
+    try {
+      const userResponse = await login(email, password);
+      user.setUser(userResponse);
+      user.setIsAuth(true);
+      navigate("/");
+    } catch (err) {
+      alert(err.response.data.message);
+    }
+  }
+
+  const signUp = async () => {
+    try {
+      const userResponse = await registration(email, password);
+      navigate("/login");
+    } catch (err) {
+      alert(err.response.data.message);
+    }
+  };
 
 	const onChangeEmail = (e) => {
 		setEmail(e.target.value);
@@ -22,30 +45,54 @@ export default function Auth() {
 	return (
     <AuthContainer>
       <AuthForm>
-        <FormLegend>{isLogin ? 'Войти в кабинет' : 'Зарегистрируйтесь'}</FormLegend>
-        <Form>
+        <FormLegend>
+          {isLogin ? "Войти в кабинет" : "Зарегистрируйтесь"}
+        </FormLegend>
+        <Form autoComplete="on" onSubmit={(e) => e.preventDefault()}>
           <Input
             type="text"
             value={email}
+            name="login"
+            autoComplete="username-email"
             onChange={onChangeEmail}
             placeholder="Email"
           />
           <Input
             type="password"
             value={password}
+            name="password"
+            autoComplete="current-password"
             onChange={onChangePassword}
             placeholder="Пароль"
           />
-          <SubmitButton onClick={onSubmit}>Войти</SubmitButton>
-					<RegistrationWrap>
-						Нет профиля? 
-						<RegistrationLink to="/registration">Зарегистрируйтесь!</RegistrationLink>
-					</RegistrationWrap>
+          {isLogin ? (
+            <>
+              <SubmitButton type="submit" onClick={signIn}>
+                Войти
+              </SubmitButton>
+              <RegistrationWrap>
+                {`Нет профиля? `}
+                <RegistrationLink to="/registration">
+                  Зарегистрируйтесь!
+                </RegistrationLink>
+              </RegistrationWrap>
+            </>
+          ) : (
+            <>
+              <SubmitButton type="submit" onClick={signUp}>
+                Зарегистрироваться
+              </SubmitButton>
+              <RegistrationWrap>
+                {`Есть профиль? `}
+                <RegistrationLink to="/login">Войти!</RegistrationLink>
+              </RegistrationWrap>
+            </>
+          )}
         </Form>
       </AuthForm>
     </AuthContainer>
   );
-}
+});
 
 // Styled Components
 const AuthContainer = styled(Container)`
@@ -110,3 +157,6 @@ const RegistrationLink = styled(Link)`
   margin-left: 8px;
   color: var(--link-color);
 `;
+
+
+export default Auth;

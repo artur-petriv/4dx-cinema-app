@@ -7,7 +7,7 @@ import FilterSelect from './FilterSelect';
 export default function index({ title, type, items, selectedSort }) {
   let FilterType = <FilterSelect selectedSort={selectedSort} items={items} />;
 
-  if (type === "checkbox") FilterType = <FilterCheckboxList items={items} />;
+  if (type === "checkbox") FilterType = <FilterCheckboxList items={items} title={title} />;
   if (type === "radio") FilterType = <FilterRadio items={items} />;
 
   return (
