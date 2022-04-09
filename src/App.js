@@ -28,7 +28,7 @@ const App = observer(() => {
           user.setIsAuth(true);
         })
         .finally(() => setLoading(false));
-    }, 1500);
+    }, 100);
     return () => clearTimeout(timer);
   }, []);
 

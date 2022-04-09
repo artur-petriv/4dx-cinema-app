@@ -9,6 +9,8 @@ import FilmDatepicker from '../components/Film/Datepicker';
 import Filter from '../components/Filter';
 import FilmTicket from '../components/Film/Ticket';
 import FilmHall from '../components/Film/Hall';
+import { useParams } from "react-router-dom";
+import { fetchOneFilm } from '../http/filmAPI';
 
 const FiltersData = [
   {
@@ -31,42 +33,49 @@ const FiltersData = [
   },
 ];
 
-const film = {
-  id: 1,
-  name: "Веном",
-  year: "2022",
-  country: "США",
-  language: "Украинский",
-  img: "",
-  trailer: "",
-  duration: 126,
-  imgUrl: "https://razborkatesla.com.ua/o/card.jpg",
-  rating: "7.2",
-  genres: [
-    {
-      id: 1,
-      title: "Фентези",
-      value: "fantasy",
-      createdAt: "2022-07-31T21:00:00.000Z",
-      updatedAt: "2022-07-31T21:00:00.000Z",
-    },
-    {
-      id: 3,
-      title: "Трилер",
-      value: "thriller",
-      createdAt: "2022-01-07T22:00:00.000Z",
-      updatedAt: "2022-01-07T22:00:00.000Z",
-    },
-  ],
-};
+// const film = {
+//   id: 1,
+//   name: "Веном",
+//   year: "2022",
+//   country: "США",
+//   language: "Украинский",
+//   img: "",
+//   trailer: "",
+//   duration: 126,
+//   imgUrl: "https://razborkatesla.com.ua/o/card.jpg",
+//   rating: "7.2",
+//   genres: [
+//     {
+//       id: 1,
+//       title: "Фентези",
+//       value: "fantasy",
+//       createdAt: "2022-07-31T21:00:00.000Z",
+//       updatedAt: "2022-07-31T21:00:00.000Z",
+//     },
+//     {
+//       id: 3,
+//       title: "Трилер",
+//       value: "thriller",
+//       createdAt: "2022-01-07T22:00:00.000Z",
+//       updatedAt: "2022-01-07T22:00:00.000Z",
+//     },
+//   ],
+// };
 
 export default function Film() {
+  const { id } = useParams();
+  const [film, setFilm] = React.useState({});
+
+  React.useEffect(() => {
+    fetchOneFilm(id).then(data => setFilm(data));
+  }, []);
+
   return (
     <FilmSection>
       <FilmContainer>
         <FilmHead>
           <FilmCard>
-            <Poster imageUrl={film.imgUrl} />
+            <Poster imageUrl={film.img} />
             <FilmInfo>
               <FilmTitle name={film.name} />
               <FilmGenres />

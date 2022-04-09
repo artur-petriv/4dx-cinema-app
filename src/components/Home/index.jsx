@@ -5,19 +5,20 @@ import HomeSidebar from "./HomeSidebar";
 import Container from "./../Container";
 import { observer } from "mobx-react-lite";
 import { Context } from "../..";
-import { fetchAgeLimitations, fetchFormats, fetchGenres, fetchSort } from "../../http/filmAPI";
+import { fetchAgeLimitations, fetchFilms, fetchFormats, fetchGenres, fetchSort } from "../../http/filmAPI";
 
 const Home = observer(() => {
   const { films } = React.useContext(Context);
 
   React.useEffect(() => {
     // fetchSort().then(data => films.setSort(data));
-    // fetchFormats().then(data => films.setFormats(data));
-    // fetchAgeLimitations().then(data => films.setAgeLimitation(data));
+    fetchFilms().then((data) => films.setFilms(data.rows));
+    fetchFormats().then(data => films.setFormats(data));
+    fetchAgeLimitations().then((data) => films.setAgeLimitation(data));
     fetchGenres().then(data => films.setGenres(data));
   }, []);
 
-  console.log('pp', films.genres)
+  console.log('pp', films.films)
 
   return (
     <HomeSection>

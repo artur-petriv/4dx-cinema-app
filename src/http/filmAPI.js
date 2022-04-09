@@ -11,12 +11,12 @@ export const fetchSort = async () => {
 };
 
 export const fetchFormats = async () => {
-  const { data } = await $host.get("api/films");
+  const { data } = await $host.get("api/format");
   return data;
 };
 
 export const fetchAgeLimitations = async () => {
-  const { data } = await $host.get("api/films");
+  const { data } = await $host.get("api/ageLimitation");
   return data;
 };
 
@@ -26,11 +26,11 @@ export const fetchGenres = async () => {
 };
 
 export const fetchFilms = async () => {
-	const { data } = await $host.get('api/films');
+	const { data } = await $host.get('api/film');
 	return data;
 }
 
-export const fetchOneFilm = async () => {
-	const { data } = await $host.get('api/film');
+export const fetchOneFilm = async (id) => {
+	const { data } = await $host.get('api/film/' + id);
 	return data;
 }

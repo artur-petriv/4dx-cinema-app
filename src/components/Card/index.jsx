@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 import ImdbSvg from '../../svg/ImdbSvg';
 import Poster from '../Poster';
 
-export default function index({ film: { id, imgUrl, name, genres, rating } }) {
+export default function index({ film: { id, img, name, genres, rating } }) {
   return (
     <Card>
       <Link to={`/film/${id}`}>
-        <Poster imageUrl={imgUrl} />
+        <Poster imageUrl={img} />
       </Link>
       <CardInfo>
         <CardTitleLink to={`/film/${id}`}>{name}</CardTitleLink>
         <CardDescription>{genres?.map((genre) => genre.title).join(", ").toLowerCase()}</CardDescription>
         <CardRating>
           <CardRatingSvg />
-          <CardRatingNumbers>{rating}</CardRatingNumbers>
+          <CardRatingNumbers>{rating.rate}</CardRatingNumbers>
         </CardRating>
       </CardInfo>
     </Card>
