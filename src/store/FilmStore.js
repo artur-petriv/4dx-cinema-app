@@ -4,38 +4,43 @@ import {
 
 export default class FilmStore {
   constructor() {
-    this._sort = [{
+    this._sort = [
+      {
         name: "По рейтингу",
-        value: "rating"
+        value: "rating",
       },
       {
         name: "По новизне",
-        value: "new"
+        value: "new",
       },
       {
         name: "По длительности",
-        value: "duration"
+        value: "duration",
       },
     ];
-    this._ageLimitations = [{
+    this._ageLimitations = [
+      {
         id: 1,
         age: 6,
-        title: "6+"
+        title: "6+",
       },
       // { id: 2, age: 12, title: "12+" },
     ];
-    this._formats = [{
+    this._formats = [
+      {
         id: 1,
         title: "2D",
-        value: "2D"
+        value: "2D",
       },
       // { id: 2, title: "3D", value: "3D" },
     ];
-    this._genres = [{
-      id: 1,
-      title: "Фентези",
-      value: "fantasy"
-    }, ];
+    this._genres = [
+      {
+        id: 1,
+        title: "Фентези",
+        value: "fantasy",
+      },
+    ];
     this._films = [
       {
         id: 2,
@@ -91,68 +96,15 @@ export default class FilmStore {
           updatedAt: "2022-01-02T08:56:36.384Z",
         },
       },
-      // {
-      //   id: 1,
-      //   name: "Веном",
-      //   year: "2022",
-      //   country: "США",
-      //   language: "Украинский",
-      //   img: "",
-      //   trailer: "",
-      //   duration: 126,
-      //   imgUrl: "https://razborkatesla.com.ua/o/card.jpg",
-      //   rating: "7.2",
-      //   genres: [
-      //     {
-      //       id: 1,
-      //       title: "Фентези",
-      //       value: "fantasy",
-      //       createdAt: "2022-07-31T21:00:00.000Z",
-      //       updatedAt: "2022-07-31T21:00:00.000Z",
-      //     },
-      //     {
-      //       id: 3,
-      //       title: "Трилер",
-      //       value: "thriller",
-      //       createdAt: "2022-01-07T22:00:00.000Z",
-      //       updatedAt: "2022-01-07T22:00:00.000Z",
-      //     },
-      //   ],
-      // },
-      // {
-      //   id: 2,
-      //   name: "Веном 2",
-      //   year: "2023",
-      //   country: "США",
-      //   language: "Украинский",
-      //   img: "",
-      //   trailer: "",
-      //   duration: 126,
-      //   imgUrl: "https://razborkatesla.com.ua/o/card.jpg",
-      //   rating: "6.5",
-      //   genres: [
-      //     {
-      //       id: 1,
-      //       title: "Фентези",
-      //       value: "fantasy",
-      //       createdAt: "2022-07-31T21:00:00.000Z",
-      //       updatedAt: "2022-07-31T21:00:00.000Z",
-      //     },
-      //     {
-      //       id: 3,
-      //       title: "Драма",
-      //       value: "thriller",
-      //       createdAt: "2022-01-07T22:00:00.000Z",
-      //       updatedAt: "2022-01-07T22:00:00.000Z",
-      //     },
-      //   ],
-      // },
     ];
 
     this._sortSelected = "rating";
     this._formatsSelected = {};
     this._ageLimitationSelected = "";
     this._genresSelected = {};
+    this._page = 1;
+    this._totalCount = 0;
+    this._limit = 1;
     makeAutoObservable(this);
   }
 
@@ -190,7 +142,19 @@ export default class FilmStore {
 
   setGenresSelected(genres) {
     this._genresSelected = genres;
-  };
+  }
+
+  setPage(page) {
+    this._page = page;
+  }
+
+  setTotalCount(total) {
+    this._totalCount = total;
+  }
+
+  setLimit(limit) {
+    this._limit = limit;
+  }
 
   get sort() {
     return this._sort;
@@ -226,5 +190,17 @@ export default class FilmStore {
 
   get genresSelected() {
     return this._genresSelected;
+  }
+
+  get page() {
+    return this._page;
+  }
+
+  get totalCount() {
+    return this._totalCount;
+  }
+
+  get limit() {
+    return this._limit;
   }
 }

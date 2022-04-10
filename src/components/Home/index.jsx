@@ -12,13 +12,14 @@ const Home = observer(() => {
 
   React.useEffect(() => {
     // fetchSort().then(data => films.setSort(data));
-    fetchFilms().then((data) => films.setFilms(data.rows));
+    fetchFilms().then((data) => {
+      films.setFilms(data.rows);
+      films.setTotalCount(data.count);
+    });
     fetchFormats().then(data => films.setFormats(data));
     fetchAgeLimitations().then((data) => films.setAgeLimitation(data));
     fetchGenres().then(data => films.setGenres(data));
   }, []);
-
-  console.log('pp', films.films)
 
   return (
     <HomeSection>
