@@ -9,9 +9,10 @@ import { Context } from '.';
 import { observer } from 'mobx-react-lite';
 import MoonLoader from "react-spinners/MoonLoader";
 import { css } from "@emotion/react";
+import Popup from "./components/Popup"
 
 const App = observer(() => {
-  const { user } = React.useContext(Context);
+  const { user, modal } = React.useContext(Context);
   const [loading, setLoading] = React.useState(true);
 
   const override = css`
@@ -45,6 +46,7 @@ const App = observer(() => {
       <Header />
       <AppRouter />
       <Footer />
+      {modal.visible && <Popup />}
     </Application>
   );
 });

@@ -19,8 +19,13 @@ const HeaderButtons = observer(() => {
         <ButtonIconIcon />
       </ButtonIcon>
 
+      {}
+
       {user.isAuth ? (
-        <span onClick={signOut}>Выход</span>
+        <>
+          <Link to="/admin">Админ панель</Link>
+          <span style={{ marginLeft: '16px' }} onClick={signOut}>Выход</span>
+        </>
         ) : (
         <LoginLinkButton to="login">Вход</LoginLinkButton>
       )}

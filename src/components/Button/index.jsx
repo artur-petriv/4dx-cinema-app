@@ -7,13 +7,20 @@ export default function Button({ children }) {
 
 // Styled Components
 const Btn = styled.button`
-	padding: 16px;
-	width: 100%;
-	max-width: 320px;
-	background-color: var(--brand-color);
-	color: var(--gray-0);
-	font-size: 16px;
-	font-weight: 600;
-	border-radius: var(--border-radius-medium);
-	text-align: center;
+  padding: 12px;
+  width: 100%;
+  max-width: 320px;
+  background-color: var(--brand-color);
+  color: var(--gray-0);
+  border-radius: var(--border-radius-medium);
+  line-height: 1;
+  font-weight: 600;
+  transition: background-color 0.3s, opacity 0.3s;
+  opacity: 0.95;
+  &:hover {
+    opacity: 1;
+  }
+  &:active {
+    opacity: 0.9;
+  }
 `;

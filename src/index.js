@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import UserStore from './store/UserStore';
 import FilmStore from './store/FilmStore';
+import ModalStore from './store/ModalStore';
 
 export const Context = React.createContext(null);
 
@@ -13,6 +14,7 @@ ReactDOM.render(
     <Context.Provider value={{
       user: new UserStore(),
       films: new FilmStore(),
+      modal: new ModalStore(),
     }}>
       <Router>
         <App />

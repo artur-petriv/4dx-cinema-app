@@ -1,7 +1,9 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react'
 import styled from 'styled-components'
 import Container from '../Container'
 import AdminItem from './AdminItem';
+import { Context } from '../../'
 
 const data = [
   {
@@ -30,21 +32,28 @@ const data = [
   },
 ];
 
-export default function Admin() {
+const Admin = observer(() => {
+	const { modal } = React.useContext(Context);
+
+	const openPopup = () => {
+    modal.setVisible(true);
+  };
+
 	return (
     <AdminContainer>
       {data?.map(({ title, addTitle, editTitle, removeTitle }, i) => (
         <AdminItem
-					key={i}
+          key={i}
           title={title}
           addTitle={addTitle}
           editTitle={editTitle}
           removeTitle={removeTitle}
+          openPopup={openPopup}
         />
       ))}
     </AdminContainer>
   );
-}
+});
 
 // Styled Components
 const AdminContainer = styled(Container)`
@@ -53,3 +62,5 @@ const AdminContainer = styled(Container)`
 	justify-content: flex-start;
 	gap: 20px;
 `;
+
+export default Admin;
