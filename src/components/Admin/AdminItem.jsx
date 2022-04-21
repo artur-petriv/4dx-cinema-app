@@ -1,8 +1,15 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 
-export default function AdminItem({ title, addTitle, editTitle, removeTitle, openPopup }) {
-	return (
+export default function AdminItem({
+  title,
+  name,
+  addTitle,
+  editTitle,
+  removeTitle,
+  openPopup,
+}) {
+  return (
     <Item>
       <Title>{title}</Title>
       <Buttons>

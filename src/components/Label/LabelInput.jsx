@@ -1,11 +1,25 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 
-export default function LabelInput({ title, valuePlaceholder }) {
-	return (
+export default function LabelInput({
+  title,
+  name,
+  value,
+  onChange,
+  valuePlaceholder,
+  errorMessage,
+}) {
+  return (
     <LabelContainer>
       <Title>{title}</Title>
-      <Input placeholder={valuePlaceholder} />
+      <Input
+        onChange={onChange}
+        value={value}
+        name={name}
+        placeholder={valuePlaceholder}
+        className={errorMessage && "error"}
+      />
+      {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
     </LabelContainer>
   );
 }
@@ -21,7 +35,7 @@ const LabelContainer = styled.div`
 `;
 
 const Title = styled.div`
-	margin-bottom: 8px;
+  margin-bottom: 8px;
 `;
 
 const Input = styled.input`
@@ -33,10 +47,19 @@ const Input = styled.input`
   transition: 0.3s;
   font-size: var(--text-font-size);
   line-height: 20px;
+  &.error {
+    border-color: var(--negative-color);
+  }
   &:focus {
     border: 1px solid var(--brand-color);
   }
   &::placeholder {
     color: var(--gray-4);
   }
+`;
+
+const ErrorText = styled.span`
+  margin-top: 8px;
+  color: var(--negative-color);
+  font-size: var(--small-font-size);
 `;
