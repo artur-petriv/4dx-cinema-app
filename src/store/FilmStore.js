@@ -1,6 +1,4 @@
-import {
-  makeAutoObservable
-} from "mobx";
+import { makeAutoObservable } from "mobx";
 
 export default class FilmStore {
   constructor() {
@@ -21,7 +19,7 @@ export default class FilmStore {
     this._ageLimitations = [
       {
         id: 1,
-        age: 6,
+        value: 6,
         title: "6+",
       },
       // { id: 2, age: 12, title: "12+" },

@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function PaginationButton({ page: { page, selected = false } }) {
-  // console.log(selected);
-
-  return <Button className={selected ? "selected" : ""}>{page}</Button>;
+export default function PaginationButton({ page, selected, onClick }) {
+  return (
+    <Button onClick={onClick} className={selected ? "selected" : ""}>
+      {page}
+    </Button>
+  );
 }
 
 const Button = styled.button`

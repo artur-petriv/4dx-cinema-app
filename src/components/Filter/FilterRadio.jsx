@@ -1,48 +1,46 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Context } from '../..';
-import FilterContainer from './FilterContainer';
+import React from "react";
+import styled from "styled-components";
+import FilterContainer from "./FilterContainer";
 
-export default function FilterRadio({ items }) {
-  const [radioButton, setRadioButton] = React.useState("");
-  const { films } = React.useContext(Context);
-
-  function handleRadioClick(value) {
-    if (radioButton === value) return;
-    films.setAgeLimitationSelected(value);
-    setRadioButton(value);
-  }
-
-  React.useEffect(() => {
-    if (films.ageLimitationSelected) {
-      setRadioButton(films.ageLimitationSelected);
-    }
-  }, [])
-
+function FilterRadio({ title, items, selected, changeRadioSelected }) {
   return (
-    <FilterContainer>
-      <FilterRadioItem onClick={() => handleRadioClick("")}>
-        <FilterRadioButton
-          className={radioButton === "" ? "selected" : ""}
-        ></FilterRadioButton>
-        <FilterRadioName>Все</FilterRadioName>
-      </FilterRadioItem>
-      {items?.map((radio) => (
-        <FilterRadioItem
-          onClick={() => handleRadioClick(radio.age)}
-          key={radio.age}
-        >
-          <FilterRadioButton
-            className={radioButton === radio.age ? "selected" : ""}
-          ></FilterRadioButton>
-          <FilterRadioName>{radio.title}</FilterRadioName>
-        </FilterRadioItem>
-      ))}
-    </FilterContainer>
+    <Filter>
+      <FilterTitle>{title}</FilterTitle>
+      <FilterContainer>
+        {items?.map((radio) => (
+          <FilterRadioItem
+            key={radio.id}
+            onClick={() => changeRadioSelected({ ...radio })}
+          >
+            <FilterRadioButton
+              className={selected.value === radio.value ? "selected" : ""}
+            ></FilterRadioButton>
+            <FilterRadioName>{radio.title}</FilterRadioName>
+          </FilterRadioItem>
+        ))}
+      </FilterContainer>
+    </Filter>
   );
 }
 
 // Styled Components
+const Filter = styled.div`
+  padding-bottom: 24px;
+  display: grid;
+  row-gap: 12px;
+  border-bottom: 1px solid var(--gray-1);
+  &:last-child {
+    /* padding-bottom: 0; */
+    border-bottom: none;
+  }
+`;
+
+const FilterTitle = styled.div`
+  display: inline-flex;
+  color: var(--gray-5);
+  font-size: var(--small-font-size);
+`;
+
 const FilterRadioButton = styled.div`
   height: 20px;
   width: 20px;
@@ -54,7 +52,7 @@ const FilterRadioButton = styled.div`
     border-color: var(--brand-color);
     // border-width: 2px;
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       top: 50%;
       left: 50%;
@@ -82,3 +80,5 @@ const FilterRadioName = styled.span`
   font-weight: 600;
   color: var(--gray-8);
 `;
+
+export default FilterRadio;

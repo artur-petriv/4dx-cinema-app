@@ -1,7 +1,7 @@
 import { $authHost, $host } from "./index";
 
-export const createFilm = async (type) => {
-  const { data } = await $authHost.post("api/film", type);
+export const createFilm = async (film) => {
+  const { data } = await $authHost.post("api/film", film);
   return data;
 };
 
@@ -25,8 +25,20 @@ export const fetchGenres = async () => {
   return data;
 };
 
-export const fetchFilms = async () => {
-  const { data } = await $host.get("api/film");
+export const fetchFilms = async ({
+  ageLimitationId,
+  formats,
+  genres,
+  page,
+  limit = 3,
+}) => {
+  const { data } = await $host.get("api/film", {
+    ageLimitationId,
+    formats,
+    genres,
+    page,
+    limit,
+  });
   return data;
 };
 

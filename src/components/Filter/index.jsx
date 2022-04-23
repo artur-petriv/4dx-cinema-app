@@ -1,14 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import FilterCheckboxList from './FilterCheckboxList';
-import FilterRadio from './FilterRadio';
-import FilterSelect from './FilterSelect';
+import React from "react";
+import styled from "styled-components";
+import FilterCheckboxList from "./FilterCheckboxList";
+import FilterRadioList from "./FilterRadioList";
+import FilterSelect from "./FilterSelect";
 
 export default function index({ title, type, items, selectedSort }) {
   let FilterType = <FilterSelect selectedSort={selectedSort} items={items} />;
 
-  if (type === "checkbox") FilterType = <FilterCheckboxList items={items} title={title} />;
-  if (type === "radio") FilterType = <FilterRadio items={items} />;
+  if (type === "checkbox")
+    FilterType = <FilterCheckboxList items={items} title={title} />;
+  if (type === "radio") FilterType = <FilterRadioList items={items} />;
 
   return (
     <Filter>

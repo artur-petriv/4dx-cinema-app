@@ -26,7 +26,7 @@ export default function LabelInput({
 
 // Styled Components
 const LabelContainer = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   &:last-of-type {
@@ -36,6 +36,9 @@ const LabelContainer = styled.div`
 
 const Title = styled.div`
   margin-bottom: 8px;
+  display: inline-flex;
+  color: var(--gray-5);
+  font-size: var(--small-font-size);
 `;
 
 const Input = styled.input`
