@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import ImdbSvg from '../../svg/ImdbSvg';
-import Poster from '../Poster';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import ImdbSvg from "../../svg/ImdbSvg";
+import Poster from "../Poster";
 
 export default function index({ film: { id, img, name, genres, rating } }) {
   return (
@@ -12,10 +12,15 @@ export default function index({ film: { id, img, name, genres, rating } }) {
       </Link>
       <CardInfo>
         <CardTitleLink to={`/film/${id}`}>{name}</CardTitleLink>
-        <CardDescription>{genres?.map((genre) => genre.title).join(", ").toLowerCase()}</CardDescription>
+        <CardDescription>
+          {genres
+            ?.map((genre) => genre.title)
+            .join(", ")
+            .toLowerCase()}
+        </CardDescription>
         <CardRating>
           <CardRatingSvg />
-          <CardRatingNumbers>{rating.rate}</CardRatingNumbers>
+          <CardRatingNumbers>{rating}</CardRatingNumbers>
         </CardRating>
       </CardInfo>
     </Card>

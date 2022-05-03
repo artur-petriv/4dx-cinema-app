@@ -6,7 +6,7 @@ export const createFilm = async (film) => {
 };
 
 export const fetchSort = async () => {
-  const { data } = await $host.get("api/films");
+  const { data } = await $host.get("api/film");
   return data;
 };
 
@@ -25,20 +25,36 @@ export const fetchGenres = async () => {
   return data;
 };
 
-export const fetchFilms = async ({
-  ageLimitationId,
-  formats,
-  genres,
-  page,
-  limit = 3,
-}) => {
+export const fetchFilms = async (
+  sortSelected,
+  formatsSelected,
+  ageLimitationSelected,
+  genresSelected,
+  page = 1,
+  limit = 2
+) => {
+  const genresSelectedStr = JSON.stringify(genresSelected);
   const { data } = await $host.get("api/film", {
-    ageLimitationId,
-    formats,
-    genres,
+    params: {
+      sortSelected,
+      // formatsSelected,
+      // ageLimitationSelected,
+      // genresSelected,
+      genresSelectedStr,
+      page,
+      limit,
+    },
+  });
+
+  console.log("req", {
+    sortSelected,
+    formatsSelected,
+    ageLimitationSelected,
+    genresSelected,
     page,
     limit,
   });
+  console.log("res", data);
   return data;
 };
 

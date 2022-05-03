@@ -6,7 +6,9 @@ import { Context } from "../..";
 import { observer } from "mobx-react-lite";
 
 const HomeContent = observer(() => {
-  const { films: { films } } = React.useContext(Context);
+  const {
+    films: { films },
+  } = React.useContext(Context);
 
   return (
     <Content>

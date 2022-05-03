@@ -18,7 +18,7 @@ const Home = observer(() => {
 
   React.useEffect(() => {
     // fetchSort().then(data => films.setSort(data));
-    fetchFilms(1, 1, 1, 1, 4).then((data) => {
+    fetchFilms().then((data) => {
       films.setFilms(data.rows);
       films.setTotalCount(data.count);
     });
@@ -28,11 +28,25 @@ const Home = observer(() => {
   }, []);
 
   React.useEffect(() => {
-    fetchFilms(1, 1, 1, films.page, 2).then((data) => {
+    fetchFilms(
+      films.sortSelected,
+      films.formatsSelected,
+      films.ageLimitationSelected,
+      films.genresSelected,
+      films.page,
+      films.limit
+    ).then((data) => {
       films.setFilms(data.rows);
       films.setTotalCount(data.count);
     });
-  }, [films.page]);
+  }, [
+    films.sortSelected,
+    films.formatsSelected,
+    films.ageLimitationSelected,
+    films.genresSelected,
+    films.page,
+    films.limit,
+  ]);
 
   return (
     <HomeSection>

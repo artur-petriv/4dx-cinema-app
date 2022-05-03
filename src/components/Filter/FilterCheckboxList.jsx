@@ -10,6 +10,8 @@ const FilterCheckboxList = ({ items, title }) => {
 
   React.useEffect(() => {
     // TODO: Rework
+    if (items.length === 0) return;
+
     if (title && title === "Формат") {
       if (
         films.formatsSelected &&
@@ -17,7 +19,7 @@ const FilterCheckboxList = ({ items, title }) => {
         films.formatsSelected.constructor === Object
       )
         films.setFormatsSelected(
-          items.reduce((acc, cur) => ({ [cur.value]: false })),
+          items?.reduce((acc, cur) => ({ [cur.value]: false })),
           {}
         );
     }
@@ -29,23 +31,25 @@ const FilterCheckboxList = ({ items, title }) => {
         films.genresSelected.constructor === Object
       )
         films.setGenresSelected(
-          items.reduce((acc, cur) => ({ [cur.value]: false })),
+          items?.reduce((acc, cur) => ({ [cur.id]: false })),
           {}
         );
     }
   }, []);
 
-  function handleCheckboxClick(value) {
+  console.log({ ...films.genresSelected });
+
+  function handleCheckboxClick(id) {
     if (title === "Формат")
       films.setFormatsSelected({
         ...films.formatsSelected,
-        [value]: !films.formatsSelected[value],
+        [id]: !films.formatsSelected[id],
       });
 
     if (title === "Жанры")
       films.setGenresSelected({
         ...films.genresSelected,
-        [value]: !films.genresSelected[value],
+        [id]: !films.genresSelected[id],
       });
   }
 
@@ -55,16 +59,16 @@ const FilterCheckboxList = ({ items, title }) => {
     <FilterContainer>
       {items?.map((checkbox) => (
         <FilterCheckboxItem
-          key={checkbox.value}
-          onClick={() => handleCheckboxClick(checkbox.value)}
+          key={checkbox.id}
+          onClick={() => handleCheckboxClick(checkbox.id)}
         >
           <FilterCheckbox
             className={
               title === "Формат"
-                ? films.formatsSelected[checkbox.value]
+                ? films.formatsSelected[checkbox.id]
                   ? "selected"
                   : ""
-                : films.genresSelected[checkbox.value]
+                : films.genresSelected[checkbox.id]
                 ? "selected"
                 : ""
             }

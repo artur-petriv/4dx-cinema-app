@@ -32,13 +32,7 @@ export default class FilmStore {
       },
       // { id: 2, title: "3D", value: "3D" },
     ];
-    this._genres = [
-      {
-        id: 1,
-        title: "Фентези",
-        value: "fantasy",
-      },
-    ];
+    this._genres = [];
     this._films = [
       {
         id: 2,
@@ -86,13 +80,7 @@ export default class FilmStore {
             updatedAt: "2022-01-07T22:00:00.000Z",
           },
         ],
-        rating: {
-          id: 2,
-          rate: 4,
-          filmId: 2,
-          createdAt: "2022-01-02T08:56:36.384Z",
-          updatedAt: "2022-01-02T08:56:36.384Z",
-        },
+        rating: 5,
       },
     ];
 
@@ -102,7 +90,7 @@ export default class FilmStore {
     this._genresSelected = {};
     this._page = 1;
     this._totalCount = 0;
-    this._limit = 1;
+    this._limit = 2;
     makeAutoObservable(this);
   }
 

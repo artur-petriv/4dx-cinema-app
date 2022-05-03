@@ -6,17 +6,12 @@ import PaginationButton from "./PaginationButton";
 
 const Pagination = observer(() => {
   const { films } = React.useContext(Context);
-  // const [pages, setPages] = React.useState([]);
-
   const pageCount = Math.ceil(films.totalCount / films.limit);
   const arr = [];
 
   for (let i = 0; i < pageCount; i++) {
     arr.push(i + 1);
   }
-
-  console.log(films.totalCount);
-  console.log(films.limit);
 
   return (
     <PaginationList>
