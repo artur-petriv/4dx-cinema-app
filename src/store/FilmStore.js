@@ -2,89 +2,13 @@ import { makeAutoObservable } from "mobx";
 
 export default class FilmStore {
   constructor() {
-    this._sort = [
-      {
-        name: "По рейтингу",
-        value: "rating",
-      },
-      {
-        name: "По новизне",
-        value: "new",
-      },
-      {
-        name: "По длительности",
-        value: "duration",
-      },
-    ];
-    this._ageLimitations = [
-      {
-        id: 1,
-        value: 6,
-        title: "6+",
-      },
-      // { id: 2, age: 12, title: "12+" },
-    ];
-    this._formats = [
-      {
-        id: 1,
-        title: "2D",
-        value: "2D",
-      },
-      // { id: 2, title: "3D", value: "3D" },
-    ];
+    this._sort = [];
+    this._ageLimitations = [];
+    this._formats = [];
     this._genres = [];
-    this._films = [
-      {
-        id: 2,
-        name: "Веном 2",
-        year: "2022",
-        country: "США",
-        language: "Украинский",
-        img: "https://razborkatesla.com.ua/o/card.jpg",
-        trailer: "222",
-        duration: 126,
-        startDate: "2022-01-04",
-        endDate: "2022-01-04",
-        createdAt: "2022-01-02T10:07:32.876Z",
-        updatedAt: "2022-01-02T10:07:32.876Z",
-        ageLimitationId: 1,
-        formats: [
-          {
-            id: 1,
-            title: "2D",
-            value: "2d",
-            createdAt: "2022-01-02T10:07:32.876Z",
-            updatedAt: "2022-01-02T10:07:32.876Z",
-          },
-          {
-            id: 2,
-            title: "3D",
-            value: "3d",
-            createdAt: "2022-01-02T10:07:32.876Z",
-            updatedAt: "2022-01-02T10:07:32.876Z",
-          },
-        ],
-        genres: [
-          {
-            id: 1,
-            title: "Фентези",
-            value: "fantasy",
-            createdAt: "2022-07-31T21:00:00.000Z",
-            updatedAt: "2022-07-31T21:00:00.000Z",
-          },
-          {
-            id: 3,
-            title: "Трилер",
-            value: "thriller",
-            createdAt: "2022-01-07T22:00:00.000Z",
-            updatedAt: "2022-01-07T22:00:00.000Z",
-          },
-        ],
-        rating: 5,
-      },
-    ];
+    this._films = [];
 
-    this._sortSelected = "rating";
+    this._sortSelected = "";
     this._formatsSelected = {};
     this._ageLimitationSelected = "";
     this._genresSelected = {};

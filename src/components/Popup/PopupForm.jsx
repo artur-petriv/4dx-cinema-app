@@ -72,7 +72,6 @@ const PopupForm = () => {
     }).then((data) => {
       setFormValues(initialFormValues);
       modal.setVisible(false);
-      console.log(data);
     });
   };
 

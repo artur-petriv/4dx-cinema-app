@@ -4,6 +4,7 @@ import Pagination from "../Pagination";
 import Card from "./../Card";
 import { Context } from "../..";
 import { observer } from "mobx-react-lite";
+import CardSkeleton from "../Card/CardSkeleton";
 
 const HomeContent = observer(() => {
   const {
@@ -13,9 +14,11 @@ const HomeContent = observer(() => {
   return (
     <Content>
       <CardsList>
-        {films?.map((film) => (
-          <Card key={film.id} film={film} />
-        ))}
+        {films.length > 0
+          ? films?.map((film) => <Card key={film.id} film={film} />)
+          : Array(8)
+              .fill()
+              .map((n, i) => <CardSkeleton key={i} />)}
       </CardsList>
       <Pagination />
     </Content>

@@ -1,27 +1,28 @@
 import React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
-import ImdbSvg from "../../svg/ImdbSvg";
+import styled from "styled-components";
 import Poster from "../Poster";
+import CardRating from "./CardRating";
 
-export default function index({ film: { id, img, name, genres, rating } }) {
+export default function index({
+  film: { id, img, name, genres, formats, ageLimitationId, rating },
+}) {
   return (
     <Card>
       <Link to={`/film/${id}`}>
         <Poster imageUrl={img} />
       </Link>
       <CardInfo>
-        <CardTitleLink to={`/film/${id}`}>{name}</CardTitleLink>
-        <CardDescription>
-          {genres
-            ?.map((genre) => genre.title)
-            .join(", ")
-            .toLowerCase()}
-        </CardDescription>
-        <CardRating>
-          <CardRatingSvg />
-          <CardRatingNumbers>{rating}</CardRatingNumbers>
-        </CardRating>
+        <CardWrap>
+          <CardTitleLink to={`/film/${id}`}>{name}</CardTitleLink>
+          <CardDescription>
+            {genres
+              ?.map((genre) => genre.title)
+              .join(", ")
+              .toLowerCase()}
+          </CardDescription>
+        </CardWrap>
+        <CardRating rating={rating} />
       </CardInfo>
     </Card>
   );
@@ -44,15 +45,17 @@ const Card = styled.div`
   }
 `;
 
-const CardImg = styled.img`
-  border-radius: var(--border-radius-medium);
-  display: block;
-  object-fit: cover;
-`;
-
 const CardInfo = styled.div`
   margin-top: 12px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const CardWrap = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const CardTitleLink = styled(Link)`
@@ -66,23 +69,4 @@ const CardDescription = styled.p`
   margin: 0;
   line-height: var(--line-large);
   color: var(--gray-5);
-`;
-
-const CardRating = styled.div`
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-`;
-
-const CardRatingSvg = styled(ImdbSvg)`
-  width: 48px;
-  height: 24px;
-`;
-
-const CardRatingNumbers = styled.span`
-  margin-left: 8px;
-  line-height: var(--line-base);
-  font-weight: var(--font-medium);
-  font-size: var(--text-font-size);
-  color: var(--gray-8);
 `;

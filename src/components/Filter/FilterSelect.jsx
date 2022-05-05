@@ -1,19 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Context } from '../..';
-import ArrowDropdownSvg from '../../svg/ArrowDropdownSvg';
-import FilterSelectList from './FilterSelectList';
+import React from "react";
+import styled from "styled-components";
+import { Context } from "../..";
+import ArrowDropdownSvg from "../../svg/ArrowDropdownSvg";
+import FilterSelectList from "./FilterSelectList";
+import { observer } from "mobx-react-lite";
 
-export default function FilterSelect({ items, selectedSort }) {
+const FilterSelect = observer(({ items }) => {
   const [isVisible, setIsVisible] = React.useState(false);
   const [selected, setSelected] = React.useState("");
+  const { films } = React.useContext(Context);
 
-  
   React.useEffect(() => {
-    const val = items.find(({ value }) => value === selectedSort);
-    setSelected(val?.name);
-    return;
-  }, []);
+    if (films.sort.length === 0) return;
+
+    const val = films.sort[0];
+    setSelected(val.name);
+    films.setSortSelected(val.value);
+  }, [films.sort]);
 
   function showFilterList() {
     setIsVisible(true);
@@ -41,10 +44,9 @@ export default function FilterSelect({ items, selectedSort }) {
       )}
     </FilterContainer>
   );
-}
+});
 
 // Styled Components
-
 const FilterContainer = styled.div`
   position: relative;
 `;
@@ -81,3 +83,5 @@ const DropdownArrow = styled(ArrowDropdownSvg)`
     transform: rotate(180deg);
   }
 `;
+
+export default FilterSelect;

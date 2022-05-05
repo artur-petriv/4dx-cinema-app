@@ -7,23 +7,19 @@ import Filter from "./../Filter";
 const HomeSidebar = observer(() => {
   const { films } = React.useContext(Context);
 
+  // TODO: Rework
   return (
-    <HomeSidebar2>
-      <Filter
-        title="Сортировка"
-        type="select"
-        selectedSort={films.sortSelected}
-        items={films.sort}
-      />
+    <Sidebar>
+      <Filter title="Сортировка" type="select" items={films.sort} />
       <Filter title="Формат" type="checkbox" items={films.formats} />
       <Filter title="Возраст" type="radio" items={films.ageLimitations} />
       <Filter title="Жанры" type="checkbox" items={films.genres} />
-    </HomeSidebar2>
+    </Sidebar>
   );
 });
 
 // Stled Components
-const HomeSidebar2 = styled.div`
+const Sidebar = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -33,6 +29,5 @@ const HomeSidebar2 = styled.div`
   border-radius: var(--border-radius-medium);
   box-shadow: var(--box-shadow);
 `;
-
 
 export default HomeSidebar;

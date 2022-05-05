@@ -34,27 +34,18 @@ export const fetchFilms = async (
   limit = 2
 ) => {
   const genresSelectedStr = JSON.stringify(genresSelected);
+  const formatsSelectedStr = JSON.stringify(formatsSelected);
   const { data } = await $host.get("api/film", {
     params: {
       sortSelected,
-      // formatsSelected,
-      // ageLimitationSelected,
-      // genresSelected,
+      formatsSelectedStr,
       genresSelectedStr,
+      ageLimitationSelected,
       page,
       limit,
     },
   });
 
-  console.log("req", {
-    sortSelected,
-    formatsSelected,
-    ageLimitationSelected,
-    genresSelected,
-    page,
-    limit,
-  });
-  console.log("res", data);
   return data;
 };
 

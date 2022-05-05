@@ -10,7 +10,9 @@ const FilterCheckboxList = ({ items, title }) => {
 
   React.useEffect(() => {
     // TODO: Rework
-    if (items.length === 0) return;
+    if (items.length === 0) {
+      return;
+    }
 
     if (title && title === "Формат") {
       if (
@@ -37,8 +39,6 @@ const FilterCheckboxList = ({ items, title }) => {
     }
   }, []);
 
-  console.log({ ...films.genresSelected });
-
   function handleCheckboxClick(id) {
     if (title === "Формат")
       films.setFormatsSelected({
@@ -57,27 +57,29 @@ const FilterCheckboxList = ({ items, title }) => {
 
   return (
     <FilterContainer>
-      {items?.map((checkbox) => (
-        <FilterCheckboxItem
-          key={checkbox.id}
-          onClick={() => handleCheckboxClick(checkbox.id)}
-        >
-          <FilterCheckbox
-            className={
-              title === "Формат"
-                ? films.formatsSelected[checkbox.id]
-                  ? "selected"
-                  : ""
-                : films.genresSelected[checkbox.id]
-                ? "selected"
-                : ""
-            }
-          >
-            <FilterCheckboxIcon />
-          </FilterCheckbox>
-          <FilterCheckboxName>{checkbox.title}</FilterCheckboxName>
-        </FilterCheckboxItem>
-      ))}
+      {items.length === 0
+        ? ""
+        : items?.map((checkbox) => (
+            <FilterCheckboxItem
+              key={checkbox.id}
+              onClick={() => handleCheckboxClick(checkbox.id)}
+            >
+              <FilterCheckbox
+                className={
+                  title === "Формат"
+                    ? films.formatsSelected[checkbox.id]
+                      ? "selected"
+                      : ""
+                    : films.genresSelected[checkbox.id]
+                    ? "selected"
+                    : ""
+                }
+              >
+                <FilterCheckboxIcon />
+              </FilterCheckbox>
+              <FilterCheckboxName>{checkbox.title}</FilterCheckboxName>
+            </FilterCheckboxItem>
+          ))}
     </FilterContainer>
   );
 };

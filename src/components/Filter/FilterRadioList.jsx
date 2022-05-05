@@ -9,11 +9,11 @@ export default function FilterRadioList({ items }) {
   const [radioButton, setRadioButton] = React.useState("");
   const { films } = React.useContext(Context);
 
-  function handleRadioClick(value) {
-    if (radioButton === value) return;
+  function handleRadioClick(id) {
+    if (radioButton === id) return;
 
-    films.setAgeLimitationSelected(value);
-    setRadioButton(value);
+    films.setAgeLimitationSelected(id);
+    setRadioButton(id);
   }
 
   React.useEffect(() => {
@@ -32,11 +32,11 @@ export default function FilterRadioList({ items }) {
       </FilterRadioItem>
       {items?.map((radio) => (
         <FilterRadioItem
-          onClick={() => handleRadioClick(radio.value)}
-          key={radio.value}
+          key={radio.id}
+          onClick={() => handleRadioClick(radio.id)}
         >
           <FilterRadioButton
-            className={radioButton === radio.value ? "selected" : ""}
+            className={radioButton === radio.id ? "selected" : ""}
           ></FilterRadioButton>
           <FilterRadioName>{radio.title}</FilterRadioName>
         </FilterRadioItem>
