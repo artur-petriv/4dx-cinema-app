@@ -5,14 +5,16 @@ import ImdbSvg from "../../svg/ImdbSvg";
 export default function CardRating({ size, rating }) {
   return (
     <Rating>
-      <RatingSvg />
-      <RatingNumbers>{rating}</RatingNumbers>
+      <RatingSvg className={size === "small" && "small"} />
+      <RatingNumbers className={size === "small" && "small"}>
+        {rating}
+      </RatingNumbers>
     </Rating>
   );
 }
 
 const Rating = styled.div`
-  margin-top: 12px;
+  margin-top: 8px;
   display: flex;
   align-items: center;
 `;
@@ -20,6 +22,10 @@ const Rating = styled.div`
 const RatingSvg = styled(ImdbSvg)`
   width: 48px;
   height: 24px;
+  &.small {
+    width: 40px;
+    height: 20px;
+  }
 `;
 
 const RatingNumbers = styled.span`
@@ -28,4 +34,7 @@ const RatingNumbers = styled.span`
   font-weight: var(--font-medium);
   font-size: var(--text-font-size);
   color: var(--gray-8);
+  &.small {
+    font-size: var(--small-font-size);
+  }
 `;

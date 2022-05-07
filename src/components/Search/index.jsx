@@ -4,8 +4,10 @@ import styled from "styled-components";
 import CardRating from "../Card/CardRating";
 
 export default function Search() {
-  const [show, setShow] = React.useState(true);
-  const [search, setSearch] = React.useState("1");
+  const [show, setShow] = React.useState(false);
+  const [search, setSearch] = React.useState("");
+
+  React.useEffect(() => {}, [search]);
 
   return (
     <>
@@ -22,7 +24,8 @@ export default function Search() {
         </SearchForm>
         {show && search && (
           <SearchBox>
-            {Array(3)
+            <NotFoundText>Нічого не знайдено</NotFoundText>
+            {Array(search.length)
               .fill()
               .map((n, i) => (
                 <Card key={i}>
@@ -33,7 +36,7 @@ export default function Search() {
                       borderRadius: "4px",
                       display: "flex",
                     }}
-                    alt=""
+                    alt="Item"
                   />
                   <div>
                     <h4>Веном 2</h4>
@@ -46,7 +49,7 @@ export default function Search() {
                     >
                       бойовик, трилер, пригоди
                     </div>
-                    <CardRating rating="7" />
+                    <CardRating size="small" rating="7" />
                   </div>
                 </Card>
               ))}
@@ -61,6 +64,7 @@ export default function Search() {
 const SearchMain = styled.div`
   grid-area: search;
   position: relative;
+  z-index: var(--z-index-first);
 `;
 
 const Overlay = styled.div`
@@ -70,6 +74,7 @@ const Overlay = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: var(--z-index);
 `;
 
 const SearchIcon = styled(SearchSvg)`
@@ -128,6 +133,10 @@ const SearchBox = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 8px;
+`;
+
+const NotFoundText = styled.div`
+  font-size: 13px;
 `;
 
 const Card = styled.div`
