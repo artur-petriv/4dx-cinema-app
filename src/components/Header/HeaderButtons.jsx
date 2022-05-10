@@ -7,11 +7,11 @@ import { observer } from "mobx-react-lite";
 
 const HeaderButtons = observer(() => {
   const { user } = React.useContext(Context);
-  
+
   const signOut = () => {
     user.setUser({});
     user.setIsAuth(false);
-  }
+  };
 
   return (
     <HeaderButtonsWrapper>
@@ -23,11 +23,11 @@ const HeaderButtons = observer(() => {
 
       {user.isAuth ? (
         <>
-          <Link to="/admin">Админ панель</Link>
-          <span style={{ marginLeft: '16px' }} onClick={signOut}>Выход</span>
+          <LoginLinkButton to="/admin">Адмін панель</LoginLinkButton>
+          <LogOut onClick={signOut}>Выход</LogOut>
         </>
-        ) : (
-        <LoginLinkButton to="login">Вход</LoginLinkButton>
+      ) : (
+        <LoginLinkButton to="login">Вхід</LoginLinkButton>
       )}
     </HeaderButtonsWrapper>
   );
@@ -66,11 +66,14 @@ const ButtonIconIcon = styled(ButtonIconSvg)`
 `;
 
 const LoginLinkButton = styled(Link)`
-  padding: 8px 24px;
-  border-radius: 32px;
+  padding: 8px 16px;
+  min-width: 100px;
+  border-radius: 8px;
   transition: background-color 0.3s, opacity 0.3s;
   display: inline-flex;
-  line-height: 18px;
+  align-items: center;
+  justify-content: center;
+  line-height: 20px;
   background-color: var(--brand-color);
   color: var(--gray-0);
   opacity: 0.95;
@@ -82,6 +85,16 @@ const LoginLinkButton = styled(Link)`
     /* background-color: var(--gray-2); */
     opacity: 0.9;
   }
+`;
+
+const LogOut = styled.div`
+  margin-left: 20px;
+  padding: 8px 20px;
+  background-color: var(--gray-1);
+  border-radius: 8px;
+  cursor: pointer;
+  line-height: 20px;
+  font-weight: 500;
 `;
 
 export default HeaderButtons;

@@ -49,6 +49,14 @@ export const fetchFilms = async (
   return data;
 };
 
+export const searchFilms = async (name) => {
+  const { data } = await $host.get("api/film/search", {
+    params: { name },
+  });
+
+  return data;
+};
+
 export const fetchOneFilm = async (id) => {
   const { data } = await $host.get("api/film/" + id);
   return data;
