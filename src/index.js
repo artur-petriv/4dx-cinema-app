@@ -1,23 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { BrowserRouter as Router } from 'react-router-dom';
-import reportWebVitals from './reportWebVitals';
-import UserStore from './store/UserStore';
-import FilmStore from './store/FilmStore';
-import ModalStore from './store/ModalStore';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { BrowserRouter as Router } from "react-router-dom";
+import reportWebVitals from "./reportWebVitals";
+import UserStore from "./store/UserStore";
+import FilmStore from "./store/FilmStore";
+import ModalStore from "./store/ModalStore";
+import ThemeProvider from "./providers/ThemeProvider";
 
 export const Context = React.createContext(null);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Context.Provider value={{
-      user: new UserStore(),
-      films: new FilmStore(),
-      modal: new ModalStore(),
-    }}>
+    <Context.Provider
+      value={{
+        user: new UserStore(),
+        films: new FilmStore(),
+        modal: new ModalStore(),
+      }}
+    >
       <Router>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </Router>
     </Context.Provider>
   </React.StrictMode>,

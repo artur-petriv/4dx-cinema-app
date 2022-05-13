@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Context } from "./../../";
 import { observer } from "mobx-react-lite";
+import { ThemeContext, themes } from "../../contexts/ThemeContext";
 
 const HeaderButtons = observer(() => {
   const { user } = React.useContext(Context);
@@ -15,16 +16,24 @@ const HeaderButtons = observer(() => {
 
   return (
     <HeaderButtonsWrapper>
-      <ButtonIcon>
-        <ButtonIconIcon />
-      </ButtonIcon>
-
-      {}
+      <ThemeContext.Consumer>
+        {({ theme, setTheme }) => (
+          <ButtonIcon
+            onClick={() => {
+              console.log(theme);
+              if (theme === themes.light) setTheme(themes.dark);
+              if (theme === themes.dark) setTheme(themes.light);
+            }}
+          >
+            <ButtonIconIcon />
+          </ButtonIcon>
+        )}
+      </ThemeContext.Consumer>
 
       {user.isAuth ? (
         <>
           <LoginLinkButton to="/admin">Адмін панель</LoginLinkButton>
-          <LogOut onClick={signOut}>Выход</LogOut>
+          <LogOut onClick={signOut}>Вийти</LogOut>
         </>
       ) : (
         <LoginLinkButton to="login">Вхід</LoginLinkButton>

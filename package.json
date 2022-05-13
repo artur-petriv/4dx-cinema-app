@@ -20,6 +20,7 @@
     "sass": "^1.43.4",
     "styled-components": "^5.3.3",
     "swiper": "^7.3.3",
+    "use-local-storage": "^2.3.6",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
