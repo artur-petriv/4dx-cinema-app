@@ -1,18 +1,18 @@
-import React from 'react'
+import React from "react";
 import Container from "./../Container";
 import styled from "styled-components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { login, registration } from '../../http/userAPI';
-import { Context } from '../..';
-import { observer } from 'mobx-react-lite';
+import { login, registration } from "../../http/userAPI";
+import { Context } from "../..";
+import { observer } from "mobx-react-lite";
 
 const Auth = observer(() => {
   const { user } = React.useContext(Context);
   const location = useLocation();
   const navigate = useNavigate();
-  const isLogin = location.pathname === '/login';
-	const [email, setEmail] = React.useState('');
-	const [password, setPassword] = React.useState('');
+  const isLogin = location.pathname === "/login";
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const signIn = async () => {
     try {
@@ -23,7 +23,7 @@ const Auth = observer(() => {
     } catch (err) {
       alert(err.response.data.message);
     }
-  }
+  };
 
   const signUp = async () => {
     try {
@@ -34,15 +34,15 @@ const Auth = observer(() => {
     }
   };
 
-	const onChangeEmail = (e) => {
-		setEmail(e.target.value);
-	}
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
 
-	const onChangePassword = (e) => {
+  const onChangePassword = (e) => {
     setPassword(e.target.value);
   };
 
-	return (
+  return (
     <AuthContainer>
       <AuthForm>
         <FormLegend>
@@ -96,22 +96,22 @@ const Auth = observer(() => {
 
 // Styled Components
 const AuthContainer = styled(Container)`
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const AuthForm = styled.div`
   padding: 24px 24px;
-	border-radius: 8px;
-	background-color: var(--gray-0);
-	box-shadow: var(--box-shadow);
+  border-radius: 8px;
+  background-color: var(--gray-0);
+  box-shadow: var(--box-shadow);
 `;
 
 const Form = styled.form`
-	width: 320px;
-	display: flex;
-	flex-direction: column;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const FormLegend = styled.h2`
@@ -129,34 +129,33 @@ const Input = styled.input`
   color: var(--gray-10);
   transition: 0.3s;
   font-size: var(--text-font-size);
-	line-height: 20px;
+  line-height: 20px;
   &:focus {
     border: 1px solid var(--brand-color);
   }
-	&::placeholder {
-		color: var(--gray-10);
-	}
+  &::placeholder {
+    color: var(--gray-10);
+  }
 `;
 
 const SubmitButton = styled.button`
-	margin-top: 8px;
-	padding: 8px 16px;
-	line-height: 20px;;
-	background-color: var(--brand-color);
-	border-radius: 8px;
-	color: var(--gray-0);
+  margin-top: 8px;
+  padding: 8px 16px;
+  line-height: 20px;
+  background-color: var(--brand-color);
+  border-radius: 8px;
+  color: white;
 `;
 
 const RegistrationWrap = styled.div`
-	margin-top: 16px;
-	text-align: center;
-	color: var(--gray-6);
+  margin-top: 16px;
+  text-align: center;
+  color: var(--gray-6);
 `;
 
 const RegistrationLink = styled(Link)`
   margin-left: 8px;
   color: var(--link-color);
 `;
-
 
 export default Auth;

@@ -47,7 +47,7 @@ const Button = styled.button`
   padding: 12px;
   width: 180px;
   background-color: var(--brand-color);
-  color: var(--gray-0);
+  color: white;
   border-radius: var(--border-radius-medium);
   line-height: 1;
   transition: background-color 0.3s, opacity 0.3s;

@@ -10,10 +10,10 @@ const HomeSidebar = observer(() => {
   // TODO: Rework
   return (
     <Sidebar>
-      <Filter title="Сортировка" type="select" items={films.sort} />
+      <Filter title="Сортування" type="select" items={films.sort} />
       <Filter title="Формат" type="checkbox" items={films.formats} />
-      <Filter title="Возраст" type="radio" items={films.ageLimitations} />
-      <Filter title="Жанры" type="checkbox" items={films.genres} />
+      <Filter title="Вік" type="radio" items={films.ageLimitations} />
+      <Filter title="Жанри" type="checkbox" items={films.genres} />
     </Sidebar>
   );
 });

@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 
 export default function Button({ children }) {
-	return <Btn>{children}</Btn>;
+  return <Btn>{children}</Btn>;
 }
 
 // Styled Components
@@ -11,7 +11,7 @@ const Btn = styled.button`
   width: 100%;
   max-width: 320px;
   background-color: var(--brand-color);
-  color: var(--gray-0);
+  color: white;
   border-radius: var(--border-radius-medium);
   line-height: 1;
   font-weight: 600;

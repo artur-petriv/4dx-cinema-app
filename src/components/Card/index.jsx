@@ -68,5 +68,5 @@ const CardTitleLink = styled(Link)`
 const CardDescription = styled.p`
   margin: 0;
   line-height: var(--line-large);
-  color: var(--gray-5);
+  color: var(--gray-6);
 `;

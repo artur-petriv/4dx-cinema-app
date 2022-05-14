@@ -19,11 +19,11 @@ const initialSort = [
     value: "rating",
   },
   {
-    name: "По новизне",
+    name: "По новизні",
     value: "new",
   },
   {
-    name: "По длительности",
+    name: "По тривалості",
     value: "duration",
   },
 ];

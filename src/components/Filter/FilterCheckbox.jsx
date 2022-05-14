@@ -77,7 +77,7 @@ const FilterCheckboxItem = styled.div`
 const FilterCheckboxIcon = styled(CheckedSvg)`
   width: 14px;
   height: 10px;
-  fill: var(--gray-0);
+  fill: white;
 `;
 
 const FilterCheckboxName = styled.span`

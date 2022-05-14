@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Context } from "./../../";
 import { observer } from "mobx-react-lite";
 import { ThemeContext, themes } from "../../contexts/ThemeContext";
+import MoonButtonSvg from "./../../svg/MoonButtonSvg";
 
 const HeaderButtons = observer(() => {
   const { user } = React.useContext(Context);
@@ -20,12 +21,11 @@ const HeaderButtons = observer(() => {
         {({ theme, setTheme }) => (
           <ButtonIcon
             onClick={() => {
-              console.log(theme);
               if (theme === themes.light) setTheme(themes.dark);
               if (theme === themes.dark) setTheme(themes.light);
             }}
           >
-            <ButtonIconIcon />
+            {theme === themes.light ? <MoonButtonSvg /> : <ButtonIconIcon />}
           </ButtonIcon>
         )}
       </ThemeContext.Consumer>
@@ -71,7 +71,7 @@ const ButtonIconIcon = styled(ButtonIconSvg)`
   margin: 0;
   height: 18px;
   width: 18px;
-  fill: var(--gray-4);
+  fill: var(--gray-7);
 `;
 
 const LoginLinkButton = styled(Link)`
@@ -84,7 +84,7 @@ const LoginLinkButton = styled(Link)`
   justify-content: center;
   line-height: 20px;
   background-color: var(--brand-color);
-  color: var(--gray-0);
+  color: white;
   opacity: 0.95;
   &:hover {
     /* background-color: var(--gray-1); */
@@ -104,6 +104,7 @@ const LogOut = styled.div`
   cursor: pointer;
   line-height: 20px;
   font-weight: 500;
+  color: var(--gray-10);
 `;
 
 export default HeaderButtons;

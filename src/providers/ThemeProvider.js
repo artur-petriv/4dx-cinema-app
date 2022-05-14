@@ -17,7 +17,6 @@ const ThemeProvider = ({ children }) => {
   React.useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
-    console.log("change theme");
   }, [theme]);
 
   return (

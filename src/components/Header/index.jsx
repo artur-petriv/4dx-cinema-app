@@ -1,9 +1,9 @@
-import React from 'react';
-import Logo from './../Logo';
-import Search from './../Search';
-import HeaderButtons from './HeaderButtons';
-import styled from 'styled-components';
-import Container from './../Container';
+import React from "react";
+import Logo from "./../Logo";
+import Search from "./../Search";
+import HeaderButtons from "./HeaderButtons";
+import styled from "styled-components";
+import Container from "./../Container";
 
 export default function index() {
   return (
@@ -26,6 +26,6 @@ const Header = styled.header`
 `;
 
 const HeaderContainer = styled(Container)`
-  grid-template-areas: 'logo logo logo logo search search search search header-buttons header-buttons header-buttons header-buttons';
+  grid-template-areas: "logo logo logo logo search search search search header-buttons header-buttons header-buttons header-buttons";
   align-items: center;
 `;

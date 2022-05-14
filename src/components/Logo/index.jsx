@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import LogoSvg from './../../svg/LogoSvg';
-import styled from 'styled-components';
+import React from "react";
+import { Link } from "react-router-dom";
+import LogoSvg from "./../../svg/LogoSvg";
+import styled from "styled-components";
 
 export default function index() {
   return (
@@ -17,6 +17,7 @@ export default function index() {
 const LogoIcon = styled(LogoSvg)`
   width: 141px;
   height: 15px;
+  fill: var(--gray-10);
 `;
 
 const LogoLink = styled(Link)`

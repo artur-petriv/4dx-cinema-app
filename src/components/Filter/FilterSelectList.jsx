@@ -51,7 +51,7 @@ const List = styled.div`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  background-color: var(--gray-0);
+  background-color: var(--gray-1);
   border-radius: var(--border-radius-medium);
   box-shadow: var(--box-shadow-overflow);
   z-index: var(--z-index-first);
@@ -71,10 +71,10 @@ const Option = styled.div`
   color: var(--gray-8);
   user-select: none;
   &:hover {
-    background-color: var(--gray-1);
+    background-color: var(--gray-2);
   }
   &:active {
-    background-color: var(--gray-2);
+    background-color: var(--gray-3);
   }
 `;
 
