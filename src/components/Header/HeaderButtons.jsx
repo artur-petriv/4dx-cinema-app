@@ -1,11 +1,11 @@
-import React from "react";
-import ButtonIconSvg from "./../../svg/ButtonIconSvg";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { Context } from "./../../";
-import { observer } from "mobx-react-lite";
-import { ThemeContext, themes } from "../../contexts/ThemeContext";
-import MoonButtonSvg from "./../../svg/MoonButtonSvg";
+import React from 'react';
+import ButtonIconSvg from './../../svg/ButtonIconSvg';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { Context } from './../../';
+import { observer } from 'mobx-react-lite';
+import { ThemeContext, themes } from '../../contexts/ThemeContext';
+import MoonButtonSvg from './../../svg/MoonButtonSvg';
 
 const HeaderButtons = observer(() => {
   const { user } = React.useContext(Context);
@@ -23,9 +23,8 @@ const HeaderButtons = observer(() => {
             onClick={() => {
               if (theme === themes.light) setTheme(themes.dark);
               if (theme === themes.dark) setTheme(themes.light);
-            }}
-          >
-            {theme === themes.light ? <MoonButtonSvg /> : <ButtonIconIcon />}
+            }}>
+            {theme === themes.light ? <ButtonIconIcon /> : <MoonButtonSvg />}
           </ButtonIcon>
         )}
       </ThemeContext.Consumer>

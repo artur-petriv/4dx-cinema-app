@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-const genres = ["боевик", "ужасы", "фантастика"];
+const genres = ['боевик', 'ужасы', 'фантастика'];
 
 export default function FilmGenres() {
   return (
@@ -12,4 +12,4 @@ export default function FilmGenres() {
   );
 }
 
-const GenresParagraph = styled.p``;
+const GenresParagraph = styled.div``;

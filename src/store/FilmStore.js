@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable } from 'mobx';
 
 export default class FilmStore {
   constructor() {
@@ -8,13 +8,13 @@ export default class FilmStore {
     this._genres = [];
     this._films = [];
 
-    this._sortSelected = "";
+    this._sortSelected = '';
     this._formatsSelected = {};
-    this._ageLimitationSelected = "";
+    this._ageLimitationSelected = '';
     this._genresSelected = {};
     this._page = 1;
     this._totalCount = 0;
-    this._limit = 2;
+    this._limit = 8;
     makeAutoObservable(this);
   }
 

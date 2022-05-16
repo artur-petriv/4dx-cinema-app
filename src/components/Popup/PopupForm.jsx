@@ -1,21 +1,21 @@
-import { observer } from "mobx-react-lite";
-import React from "react";
-import styled from "styled-components";
-import { Context } from "../..";
-import { createFilm } from "../../http/filmAPI";
-import FilterCheckbox from "../Filter/FilterCheckbox";
-import FilterRadio from "../Filter/FilterRadio";
-import LabelInput from "../Label/LabelInput";
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import styled from 'styled-components';
+import { Context } from '../..';
+import { createFilm } from '../../http/filmAPI';
+import FilterCheckbox from '../Filter/FilterCheckbox';
+import FilterRadio from '../Filter/FilterRadio';
+import LabelInput from '../Label/LabelInput';
 
 const initialFormValues = {
-  name: "",
-  year: "",
-  country: "",
-  language: "",
-  img: "https://razborkatesla.com.ua/o/card.jpg",
-  trailer: "https://razborkatesla.com.ua/o/card.jpg",
-  duration: "",
-  rating: "",
+  name: '',
+  year: '2022',
+  country: 'США',
+  language: 'Українська',
+  img: 'https://razborkatesla.com.ua/o/card.jpg',
+  trailer: 'https://www.youtube.com/embed/ueb7NJP9f9w',
+  duration: '120',
+  rating: '6',
 };
 
 const PopupForm = () => {
@@ -65,7 +65,6 @@ const PopupForm = () => {
   const submitEvents = () => {
     createFilm({
       ...formValues,
-      rating: 5,
       ageLimitationSelected,
       genresSelected,
       formatsSelected,
