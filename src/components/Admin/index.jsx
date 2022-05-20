@@ -1,42 +1,50 @@
-import { observer } from "mobx-react-lite";
-import React from "react";
-import styled from "styled-components";
-import Container from "../Container";
-import AdminItem from "./AdminItem";
-import { Context } from "../../";
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import styled from 'styled-components';
+import Container from '../Container';
+import AdminItem from './AdminItem';
+import { Context } from '../../';
 
 const data = [
   {
-    title: "Вікові категорії",
-    name: "ageLimits",
-    type: "simple",
-    addTitle: "Добавити категорію",
-    editTitle: "Редагувати категорію",
-    removeTitle: "Видалити категорію",
+    title: 'Вікові категорії',
+    name: 'ageLimits',
+    type: 'simple',
+    addTitle: 'Добавити категорію',
+    editTitle: 'Редагувати категорію',
+    removeTitle: 'Видалити категорію',
   },
   {
-    title: "Жанри",
-    name: "genres",
-    type: "simple",
-    addTitle: "Добавити жанр",
-    editTitle: "Редагувати жанр",
-    removeTitle: "Видалити жанр",
+    title: 'Жанри',
+    name: 'genres',
+    type: 'simple',
+    addTitle: 'Добавити жанр',
+    editTitle: 'Редагувати жанр',
+    removeTitle: 'Видалити жанр',
   },
   {
-    title: "Формати",
-    name: "formats",
-    type: "simple",
-    addTitle: "Добавити формат",
-    editTitle: "Редагувати формат",
-    removeTitle: "Видалити формат",
+    title: 'Формати',
+    name: 'formats',
+    type: 'simple',
+    addTitle: 'Добавити формат',
+    editTitle: 'Редагувати формат',
+    removeTitle: 'Видалити формат',
   },
   {
-    title: "Фільми",
-    name: "films",
-    type: "film",
-    addTitle: "Добавити фільм",
-    editTitle: "Редагувати фільм",
-    removeTitle: "Видалити фільм",
+    title: 'Фільми',
+    name: 'films',
+    type: 'film',
+    addTitle: 'Добавити фільм',
+    editTitle: 'Редагувати фільм',
+    removeTitle: 'Видалити фільм',
+  },
+  {
+    title: 'Сеанси',
+    name: 'sessions',
+    type: 'session',
+    addTitle: 'Добавити сеанс',
+    editTitle: 'Редагувати сеанс',
+    removeTitle: 'Видалити сеанс',
   },
 ];
 
@@ -52,19 +60,17 @@ const Admin = observer(() => {
 
   return (
     <AdminContainer>
-      {data?.map(
-        ({ title, name, type, addTitle, editTitle, removeTitle }, i) => (
-          <AdminItem
-            key={i}
-            title={title}
-            name={name}
-            addTitle={addTitle}
-            editTitle={editTitle}
-            removeTitle={removeTitle}
-            openPopup={() => openPopup(name, addTitle, type)}
-          />
-        )
-      )}
+      {data?.map(({ title, name, type, addTitle, editTitle, removeTitle }, i) => (
+        <AdminItem
+          key={i}
+          title={title}
+          name={name}
+          addTitle={addTitle}
+          editTitle={editTitle}
+          removeTitle={removeTitle}
+          openPopup={() => openPopup(name, addTitle, type)}
+        />
+      ))}
     </AdminContainer>
   );
 });

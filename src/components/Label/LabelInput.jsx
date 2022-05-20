@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 export default function LabelInput({
   title,
@@ -17,7 +17,7 @@ export default function LabelInput({
         value={value}
         name={name}
         placeholder={valuePlaceholder}
-        className={errorMessage && "error"}
+        className={errorMessage && 'error'}
       />
       {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
     </LabelContainer>
@@ -26,7 +26,7 @@ export default function LabelInput({
 
 // Styled Components
 const LabelContainer = styled.div`
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   display: flex;
   flex-direction: column;
   &:last-of-type {

@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import { Context } from "../..";
-import ArrowDropdownSvg from "../../svg/ArrowDropdownSvg";
-import FilterSelectList from "./FilterSelectList";
-import { observer } from "mobx-react-lite";
+import React from 'react';
+import styled from 'styled-components';
+import { Context } from '../..';
+import ArrowDropdownSvg from '../../svg/ArrowDropdownSvg';
+import FilterSelectList from './FilterSelectList';
+import { observer } from 'mobx-react-lite';
 
-const FilterSelect = observer(({ items }) => {
+const FilterSelect = observer(({ items, className }) => {
   const [isVisible, setIsVisible] = React.useState(false);
-  const [selected, setSelected] = React.useState("");
+  const [selected, setSelected] = React.useState('');
   const { films } = React.useContext(Context);
 
   React.useEffect(() => {
@@ -29,10 +29,10 @@ const FilterSelect = observer(({ items }) => {
   }
 
   return (
-    <FilterContainer>
+    <FilterContainer className={className}>
       <FilterSelectWrap onClick={showFilterList}>
         {selected}
-        <DropdownArrow className={`${isVisible ? "active" : ""}`} />
+        <DropdownArrow className={`${isVisible ? 'active' : ''}`} />
       </FilterSelectWrap>
 
       {isVisible && (

@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import ScreenSvg from '../../svg/ScreenSvg';
 import Seat from '../Seat';
 
 export default function FilmHall() {
-	return (
+  return (
     <FilmHallContainer>
       <Screen>
         <ScreenIcon />
@@ -31,6 +31,26 @@ export default function FilmHall() {
           </RowContent>
           <RowTitle>B</RowTitle>
         </Row>
+
+        <Row>
+          <RowTitle>C</RowTitle>
+          <RowContent>
+            {new Array(12).fill(null).map((n, i) => (
+              <Seat key={i} number={i} available />
+            ))}
+          </RowContent>
+          <RowTitle>C</RowTitle>
+        </Row>
+
+        <Row>
+          <RowTitle>D</RowTitle>
+          <RowContent>
+            {new Array(10).fill(null).map((n, i) => (
+              <Seat key={i} number={i} available />
+            ))}
+          </RowContent>
+          <RowTitle>D</RowTitle>
+        </Row>
       </Seats>
     </FilmHallContainer>
   );
@@ -38,24 +58,24 @@ export default function FilmHall() {
 
 // Styled Components
 const FilmHallContainer = styled.div`
-	padding: 28px 24px;
-	border-radius: var(--border-radius-large);
-	background-color: var(--gray-0);
-	box-shadow: var(--box-shadow);
-	grid-area: hall;
-	text-align: center;
-	display: grid;
-	gap: 60px;
+  padding: 28px 24px;
+  border-radius: var(--border-radius-large);
+  background-color: var(--gray-0);
+  box-shadow: var(--box-shadow);
+  grid-area: hall;
+  text-align: center;
+  display: grid;
+  gap: 60px;
 `;
 
 const Screen = styled.div``;
 
 const Seats = styled.div`
-	display: flex;
-	flex-direction: column;
-	/* align-items: flex-start; */
-	/* justify-content: center; */
-	gap: 24px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  /* justify-content: center; */
+  gap: 24px;
 `;
 
 const RowTitle = styled.div`
@@ -73,28 +93,26 @@ const RowTitle = styled.div`
 
 const Row = styled.div`
   display: grid;
-	align-items: center;
+  align-items: center;
   grid-template-columns: auto 1fr auto;
 `;
 
 const RowContent = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 `;
 
-
 const ScreenIcon = styled(ScreenSvg)`
-	width: 100%;
-	stroke: var(--brand-color);
+  width: 100%;
+  stroke: var(--brand-color);
 `;
 
 const ScreenTitle = styled.div`
-	text-transform: uppercase;
-	font-weight: 600;
-	color: var(--gray-4);
-	font-size: 16px;
-	line-height: 1;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--gray-4);
+  font-size: 16px;
+  line-height: 1;
 `;
-

@@ -1,10 +1,10 @@
-import React from 'react'
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import Button from '../Button';
 import Label from '../Label';
 
 export default function FilmTicket() {
-	return (
+  return (
     <FilmTicketContainer>
       <FilmTicketCard>
         <Row>
@@ -13,46 +13,46 @@ export default function FilmTicket() {
         </Row>
         <Row>
           <Label title="Дата" text="15.11.21" />
-          <Label title="Время" text="11:45" />
+          <Label title="Час" text="11:45" />
         </Row>
         <Row>
-          <Label title="Места" text="А3, А4, В4" />
+          <Label title="Місця" text="А3, А4, В4" />
         </Row>
 
-				<Total>
-					<TotalName>Всего</TotalName>
-					<TotalPrice>300 грн</TotalPrice>
-				</Total>
+        <Total>
+          <TotalName>Всього</TotalName>
+          <TotalPrice>300 грн</TotalPrice>
+        </Total>
       </FilmTicketCard>
 
-      <Button>Оформить</Button>
+      <Button>Оформити</Button>
     </FilmTicketContainer>
   );
 }
 
 // Styled Components
 const FilmTicketContainer = styled.div`
-	grid-area: ticket;
-	display: grid;
-	gap: 24px;
+  grid-area: ticket;
+  display: grid;
+  gap: 24px;
 `;
 
 const Row = styled.div`
-	padding: 16px 0;
-	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
-	flex: 1;
-	border-top: 1px solid var(--gray-1);
+  padding: 16px 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex: 1;
+  border-top: 1px solid var(--gray-1);
 
-	&:first-child {
-		padding: 0 0 16px;
-		border-top: 0;
-	}
+  &:first-child {
+    padding: 0 0 16px;
+    border-top: 0;
+  }
 
-	& > *:nth-child(2) {
-		text-align: right;
-	}
+  & > *:nth-child(2) {
+    text-align: right;
+  }
 `;
 
 const FilmTicketCard = styled.div`
@@ -64,16 +64,16 @@ const FilmTicketCard = styled.div`
 `;
 
 const Total = styled.div`
-	margin-top: 20px;
-	padding-top: 16px;
-	border-top: 1px dashed var(--gray-1);
-	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
-	color: var(--gray-8);
-	font-size: 18px;
-	font-weight: 700;
-	line-height: 1;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--gray-1);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  color: var(--gray-8);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
 `;
 
 const TotalName = styled.div``;
