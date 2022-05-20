@@ -1,26 +1,26 @@
-import React from "react";
-import styled from "styled-components";
-import Pagination from "../Pagination";
-import Card from "./../Card";
-import { Context } from "../..";
-import { observer } from "mobx-react-lite";
-import CardSkeleton from "../Card/CardSkeleton";
+import React from 'react';
+import styled from 'styled-components';
+import Pagination from '../Pagination';
+import Card from './../Card';
+import { Context } from '../..';
+import { observer } from 'mobx-react-lite';
+import CardSkeleton from '../Card/CardSkeleton';
 
 const HomeContent = observer(() => {
   const {
-    films: { films },
+    films: { films, loading },
   } = React.useContext(Context);
 
   return (
     <Content>
       <CardsList>
-        {films.length > 0
-          ? films?.map((film) => <Card key={film.id} film={film} />)
-          : Array(8)
+        {loading
+          ? Array(8)
               .fill()
-              .map((n, i) => <CardSkeleton key={i} />)}
+              .map((n, i) => <CardSkeleton key={i} />)
+          : films?.map((film) => <Card key={film.id} film={film} />)}
       </CardsList>
-      <Pagination />
+      {!loading && <Pagination />}
     </Content>
   );
 });

@@ -1,30 +1,30 @@
-import React from "react";
-import styled from "styled-components";
-import HomeContent from "./HomeContent";
-import HomeSidebar from "./HomeSidebar";
-import Container from "./../Container";
-import { observer } from "mobx-react-lite";
-import { Context } from "../..";
+import React from 'react';
+import styled from 'styled-components';
+import HomeContent from './HomeContent';
+import HomeSidebar from './HomeSidebar';
+import Container from './../Container';
+import { observer } from 'mobx-react-lite';
+import { Context } from '../..';
 import {
   fetchAgeLimitations,
   fetchFilms,
   fetchFormats,
   fetchGenres,
   fetchSort,
-} from "../../http/filmAPI";
+} from '../../http/filmAPI';
 
 const initialSort = [
   {
-    name: "По рейтингу",
-    value: "rating",
+    name: 'По рейтингу',
+    value: 'rating',
   },
   {
-    name: "По новизні",
-    value: "new",
+    name: 'По новизні',
+    value: 'new',
   },
   {
-    name: "По тривалості",
-    value: "duration",
+    name: 'По тривалості',
+    value: 'duration',
   },
 ];
 
@@ -32,9 +32,8 @@ const Home = observer(() => {
   const { films } = React.useContext(Context);
 
   React.useEffect(() => {
-    // fetchSort().then((data) => films.setSort(data));
-
     const timer = setTimeout(() => {
+      // fetchSort().then((data) => films.setSort(data));
       films.setSort(initialSort);
       fetchFormats().then((data) => films.setFormats(data));
       fetchAgeLimitations().then((data) => films.setAgeLimitation(data));
@@ -45,6 +44,7 @@ const Home = observer(() => {
   }, []);
 
   React.useEffect(() => {
+    films.setLoading(true);
     const timer = setTimeout(() => {
       fetchFilms(
         films.sortSelected,
@@ -52,13 +52,13 @@ const Home = observer(() => {
         films.ageLimitationSelected,
         films.genresSelected,
         films.page,
-        films.limit
+        films.limit,
       ).then((data) => {
         films.setFilms(data.rows);
         films.setTotalCount(data.count);
+        films.setLoading(false);
       });
-    }, 100);
-
+    }, 2450);
     return () => clearTimeout(timer);
   }, [
     films.sortSelected,
@@ -83,7 +83,7 @@ const Home = observer(() => {
 const HomeSection = styled.section``;
 
 const HomeContainer = styled(Container)`
-  grid-template-areas: "sidebar sidebar sidebar content content content content content content content content content";
+  grid-template-areas: 'sidebar sidebar sidebar content content content content content content content content content';
   align-items: flex-start;
 `;
 

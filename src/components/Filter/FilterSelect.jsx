@@ -1,22 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Context } from '../..';
 import ArrowDropdownSvg from '../../svg/ArrowDropdownSvg';
 import FilterSelectList from './FilterSelectList';
-import { observer } from 'mobx-react-lite';
 
-const FilterSelect = observer(({ items, className }) => {
+const FilterSelect = ({ items, className, setSelect }) => {
   const [isVisible, setIsVisible] = React.useState(false);
   const [selected, setSelected] = React.useState('');
-  const { films } = React.useContext(Context);
 
   React.useEffect(() => {
-    if (films.sort.length === 0) return;
-
-    const val = films.sort[0];
-    setSelected(val.name);
-    films.setSortSelected(val.value);
-  }, [films.sort]);
+    const { name, value } = items[0];
+    setSelected(name);
+    setSelect && setSelect(value);
+  }, []);
 
   function showFilterList() {
     setIsVisible(true);
@@ -44,7 +39,7 @@ const FilterSelect = observer(({ items, className }) => {
       )}
     </FilterContainer>
   );
-});
+};
 
 // Styled Components
 const FilterContainer = styled.div`

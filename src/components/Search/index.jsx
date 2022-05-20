@@ -1,14 +1,14 @@
-import React from "react";
-import SearchSvg from "../../svg/SearchSvg";
-import styled from "styled-components";
-import CardRating from "../Card/CardRating";
-import { searchFilms } from "../../http/filmAPI";
-import { Link } from "react-router-dom";
-import { regExp } from "../../utils/regExp";
+import React from 'react';
+import SearchSvg from '../../svg/SearchSvg';
+import styled from 'styled-components';
+import CardRating from '../Card/CardRating';
+import { searchFilms } from '../../http/filmAPI';
+import { Link } from 'react-router-dom';
+import { regExp } from '../../utils/regExp';
 
 export default function Search() {
   const [show, setShow] = React.useState(false);
-  const [search, setSearch] = React.useState("");
+  const [search, setSearch] = React.useState('');
   const [results, setResults] = React.useState([]);
   const ref = React.useRef(null);
 
@@ -19,13 +19,13 @@ export default function Search() {
     };
 
     if (show) {
-      document.addEventListener("mousedown", listener);
-      document.addEventListener("touchstart", listener);
+      document.addEventListener('mousedown', listener);
+      document.addEventListener('touchstart', listener);
     }
 
     return () => {
-      document.removeEventListener("mousedown", listener);
-      document.removeEventListener("touchstart", listener);
+      document.removeEventListener('mousedown', listener);
+      document.removeEventListener('touchstart', listener);
     };
   }, [show]);
 
@@ -42,7 +42,7 @@ export default function Search() {
     <>
       {show && <Overlay />}
       <SearchMain ref={ref}>
-        <SearchForm className={show && search && "search"}>
+        <SearchForm className={show && search && 'search'}>
           <SearchIcon />
           <SearchInput
             onFocus={() => setShow(true)}
@@ -63,30 +63,27 @@ export default function Search() {
                   to={`film/${id}`}
                   onClick={() => {
                     setShow(false);
-                    setSearch("");
-                  }}
-                >
+                    setSearch('');
+                  }}>
                   <Card>
                     <Img src={img} alt={name} />
                     <Info>
                       <H4>
-                        {name
-                          .split(new RegExp(regExp(search), "ig"))
-                          .map((part, i, arr) =>
-                            i === arr.length - 1 ? (
-                              part
-                            ) : (
-                              <React.Fragment key={i}>
-                                {part}
-                                <span>{search.toLocaleLowerCase()}</span>
-                              </React.Fragment>
-                            )
-                          )}
+                        {name.split(new RegExp(regExp(search), 'ig')).map((part, i, arr) =>
+                          i === arr.length - 1 ? (
+                            part
+                          ) : (
+                            <React.Fragment key={i}>
+                              {part}
+                              <span>{search.toLocaleLowerCase()}</span>
+                            </React.Fragment>
+                          ),
+                        )}
                       </H4>
                       <Genres>
                         {genres
                           .map((genre) => genre.title.toLowerCase())
-                          .join(", ")
+                          .join(', ')
                           .toLowerCase()}
                       </Genres>
                       <CardRating size="small" rating={rating} />
@@ -108,7 +105,7 @@ export default function Search() {
 const SearchMain = styled.div`
   grid-area: search;
   position: relative;
-  z-index: var(--z-index-popup);
+  z-index: var(--z-index-third);
 `;
 
 const Overlay = styled.div`
@@ -118,7 +115,7 @@ const Overlay = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: var(--z-index-popup);
+  z-index: var(--z-index-third);
 `;
 
 const SearchIcon = styled(SearchSvg)`
@@ -143,7 +140,7 @@ const SearchForm = styled.div`
   position: relative;
   &.search {
     &::after {
-      content: "";
+      content: '';
       margin-left: 20px;
       position: absolute;
       bottom: 0;

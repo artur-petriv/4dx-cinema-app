@@ -17,9 +17,9 @@ const FiltersData = [
     name: 'Формат',
     type: 'select',
     options: [
-      { name: '4DX', value: '4dx' },
-      { name: '3D', value: '3d' },
       { name: '2D', value: '2d' },
+      { name: '3D', value: '3d' },
+      { name: '4DX', value: '4dx' },
     ],
   },
   {
@@ -40,8 +40,6 @@ export default function Film() {
   React.useEffect(() => {
     fetchOneFilm(id).then((data) => setFilm(data));
   }, []);
-
-  console.log({ ...film });
 
   return (
     <FilmSection>

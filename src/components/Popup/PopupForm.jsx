@@ -192,7 +192,7 @@ const LabelButton = styled.button`
   font-weight: 600;
   transition: background-color 0.3s, opacity 0.3s;
   opacity: 0.95;
-  self-align: center;
+  align-self: center;
   &:hover {
     opacity: 1;
   }

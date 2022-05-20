@@ -2,12 +2,12 @@ import { makeAutoObservable } from 'mobx';
 
 export default class FilmStore {
   constructor() {
+    this._loading = true;
     this._sort = [];
     this._ageLimitations = [];
     this._formats = [];
     this._genres = [];
     this._films = [];
-
     this._sortSelected = '';
     this._formatsSelected = {};
     this._ageLimitationSelected = '';
@@ -16,6 +16,10 @@ export default class FilmStore {
     this._totalCount = 0;
     this._limit = 8;
     makeAutoObservable(this);
+  }
+
+  setLoading(boolean) {
+    this._loading = boolean;
   }
 
   setSort(sort) {
@@ -64,6 +68,10 @@ export default class FilmStore {
 
   setLimit(limit) {
     this._limit = limit;
+  }
+
+  get loading() {
+    return this._loading;
   }
 
   get sort() {

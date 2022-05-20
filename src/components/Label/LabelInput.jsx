@@ -5,6 +5,7 @@ export default function LabelInput({
   title,
   name,
   value,
+  type = 'text',
   onChange,
   valuePlaceholder,
   errorMessage,
@@ -16,6 +17,7 @@ export default function LabelInput({
         onChange={onChange}
         value={value}
         name={name}
+        type={type}
         placeholder={valuePlaceholder}
         className={errorMessage && 'error'}
       />
