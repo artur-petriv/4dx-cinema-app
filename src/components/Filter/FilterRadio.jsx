@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import FilterContainer from "./FilterContainer";
+import React from 'react';
+import styled from 'styled-components';
+import FilterContainer from './FilterContainer';
 
 function FilterRadio({ title, items, selected, changeRadioSelected }) {
   return (
@@ -8,14 +8,10 @@ function FilterRadio({ title, items, selected, changeRadioSelected }) {
       <FilterTitle>{title}</FilterTitle>
       <FilterContainer>
         {items?.map((radio) => (
-          <FilterRadioItem
-            key={radio.id}
-            onClick={() => changeRadioSelected({ ...radio })}
-          >
+          <FilterRadioItem key={radio.id} onClick={() => changeRadioSelected({ ...radio })}>
             <FilterRadioButton
-              className={selected.value === radio.value ? "selected" : ""}
-            ></FilterRadioButton>
-            <FilterRadioName>{radio.title}</FilterRadioName>
+              className={selected.value === radio.value ? 'selected' : ''}></FilterRadioButton>
+            <FilterRadioName>{radio.name}</FilterRadioName>
           </FilterRadioItem>
         ))}
       </FilterContainer>
@@ -52,7 +48,7 @@ const FilterRadioButton = styled.div`
     border-color: var(--brand-color);
     // border-width: 2px;
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       top: 50%;
       left: 50%;

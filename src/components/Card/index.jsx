@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import Poster from "../Poster";
-import CardRating from "./CardRating";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import Poster from '../Poster';
+import CardRating from './CardRating';
 
 export default function index({
   film: { id, img, name, genres, formats, ageLimitationId, rating },
@@ -17,8 +17,8 @@ export default function index({
           <CardTitleLink to={`/film/${id}`}>{name}</CardTitleLink>
           <CardDescription>
             {genres
-              ?.map((genre) => genre.title)
-              .join(", ")
+              ?.map((genre) => genre.name)
+              .join(', ')
               .toLowerCase()}
           </CardDescription>
         </CardWrap>

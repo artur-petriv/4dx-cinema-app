@@ -1,9 +1,9 @@
-import React from "react";
-import CheckedSvg from "./../../svg/CheckedSvg";
-import styled from "styled-components";
-import FilterContainer from "./FilterContainer";
-import { Context } from "../..";
-import { observer } from "mobx-react-lite";
+import React from 'react';
+import CheckedSvg from './../../svg/CheckedSvg';
+import styled from 'styled-components';
+import FilterContainer from './FilterContainer';
+import { Context } from '../..';
+import { observer } from 'mobx-react-lite';
 
 const FilterCheckboxList = ({ items }) => {
   const { films } = React.useContext(Context);
@@ -16,7 +16,7 @@ const FilterCheckboxList = ({ items }) => {
     )
       films.setFormatsSelected(
         items.reduce((acc, cur) => ({ [cur.value]: false })),
-        {}
+        {},
       );
   }, []);
 
@@ -32,11 +32,8 @@ const FilterCheckboxList = ({ items }) => {
       {items.map((checkbox) => (
         <FilterCheckboxItem
           key={checkbox.value}
-          onClick={() => handleCheckboxClick(checkbox.value)}
-        >
-          <FilterCheckbox
-            className={films.formatsSelected[checkbox.value] ? "selected" : ""}
-          >
+          onClick={() => handleCheckboxClick(checkbox.value)}>
+          <FilterCheckbox className={films.formatsSelected[checkbox.value] ? 'selected' : ''}>
             <FilterCheckboxIcon />
           </FilterCheckbox>
           <FilterCheckboxName>{checkbox.name}</FilterCheckboxName>

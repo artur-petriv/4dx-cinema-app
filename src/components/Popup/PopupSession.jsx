@@ -7,14 +7,17 @@ import LabelInput from '../Label/LabelInput';
 
 const initialSort = [
   {
+    id: 1,
     name: 'Веном 2',
     value: 'venom 2',
   },
   {
+    id: 2,
     name: '100% Вовк',
     value: '100% wolf',
   },
   {
+    id: 3,
     name: 'Я – панда',
     value: 'im panda',
   },
@@ -22,10 +25,12 @@ const initialSort = [
 
 const initialSort2 = [
   {
+    id: 1,
     name: '2D',
     value: '2d',
   },
   {
+    id: 2,
     name: '3D',
     value: '3d',
   },
@@ -39,14 +44,26 @@ const initialFormValues = {
 };
 
 const PopupSession = observer(() => {
-  const { modal } = React.useContext(Context);
+  const { modal, films } = React.useContext(Context);
   const [formValues, setFormValues] = React.useState(initialFormValues);
+  const [filmSelectedId, setFilmSelectedId] = React.useState(null);
+  const [formatSelectedId, setFormatSelectedId] = React.useState(null);
+  const [formatsAvailable, setFormatsAvailable] = React.useState([]);
 
   const onChangeInput = (e) => {
     setFormValues({
       ...formValues,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const onFilmSelect = (film) => {
+    setFilmSelectedId(film);
+    setFormatsAvailable(film.formats);
+  };
+
+  const onFormatSelected = (id) => {
+    setFormatSelectedId(id);
   };
 
   const submitEvents = () => {
@@ -66,7 +83,7 @@ const PopupSession = observer(() => {
       <Legend>{modal.title}</Legend>
       <FormContainer>
         <LabelsWrap>
-          <Select items={initialSort} title="Фільм" />
+          <Select items={films.films} title="Фільм" onChange={onFilmSelect} />
           <LabelInput
             title="Старт Дата"
             name="start_date"
@@ -85,7 +102,11 @@ const PopupSession = observer(() => {
           />
         </LabelsWrap>
         <LabelsWrap>
-          <Select items={initialSort2} title="Формат" />
+          <Select
+            items={formatsAvailable?.length === 0 ? [] : formatsAvailable}
+            title="Формат"
+            onChange={onFormatSelected}
+          />
           <LabelInput
             title="Час початку сеансу"
             name="time"

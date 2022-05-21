@@ -8,19 +8,25 @@ const FilterSelect = ({ items, className, setSelect }) => {
   const [selected, setSelected] = React.useState('');
 
   React.useEffect(() => {
-    const { name, value } = items[0];
+    //TODO: Check if need useCallback
+    if (items.length === 0) return;
+
+    const { name, id } = items[0];
     setSelected(name);
-    setSelect && setSelect(value);
-  }, []);
+    setSelect && setSelect(id);
+  }, [items]);
 
   function showFilterList() {
     setIsVisible(true);
   }
 
-  function hideFilterList(sortName) {
+  function hideFilterList(option) {
     setIsVisible(false);
-    if (sortName === selected) return;
-    if (sortName) setSelected(sortName);
+    if (option.name === selected) return;
+    if (option.name) {
+      setSelected(option.name);
+      setSelect && setSelect(option.id);
+    }
   }
 
   return (
@@ -34,7 +40,7 @@ const FilterSelect = ({ items, className, setSelect }) => {
         <FilterSelectList
           items={items}
           isVisible={isVisible}
-          toggleVisibility={(sortName) => hideFilterList(sortName)}
+          toggleVisibility={(option) => hideFilterList(option)}
         />
       )}
     </FilterContainer>

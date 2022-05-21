@@ -62,25 +62,25 @@ export const fetchOneFilm = async (id) => {
   return data;
 };
 
-export const createAgeLimitation = async (title, value) => {
+export const createAgeLimitation = async (name, value) => {
   const { data } = await $host.post('api/ageLimitation', {
-    title,
+    name,
     value,
   });
   return data;
 };
 
-export const createFormat = async (title, value) => {
+export const createFormat = async (name, value) => {
   const { data } = await $host.post('api/format', {
-    title,
+    name,
     value,
   });
   return data;
 };
 
-export const createGenre = async (title, value) => {
+export const createGenre = async (name, value) => {
   const { data } = await $host.post('api/genre', {
-    title,
+    name,
     value,
   });
   return data;

@@ -82,7 +82,7 @@ export default function Search() {
                       </H4>
                       <Genres>
                         {genres
-                          .map((genre) => genre.title.toLowerCase())
+                          .map((genre) => genre.name.toLowerCase())
                           .join(', ')
                           .toLowerCase()}
                       </Genres>

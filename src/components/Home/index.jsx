@@ -15,14 +15,17 @@ import {
 
 const initialSort = [
   {
+    id: 1,
     name: 'По рейтингу',
     value: 'rating',
   },
   {
+    id: 2,
     name: 'По новизні',
     value: 'new',
   },
   {
+    id: 3,
     name: 'По тривалості',
     value: 'duration',
   },

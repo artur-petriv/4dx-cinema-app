@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import CheckedSvg from "./../../svg/CheckedSvg";
-import FilterContainer from "./FilterContainer";
-import { Context } from "../..";
-import { observer } from "mobx-react-lite";
+import React from 'react';
+import styled from 'styled-components';
+import CheckedSvg from './../../svg/CheckedSvg';
+import FilterContainer from './FilterContainer';
+import { Context } from '../..';
+import { observer } from 'mobx-react-lite';
 
 const FilterCheckboxList = ({ items, title }) => {
   const { films } = React.useContext(Context);
@@ -14,7 +14,7 @@ const FilterCheckboxList = ({ items, title }) => {
       return;
     }
 
-    if (title && title === "Формат") {
+    if (title && title === 'Формат') {
       if (
         films.formatsSelected &&
         Object.keys(films.formatsSelected).length === 0 &&
@@ -22,11 +22,11 @@ const FilterCheckboxList = ({ items, title }) => {
       )
         films.setFormatsSelected(
           items?.reduce((acc, cur) => ({ [cur.value]: false })),
-          {}
+          {},
         );
     }
 
-    if (title && title === "Жанры") {
+    if (title && title === 'Жанры') {
       if (
         films.genresSelected &&
         Object.keys(films.genresSelected).length === 0 &&
@@ -34,19 +34,19 @@ const FilterCheckboxList = ({ items, title }) => {
       )
         films.setGenresSelected(
           items?.reduce((acc, cur) => ({ [cur.id]: false })),
-          {}
+          {},
         );
     }
   }, []);
 
   function handleCheckboxClick(id) {
-    if (title === "Формат")
+    if (title === 'Формат')
       films.setFormatsSelected({
         ...films.formatsSelected,
         [id]: !films.formatsSelected[id],
       });
 
-    if (title === "Жанры")
+    if (title === 'Жанры')
       films.setGenresSelected({
         ...films.genresSelected,
         [id]: !films.genresSelected[id],
@@ -58,28 +58,24 @@ const FilterCheckboxList = ({ items, title }) => {
   return (
     <FilterContainer>
       {items.length === 0
-        ? ""
+        ? ''
         : items?.map((checkbox) => (
-            <FilterCheckboxItem
-              key={checkbox.id}
-              onClick={() => handleCheckboxClick(checkbox.id)}
-            >
+            <FilterCheckboxItem key={checkbox.id} onClick={() => handleCheckboxClick(checkbox.id)}>
               <FilterCheckbox
                 className={
-                  title === "Формат"
+                  title === 'Формат'
                     ? films.formatsSelected[checkbox.id]
-                      ? "selected"
-                      : ""
+                      ? 'selected'
+                      : ''
                     : films.genresSelected[checkbox.id]
-                    ? "selected"
-                    : ""
-                }
-              >
-                {title === "Формат"
+                    ? 'selected'
+                    : ''
+                }>
+                {title === 'Формат'
                   ? films.formatsSelected[checkbox.id] && <FilterCheckboxIcon />
                   : films.genresSelected[checkbox.id] && <FilterCheckboxIcon />}
               </FilterCheckbox>
-              <FilterCheckboxName>{checkbox.title}</FilterCheckboxName>
+              <FilterCheckboxName>{checkbox.name}</FilterCheckboxName>
             </FilterCheckboxItem>
           ))}
     </FilterContainer>

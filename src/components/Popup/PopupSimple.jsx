@@ -1,19 +1,15 @@
-import { observer } from "mobx-react-lite";
-import React from "react";
-import { Context } from "../..";
-import {
-  createAgeLimitation,
-  createFormat,
-  createGenre,
-} from "../../http/filmAPI";
-import LabelInput from "../Label/LabelInput";
-import styled from "styled-components";
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import { Context } from '../..';
+import { createAgeLimitation, createFormat, createGenre } from '../../http/filmAPI';
+import LabelInput from '../Label/LabelInput';
+import styled from 'styled-components';
 
 const PopupSimple = observer(() => {
   const { modal } = React.useContext(Context);
   const [simpleValues, setSimpleValues] = React.useState({
-    firstSimple: "",
-    secondSimple: "",
+    firstSimple: '',
+    secondSimple: '',
   });
 
   const onChangeInput = (e) => {
@@ -24,36 +20,36 @@ const PopupSimple = observer(() => {
   };
 
   const submitEvents = () => {
-    const title = simpleValues.firstSimple;
+    const name = simpleValues.firstSimple;
     const value = simpleValues.secondSimple;
 
-    if (modal.name === "ageLimits") {
-      createAgeLimitation(title, value).then((data) => {
+    if (modal.name === 'ageLimits') {
+      createAgeLimitation(name, value).then((data) => {
         setSimpleValues({
-          firstSimple: "",
-          secondSimple: "",
+          firstSimple: '',
+          secondSimple: '',
         });
         modal.setVisible(false);
       });
       return;
     }
 
-    if (modal.name === "genres") {
-      createGenre(title, value).then((data) => {
+    if (modal.name === 'genres') {
+      createGenre(name, value).then((data) => {
         setSimpleValues({
-          firstSimple: "",
-          secondSimple: "",
+          firstSimple: '',
+          secondSimple: '',
         });
         modal.setVisible(false);
       });
       return;
     }
 
-    if (modal.name === "formats") {
-      createFormat(title, value).then((data) => {
+    if (modal.name === 'formats') {
+      createFormat(name, value).then((data) => {
         setSimpleValues({
-          firstSimple: "",
-          secondSimple: "",
+          firstSimple: '',
+          secondSimple: '',
         });
         modal.setVisible(false);
       });

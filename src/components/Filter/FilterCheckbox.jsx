@@ -1,14 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import CheckedSvg from "./../../svg/CheckedSvg";
-import FilterContainer from "./FilterContainer";
+import React from 'react';
+import styled from 'styled-components';
+import CheckedSvg from './../../svg/CheckedSvg';
+import FilterContainer from './FilterContainer';
 
-export default function FilterCheckbox({
-  items,
-  title,
-  selected,
-  changeCheckboxSelected,
-}) {
+export default function FilterCheckbox({ items, title, selected, changeCheckboxSelected }) {
   if (!title || items.length === 0) return null;
 
   return (
@@ -16,16 +11,11 @@ export default function FilterCheckbox({
       <FilterTitle>{title}</FilterTitle>
       <FilterContainer>
         {items?.map((checkbox) => (
-          <FilterCheckboxItem
-            key={checkbox.id}
-            onClick={() => changeCheckboxSelected(checkbox)}
-          >
-            <Checkbox
-              className={selected[checkbox.value]?.checked && "selected"}
-            >
+          <FilterCheckboxItem key={checkbox.id} onClick={() => changeCheckboxSelected(checkbox)}>
+            <Checkbox className={selected[checkbox.value]?.checked && 'selected'}>
               <FilterCheckboxIcon />
             </Checkbox>
-            <FilterCheckboxName>{checkbox.title}</FilterCheckboxName>
+            <FilterCheckboxName>{checkbox.name}</FilterCheckboxName>
           </FilterCheckboxItem>
         ))}
       </FilterContainer>

@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import FilterSelect from './FilterSelect';
 import FilterSkeleton from './FilterSkeleton';
 
-export default function Select({ items, className, type, title }) {
+export default function Select({ items, className, type, title, onChange }) {
   return (
     <FilterWrap className={className}>
-      {items.length === 0 ? (
+      {items?.length === 0 ? (
         <FilterSkeleton type={type} />
       ) : (
         <>
           <FilterTitle>{title}</FilterTitle>
-          <FilterSelect items={items} />
+          <FilterSelect items={items} setSelect={onChange} />
         </>
       )}
     </FilterWrap>
@@ -25,7 +25,6 @@ const FilterWrap = styled.div`
   row-gap: 12px;
   border-bottom: 1px solid var(--gray-1);
   &:last-child {
-    /* padding-bottom: 0; */
     border-bottom: none;
   }
 `;

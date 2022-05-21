@@ -1,14 +1,14 @@
-import { observer } from "mobx-react-lite";
-import React from "react";
-import styled from "styled-components";
-import { Context } from "../..";
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import styled from 'styled-components';
+import { Context } from '../..';
 
 const FilterSelectList = observer(({ items, isVisible, toggleVisibility }) => {
   const listRef = React.useRef();
   const { films } = React.useContext(Context);
 
   React.useEffect(() => {
-    document.addEventListener("click", handleClick);
+    document.addEventListener('click', handleClick);
 
     function handleClick(e) {
       if (listRef && listRef.current) {
@@ -19,23 +19,20 @@ const FilterSelectList = observer(({ items, isVisible, toggleVisibility }) => {
       }
     }
 
-    return () => document.removeEventListener("click", handleClick);
+    return () => document.removeEventListener('click', handleClick);
   }, []);
 
   function handleOptionClick(option, e) {
     e.stopPropagation();
-    const { name, value } = option;
-    films.setSortSelected(value);
-    toggleVisibility(name);
+    const { name, id } = option;
+    films.setSortSelected(id);
+    toggleVisibility(name, id);
   }
 
   return (
-    <List ref={listRef} className={`${isVisible ? "visible" : ""}`}>
+    <List ref={listRef} className={`${isVisible ? 'visible' : ''}`}>
       {items.map((option) => (
-        <Option
-          onClick={(e) => handleOptionClick(option, e)}
-          key={option.value}
-        >
+        <Option key={option.id} onClick={(e) => handleOptionClick(option, e)}>
           {option.name}
         </Option>
       ))}

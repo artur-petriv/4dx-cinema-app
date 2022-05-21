@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import { Context } from "../..";
-import FilterContainer from "./FilterContainer";
+import React from 'react';
+import styled from 'styled-components';
+import { Context } from '../..';
+import FilterContainer from './FilterContainer';
 
 // TODO: Rework
 
 export default function FilterRadioList({ items }) {
-  const [radioButton, setRadioButton] = React.useState("");
+  const [radioButton, setRadioButton] = React.useState('');
   const { films } = React.useContext(Context);
 
   function handleRadioClick(id) {
@@ -24,21 +24,15 @@ export default function FilterRadioList({ items }) {
 
   return (
     <FilterContainer>
-      <FilterRadioItem onClick={() => handleRadioClick("")}>
-        <FilterRadioButton
-          className={radioButton === "" ? "selected" : ""}
-        ></FilterRadioButton>
+      <FilterRadioItem onClick={() => handleRadioClick('')}>
+        <FilterRadioButton className={radioButton === '' ? 'selected' : ''}></FilterRadioButton>
         <FilterRadioName>Все</FilterRadioName>
       </FilterRadioItem>
       {items?.map((radio) => (
-        <FilterRadioItem
-          key={radio.id}
-          onClick={() => handleRadioClick(radio.id)}
-        >
+        <FilterRadioItem key={radio.id} onClick={() => handleRadioClick(radio.id)}>
           <FilterRadioButton
-            className={radioButton === radio.id ? "selected" : ""}
-          ></FilterRadioButton>
-          <FilterRadioName>{radio.title}</FilterRadioName>
+            className={radioButton === radio.id ? 'selected' : ''}></FilterRadioButton>
+          <FilterRadioName>{radio.name}</FilterRadioName>
         </FilterRadioItem>
       ))}
     </FilterContainer>
@@ -57,7 +51,7 @@ const FilterRadioButton = styled.div`
     border-color: var(--brand-color);
     // border-width: 2px;
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       top: 50%;
       left: 50%;
