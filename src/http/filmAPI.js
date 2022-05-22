@@ -85,3 +85,8 @@ export const createGenre = async (name, value) => {
   });
   return data;
 };
+
+export const createSession = async (session) => {
+  const { data } = await $host.post('api/session', session);
+  return data;
+};

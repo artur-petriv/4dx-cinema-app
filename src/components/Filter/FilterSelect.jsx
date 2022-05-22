@@ -9,11 +9,12 @@ const FilterSelect = ({ items, className, setSelect }) => {
 
   React.useEffect(() => {
     //TODO: Check if need useCallback
+    console.log('FilterSelect', items);
     if (items.length === 0) return;
 
     const { name, id } = items[0];
     setSelected(name);
-    setSelect && setSelect(id);
+    setSelect && setSelect(items[0]);
   }, [items]);
 
   function showFilterList() {
@@ -21,11 +22,13 @@ const FilterSelect = ({ items, className, setSelect }) => {
   }
 
   function hideFilterList(option) {
+    console.log('hideFilterList', option);
     setIsVisible(false);
+    if (!option) return;
     if (option.name === selected) return;
     if (option.name) {
       setSelected(option.name);
-      setSelect && setSelect(option.id);
+      setSelect && setSelect(option);
     }
   }
 

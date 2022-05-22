@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import styled from 'styled-components';
 import { Context } from '../..';
+import { createSession } from '../../http/filmAPI';
 import Select from '../Filter/Select';
 import LabelInput from '../Label/LabelInput';
 
@@ -46,9 +47,8 @@ const initialFormValues = {
 const PopupSession = observer(() => {
   const { modal, films } = React.useContext(Context);
   const [formValues, setFormValues] = React.useState(initialFormValues);
-  const [filmSelectedId, setFilmSelectedId] = React.useState(null);
-  const [formatSelectedId, setFormatSelectedId] = React.useState(null);
-  const [formatsAvailable, setFormatsAvailable] = React.useState([]);
+  const [filmSelected, setFilmSelected] = React.useState({});
+  const [formatSelected, setFormatSelected] = React.useState({});
 
   const onChangeInput = (e) => {
     setFormValues({
@@ -58,24 +58,36 @@ const PopupSession = observer(() => {
   };
 
   const onFilmSelect = (film) => {
-    setFilmSelectedId(film);
-    setFormatsAvailable(film.formats);
+    setFilmSelected(film);
   };
 
-  const onFormatSelected = (id) => {
-    setFormatSelectedId(id);
+  const onFormatSelected = (film) => {
+    setFormatSelected(film);
   };
 
   const submitEvents = () => {
-    // createFilm({
-    //   ...formValues,
-    //   ageLimitationSelected,
-    //   genresSelected,
-    //   formatsSelected,
-    // }).then((data) => {
-    //   setFormValues(initialFormValues);
-    //   modal.setVisible(false);
-    // });
+    if (
+      formValues.start_date.length === 0 ||
+      formValues.end_date.length === 0 ||
+      formValues.time.length === 0 ||
+      formValues.price.length === 0 ||
+      !filmSelected.id ||
+      !formatSelected.id
+    ) {
+      console.log('alert', filmSelected.id);
+      alert('Не заповлене хочаб одне поле');
+      return;
+    }
+
+    createSession({
+      ...formValues,
+      filmId: filmSelected.id,
+      formatId: formatSelected.id,
+    }).then((data) => {
+      console.log(data);
+      setFormValues(initialFormValues);
+      modal.setVisible(false);
+    });
   };
 
   return (
@@ -103,7 +115,7 @@ const PopupSession = observer(() => {
         </LabelsWrap>
         <LabelsWrap>
           <Select
-            items={formatsAvailable?.length === 0 ? [] : formatsAvailable}
+            items={filmSelected?.formats ? filmSelected.formats : []}
             title="Формат"
             onChange={onFormatSelected}
           />

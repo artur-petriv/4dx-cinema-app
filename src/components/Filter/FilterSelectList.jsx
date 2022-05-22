@@ -23,15 +23,16 @@ const FilterSelectList = observer(({ items, isVisible, toggleVisibility }) => {
   }, []);
 
   function handleOptionClick(option, e) {
+    console.log('option', option);
     e.stopPropagation();
-    const { name, id } = option;
+    const { id } = option;
     films.setSortSelected(id);
-    toggleVisibility(name, id);
+    toggleVisibility(option);
   }
 
   return (
     <List ref={listRef} className={`${isVisible ? 'visible' : ''}`}>
-      {items.map((option) => (
+      {items?.map((option) => (
         <Option key={option.id} onClick={(e) => handleOptionClick(option, e)}>
           {option.name}
         </Option>

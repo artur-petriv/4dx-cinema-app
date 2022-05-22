@@ -1,15 +1,15 @@
-import React from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import styled from "styled-components";
-import { check } from "./http/userAPI";
-import "./scss/App.sass";
-import AppRouter from "./components/AppRouter";
-import { Context } from ".";
-import { observer } from "mobx-react-lite";
-import MoonLoader from "react-spinners/MoonLoader";
-import { css } from "@emotion/react";
-import Popup from "./components/Popup";
+import React from 'react';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import styled from 'styled-components';
+import { check } from './http/userAPI';
+import './scss/App.sass';
+import AppRouter from './components/AppRouter';
+import { Context } from '.';
+import { observer } from 'mobx-react-lite';
+import MoonLoader from 'react-spinners/MoonLoader';
+import { css } from '@emotion/react';
+import Popup from './components/Popup';
 
 const App = observer(() => {
   const { user, modal } = React.useContext(Context);
@@ -29,19 +29,14 @@ const App = observer(() => {
           user.setIsAuth(true);
         })
         .finally(() => setLoading(false));
-    }, 1000);
+    }, 800);
     return () => clearTimeout(timer);
   }, []);
 
   if (loading) {
     return (
       <Loader>
-        <MoonLoader
-          loading={loading}
-          color="var(--brand-color)"
-          css={override}
-          size={40}
-        />
+        <MoonLoader loading={loading} color="var(--brand-color)" css={override} size={40} />
       </Loader>
     );
   }

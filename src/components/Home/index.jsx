@@ -41,7 +41,7 @@ const Home = observer(() => {
       fetchFormats().then((data) => films.setFormats(data));
       fetchAgeLimitations().then((data) => films.setAgeLimitation(data));
       fetchGenres().then((data) => films.setGenres(data));
-    }, 2500);
+    }, 1100);
 
     return () => clearTimeout(timer);
   }, []);
@@ -61,7 +61,7 @@ const Home = observer(() => {
         films.setTotalCount(data.count);
         films.setLoading(false);
       });
-    }, 2450);
+    }, 900);
     return () => clearTimeout(timer);
   }, [
     films.sortSelected,
