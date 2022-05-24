@@ -1,47 +1,47 @@
-import { observer } from 'mobx-react-lite';
-import React from 'react';
-import styled from 'styled-components';
-import { Context } from '../..';
-import { createSession } from '../../http/filmAPI';
-import Select from '../Filter/Select';
-import LabelInput from '../Label/LabelInput';
+import { observer } from "mobx-react-lite";
+import React from "react";
+import styled from "styled-components";
+import { Context } from "../..";
+import { createSession } from "../../http/filmAPI";
+import Select from "../Filter/Select";
+import LabelInput from "../Label/LabelInput";
 
 const initialSort = [
   {
     id: 1,
-    name: 'Веном 2',
-    value: 'venom 2',
+    name: "Веном 2",
+    value: "venom 2",
   },
   {
     id: 2,
-    name: '100% Вовк',
-    value: '100% wolf',
+    name: "100% Вовк",
+    value: "100% wolf",
   },
   {
     id: 3,
-    name: 'Я – панда',
-    value: 'im panda',
+    name: "Я – панда",
+    value: "im panda",
   },
 ];
 
 const initialSort2 = [
   {
     id: 1,
-    name: '2D',
-    value: '2d',
+    name: "2D",
+    value: "2d",
   },
   {
     id: 2,
-    name: '3D',
-    value: '3d',
+    name: "3D",
+    value: "3d",
   },
 ];
 
 const initialFormValues = {
-  start_date: '',
-  end_date: '',
-  time: '',
-  price: '',
+  start_date: "",
+  end_date: "",
+  time: "",
+  price: "",
 };
 
 const PopupSession = observer(() => {
@@ -74,8 +74,7 @@ const PopupSession = observer(() => {
       !filmSelected.id ||
       !formatSelected.id
     ) {
-      console.log('alert', filmSelected.id);
-      alert('Не заповлене хочаб одне поле');
+      alert("Не заповлене хочаб одне поле");
       return;
     }
 
