@@ -1,27 +1,27 @@
-import { $authHost, $host } from './index';
+import { $authHost, $host } from "./index";
 
 export const createFilm = async (film) => {
-  const { data } = await $authHost.post('api/film', film);
+  const { data } = await $authHost.post("api/film", film);
   return data;
 };
 
 export const fetchSort = async () => {
-  const { data } = await $host.get('api/film');
+  const { data } = await $host.get("api/film");
   return data;
 };
 
 export const fetchFormats = async () => {
-  const { data } = await $host.get('api/format');
+  const { data } = await $host.get("api/format");
   return data;
 };
 
 export const fetchAgeLimitations = async () => {
-  const { data } = await $host.get('api/ageLimitation');
+  const { data } = await $host.get("api/ageLimitation");
   return data;
 };
 
 export const fetchGenres = async () => {
-  const { data } = await $host.get('api/genre');
+  const { data } = await $host.get("api/genre");
   return data;
 };
 
@@ -31,11 +31,11 @@ export const fetchFilms = async (
   ageLimitationSelected,
   genresSelected,
   page = 1,
-  limit = 4,
+  limit = 4
 ) => {
   const genresSelectedStr = JSON.stringify(genresSelected);
   const formatsSelectedStr = JSON.stringify(formatsSelected);
-  const { data } = await $host.get('api/film', {
+  const { data } = await $host.get("api/film", {
     params: {
       sortSelected,
       formatsSelectedStr,
@@ -50,7 +50,7 @@ export const fetchFilms = async (
 };
 
 export const searchFilms = async (name) => {
-  const { data } = await $host.get('api/film/search', {
+  const { data } = await $host.get("api/film/search", {
     params: { name },
   });
 
@@ -58,12 +58,12 @@ export const searchFilms = async (name) => {
 };
 
 export const fetchOneFilm = async (id) => {
-  const { data } = await $host.get('api/film/' + id);
+  const { data } = await $host.get("api/film/" + id);
   return data;
 };
 
 export const createAgeLimitation = async (name, value) => {
-  const { data } = await $host.post('api/ageLimitation', {
+  const { data } = await $host.post("api/ageLimitation", {
     name,
     value,
   });
@@ -71,7 +71,7 @@ export const createAgeLimitation = async (name, value) => {
 };
 
 export const createFormat = async (name, value) => {
-  const { data } = await $host.post('api/format', {
+  const { data } = await $host.post("api/format", {
     name,
     value,
   });
@@ -79,7 +79,7 @@ export const createFormat = async (name, value) => {
 };
 
 export const createGenre = async (name, value) => {
-  const { data } = await $host.post('api/genre', {
+  const { data } = await $host.post("api/genre", {
     name,
     value,
   });
@@ -87,6 +87,30 @@ export const createGenre = async (name, value) => {
 };
 
 export const createSession = async (session) => {
-  const { data } = await $host.post('api/session', session);
+  const { data } = await $host.post("api/session", session);
+  return data;
+};
+
+export const fetchDaySessions = async (filmId, dayDate) => {
+  const { data } = await $host.get("api/session/", {
+    params: {
+      filmId,
+      dayDate,
+    },
+  });
+  return data;
+};
+
+export const fetchTickets = async (sessionId) => {
+  const { data } = await $host.get("api/ticket/", {
+    params: {
+      sessionId,
+    },
+  });
+  return data;
+};
+
+export const fetchHallRows = async () => {
+  const { data } = await $host.get("api/hallRow");
   return data;
 };

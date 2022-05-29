@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import Button from '../Button';
-import Label from '../Label';
+import React from "react";
+import styled from "styled-components";
+import Button from "../Button";
+import Label from "../Label";
 
 export default function FilmTicket() {
   return (
@@ -9,14 +9,14 @@ export default function FilmTicket() {
       <FilmTicketCard>
         <Row>
           <Label title="Сеанс" text="Веном 2" />
-          <Label title="Формат" text="4DX" />
+          <Label title="Формат" text="2D" />
         </Row>
         <Row>
           <Label title="Дата" text="15.11.21" />
-          <Label title="Час" text="11:45" />
+          <Label title="Час" text="11:30" />
         </Row>
         <Row>
-          <Label title="Місця" text="А3, А4, В4" />
+          <Label title="Місця" text="" />
         </Row>
 
         <Total>

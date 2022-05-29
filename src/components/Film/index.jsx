@@ -2,36 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import FilmGenres from "./Genres";
 import FilmRating from "./Rating";
-import FilmDatepicker from "./Datepicker";
-import FilmTicket from "./Ticket";
-import FilmHall from "./Hall";
 import FilmGenre from "./Genre";
 import Container from "../Container";
-import Filter from "../Filter";
 import Poster from "../Poster";
-
-const FiltersData = [
-  {
-    id: 1,
-    name: "Формат",
-    type: "select",
-    options: [
-      { id: 1, name: "2D", value: "2d" },
-      { id: 2, name: "3D", value: "3d" },
-      { id: 3, name: "4DX", value: "4dx" },
-    ],
-  },
-  {
-    id: 2,
-    name: "Время",
-    type: "select",
-    options: [
-      { id: 1, name: "11:45", value: "11:45" },
-      { id: 2, name: "13:00", value: "13:00" },
-      { id: 3, name: "17:45", value: "17:45" },
-    ],
-  },
-];
+import FilmContent from "./Content";
 
 export default function FilmIndex({ film }) {
   return (
@@ -43,13 +17,15 @@ export default function FilmIndex({ film }) {
             <FilmInfo>
               <FilmTitle>{film.name}</FilmTitle>
               <FilmGenres />
-              <FilmGenre title="Рік" text="2022" />
-              <FilmGenre title="Країна" text="США" />
-              <FilmGenre title="Мова" text="Український (дубляж)" />
-              <FilmGenre title="Тривалість" text="128 хв." />
-              <FilmGenre title="Рік" text="2022" />
-              <FilmGenre title="Вікове обмеження" text="16+" />
-              <FilmGenre title="Прокат" text="з 20 червня до 16 липня" />
+              <FilmGenre title="Рік" text={film.year} />
+              <FilmGenre title="Країна" text={film.country} />
+              <FilmGenre title="Мова" text={film.language} />
+              <FilmGenre title="Тривалість" text={film.duration} />
+              <FilmGenre
+                title="Вікове обмеження"
+                text={film?.age_limitation?.name}
+              />
+              {/* <FilmGenre title="Прокат" text="з 20 червня до 16 липня" /> */}
               <FilmRating rating={film.rating} />
             </FilmInfo>
           </FilmCard>
@@ -69,26 +45,7 @@ export default function FilmIndex({ film }) {
           </FilmTrailer>
         </FilmHead>
 
-        <FilmContent>
-          <FilmOptions>
-            <FilmDatepicker />
-            <FilmFilters>
-              {FiltersData.map((filter) => (
-                <FilterStyled
-                  key={filter.id}
-                  title={filter.name}
-                  type={filter.type}
-                  items={filter.options}
-                />
-              ))}
-            </FilmFilters>
-          </FilmOptions>
-
-          <FilmMain>
-            <FilmTicket />
-            <FilmHall />
-          </FilmMain>
-        </FilmContent>
+        <FilmContent film={film} />
       </FilmContainer>
     </FilmSection>
   );
@@ -139,36 +96,3 @@ const FilmTrailer = styled.div`
 const FilmInfo = styled.div``;
 
 const PosterImage = styled.div``;
-
-const FilmMain = styled(Container)`
-  display: grid;
-  grid-template-areas: "ticket ticket ticket hall hall hall hall hall hall hall hall hall";
-  gap: 32px;
-`;
-
-const FilmContent = styled.div`
-  display: grid;
-  gap: 32px;
-`;
-
-const FilmFilters = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 24px;
-`;
-
-const FilterStyled = styled(Filter)`
-  padding: 0;
-  border: 0;
-  row-gap: 8px;
-`;
-
-const FilmOptions = styled.div`
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  background-color: var(--gray-0);
-  border-radius: var(--border-radius-medium);
-  box-shadow: var(--box-shadow);
-`;

@@ -1,9 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
-import ScreenSvg from '../../svg/ScreenSvg';
-import Seat from '../Seat';
+import React from "react";
+import styled from "styled-components";
+import { fetchHallRows, fetchTickets } from "../../http/filmAPI";
+import ScreenSvg from "../../svg/ScreenSvg";
+import Seat from "../Seat";
 
-export default function FilmHall() {
+export default function FilmHall({ formats }) {
+  const [rows, setRows] = React.useState([]);
+  const [tickets, setTickets] = React.useState([]);
+  const sessionId = 1;
+
+  React.useEffect(() => {
+    fetchHallRows().then((data) => setRows(data));
+  }, []);
+
+  React.useEffect(() => {
+    fetchTickets(sessionId).then((data) => setTickets(data));
+  }, [formats]);
+
   return (
     <FilmHallContainer>
       <Screen>
@@ -12,45 +25,17 @@ export default function FilmHall() {
       </Screen>
 
       <Seats>
-        <Row>
-          <RowTitle>A</RowTitle>
-          <RowContent>
-            {new Array(10).fill(null).map((n, i) => (
-              <Seat key={i} number={i} available />
-            ))}
-          </RowContent>
-          <RowTitle>A</RowTitle>
-        </Row>
-
-        <Row>
-          <RowTitle>B</RowTitle>
-          <RowContent>
-            {new Array(12).fill(null).map((n, i) => (
-              <Seat key={i} number={i} available />
-            ))}
-          </RowContent>
-          <RowTitle>B</RowTitle>
-        </Row>
-
-        <Row>
-          <RowTitle>C</RowTitle>
-          <RowContent>
-            {new Array(12).fill(null).map((n, i) => (
-              <Seat key={i} number={i} available />
-            ))}
-          </RowContent>
-          <RowTitle>C</RowTitle>
-        </Row>
-
-        <Row>
-          <RowTitle>D</RowTitle>
-          <RowContent>
-            {new Array(10).fill(null).map((n, i) => (
-              <Seat key={i} number={i} available />
-            ))}
-          </RowContent>
-          <RowTitle>D</RowTitle>
-        </Row>
+        {rows?.map((row) => (
+          <Row key={row.id}>
+            <RowTitle>{row.row}</RowTitle>
+            <RowContent>
+              {new Array(row.places).fill().map((n, i) => (
+                <Seat key={i} number={i} available />
+              ))}
+            </RowContent>
+            <RowTitle>A</RowTitle>
+          </Row>
+        ))}
       </Seats>
     </FilmHallContainer>
   );
