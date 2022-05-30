@@ -4,36 +4,109 @@ import { fetchHallRows, fetchTickets } from "../../http/filmAPI";
 import ScreenSvg from "../../svg/ScreenSvg";
 import Seat from "../Seat";
 
-export default function FilmHall({ formats }) {
-  const [rows, setRows] = React.useState([]);
-  const [tickets, setTickets] = React.useState([]);
-  const sessionId = 1;
+export default function FilmHall({ formats, sessionId }) {
+  const [rows, setRows] = React.useState({});
+  const [places, setPlaces] = React.useState({});
+  const [placesSelected, setPlacesSelected] = React.useState([]);
 
   React.useEffect(() => {
-    fetchHallRows().then((data) => setRows(data));
+    fetchHallRows().then((data) => {
+      const k = {};
+
+      data.forEach(({ id, row, places }) => {
+        k[row] = [];
+        Array(places)
+          .fill()
+          .forEach((n, index) => {
+            const place = index + 1;
+            k[row] = [
+              ...k[row],
+              { place, hallRowId: id, row: row, status: "available" },
+            ];
+          });
+      });
+
+      setRows(k);
+    });
   }, []);
 
   React.useEffect(() => {
-    fetchTickets(sessionId).then((data) => setTickets(data));
-  }, [formats]);
+    if (Object.keys(rows).length === 0) return;
+
+    fetchTickets(sessionId).then((data) => {
+      const ok = { ...rows };
+
+      data?.forEach((place) => {
+        ok[place.hall_row.row] = ok[place.hall_row.row]?.map((item) =>
+          place.place === item.place
+            ? {
+                ...item,
+                status: place.status,
+              }
+            : item
+        );
+      });
+
+      setPlaces(ok);
+    });
+  }, [rows, sessionId]);
+
+  const onPlaceSelect = (row, hallRowId, place) => {
+    const currentPlaces = { ...places };
+
+    // Change or toggle place status in "places" state object
+    currentPlaces[row] = currentPlaces[row]?.map((item) =>
+      place === item.place
+        ? {
+            ...item,
+            status: item?.status === "selected" ? "available" : "selected",
+          }
+        : item
+    );
+
+    // Check if "hallRowId" and "place" already exists in "placesSelected" state
+    const isPlaceSelected = placesSelected.some(
+      (item) => item.hallRowId === hallRowId && item.place === place
+    );
+
+    // Remove object if place already exists or add new one
+    const newPlacesSelected = isPlaceSelected
+      ? placesSelected.filter((item) => {
+          if (item.hallRowId === hallRowId) {
+            if (item.place === place) return false;
+            return true;
+          }
+          return true;
+        })
+      : [...placesSelected, { hallRowId, place }];
+
+    setPlaces(currentPlaces);
+    setPlacesSelected(newPlacesSelected);
+  };
 
   return (
     <FilmHallContainer>
       <Screen>
         <ScreenIcon />
-        <ScreenTitle>Экран</ScreenTitle>
+        <ScreenTitle>Екран</ScreenTitle>
       </Screen>
-
       <Seats>
-        {rows?.map((row) => (
-          <Row key={row.id}>
-            <RowTitle>{row.row}</RowTitle>
+        {Object.keys(places)?.map((row) => (
+          <Row key={row}>
+            <RowTitle>{row}</RowTitle>
             <RowContent>
-              {new Array(row.places).fill().map((n, i) => (
-                <Seat key={i} number={i} available />
+              {places[row]?.map(({ place, status, hallRowId, row }) => (
+                <Seat
+                  key={place}
+                  place={place}
+                  hallRowId={hallRowId}
+                  status={status}
+                  row={row}
+                  onClickPlace={onPlaceSelect}
+                />
               ))}
             </RowContent>
-            <RowTitle>A</RowTitle>
+            <RowTitle>{row}</RowTitle>
           </Row>
         ))}
       </Seats>

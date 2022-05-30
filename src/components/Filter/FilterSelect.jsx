@@ -1,18 +1,18 @@
-import React from 'react';
-import styled from 'styled-components';
-import ArrowDropdownSvg from '../../svg/ArrowDropdownSvg';
-import FilterSelectList from './FilterSelectList';
+import React from "react";
+import styled from "styled-components";
+import ArrowDropdownSvg from "../../svg/ArrowDropdownSvg";
+import FilterSelectList from "./FilterSelectList";
 
 const FilterSelect = ({ items, className, setSelect }) => {
   const [isVisible, setIsVisible] = React.useState(false);
-  const [selected, setSelected] = React.useState('');
+  const [selected, setSelected] = React.useState("");
 
   React.useEffect(() => {
     //TODO: Check if need useCallback
-    console.log('FilterSelect', items);
+    console.log("FilterSelect", items);
     if (items.length === 0) return;
 
-    const { name, id } = items[0];
+    const { name } = items[0];
     setSelected(name);
     setSelect && setSelect(items[0]);
   }, [items]);
@@ -22,7 +22,7 @@ const FilterSelect = ({ items, className, setSelect }) => {
   }
 
   function hideFilterList(option) {
-    console.log('hideFilterList', option);
+    console.log("hideFilterList", option);
     setIsVisible(false);
     if (!option) return;
     if (option.name === selected) return;
@@ -36,7 +36,7 @@ const FilterSelect = ({ items, className, setSelect }) => {
     <FilterContainer className={className}>
       <FilterSelectWrap onClick={showFilterList}>
         {selected}
-        <DropdownArrow className={`${isVisible ? 'active' : ''}`} />
+        <DropdownArrow className={`${isVisible ? "active" : ""}`} />
       </FilterSelectWrap>
 
       {isVisible && (

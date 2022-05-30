@@ -19,7 +19,7 @@ export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
   const [currentDay, setCurrentDay] = React.useState("");
 
   // TODO: Detect current day and make list of days for sessions
-  const day = "2022-05-23";
+  const day = "2022-05-24";
   const arr = determineDaysBetween(day, 7);
 
   const onSwiperChange = (swiper) => {
@@ -29,7 +29,7 @@ export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
   React.useEffect(() => {
     fetchDaySessions(filmId, currentDay).then((data) => {
       const sessions = data;
-      console.log(sessions);
+      console.log("sessions", sessions);
 
       // Find only unique formats, make array
       const formats = sessions.reduce((acc, { format }, index) => {
@@ -43,16 +43,19 @@ export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
       // Find times for every unique format
       const obj = {};
 
-      const times = sessions.forEach((session) => {
+      const times = sessions.forEach((session, i) => {
         obj[session.formatId] = obj[session.formatId]
-          ? [...obj[session.formatId], session.time.slice(0, -3)]
-          : [session.time.slice(0, -3)];
+          ? [
+              ...obj[session.formatId],
+              { id: i, name: session.time.slice(0, -3), sessionId: session.id },
+            ]
+          : [{ id: i, name: session.time.slice(0, -3), sessionId: session.id }];
       });
 
       console.log("times", obj);
 
       setFormats(formats);
-      // setTimes();
+      setTimes(obj);
     });
   }, [currentDay, filmId, setFormats, setTimes]);
 

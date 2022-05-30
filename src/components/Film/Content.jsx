@@ -31,9 +31,13 @@ const FiltersData = [
 
 export default function FilmContentIndex({ film }) {
   const [formats, setFormats] = React.useState([]);
-  const [day, setDay] = React.useState("");
+  const [times, setTimes] = React.useState({});
+  const [formatSelected, setFormatSelected] = React.useState({});
+  const [timeSelected, setTimeSelected] = React.useState({});
 
-  console.log(formats);
+  console.log("formatSelected", formatSelected);
+  console.log("times", times[formatSelected?.id]);
+  console.log("timeSelected", timeSelected);
 
   return (
     <FilmContent>
@@ -42,21 +46,27 @@ export default function FilmContentIndex({ film }) {
           sessions={film.sessions}
           filmId={film.id}
           setFormats={setFormats}
+          setTimes={setTimes}
         />
         <FilmFilters>
           <FilterStyled
             title="Формат"
             type="select"
             items={formats}
-            // onChange={setDay}
+            onChange={setFormatSelected}
           />
-          <FilterStyled title="Час" type="select" items={formats} />
+          <FilterStyled
+            title="Час"
+            type="select"
+            items={times[formatSelected?.id]}
+            onChange={setTimeSelected}
+          />
         </FilmFilters>
       </FilmOptions>
 
       <FilmMain>
         <FilmTicket />
-        <FilmHall formats={formats} />
+        <FilmHall formats={formats} sessionId={timeSelected.sessionId} />
       </FilmMain>
     </FilmContent>
   );
