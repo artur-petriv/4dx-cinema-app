@@ -41,21 +41,33 @@ export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
       }, []);
 
       // Find times for every unique format
-      const obj = {};
+      const timeList = {};
 
-      const times = sessions.forEach((session, i) => {
-        obj[session.formatId] = obj[session.formatId]
+      sessions.forEach((session, i) => {
+        timeList[session.formatId] = timeList[session.formatId]
           ? [
-              ...obj[session.formatId],
-              { id: i, name: session.time.slice(0, -3), sessionId: session.id },
+              ...timeList[session.formatId],
+              {
+                id: i,
+                name: session.time.slice(0, -3),
+                sessionId: session.id,
+                date: session.date,
+                price: session.price,
+              },
             ]
-          : [{ id: i, name: session.time.slice(0, -3), sessionId: session.id }];
+          : [
+              {
+                id: i,
+                name: session.time.slice(0, -3),
+                sessionId: session.id,
+                date: session.date,
+                price: session.price,
+              },
+            ];
       });
 
-      console.log("times", obj);
-
       setFormats(formats);
-      setTimes(obj);
+      setTimes(timeList);
     });
   }, [currentDay, filmId, setFormats, setTimes]);
 

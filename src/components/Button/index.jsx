@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Button({ children }) {
-  return <Btn>{children}</Btn>;
+export default function Button({ children, className, onClick }) {
+  return (
+    <Btn onClick={onClick} className={className}>
+      {children}
+    </Btn>
+  );
 }
 
 // Styled Components

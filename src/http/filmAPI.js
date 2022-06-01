@@ -101,15 +101,6 @@ export const fetchDaySessions = async (filmId, dayDate) => {
   return data;
 };
 
-export const fetchTickets = async (sessionId) => {
-  const { data } = await $host.get("api/ticket/", {
-    params: {
-      sessionId,
-    },
-  });
-  return data;
-};
-
 export const fetchHallRows = async () => {
   const { data } = await $host.get("api/hallRow");
   return data;

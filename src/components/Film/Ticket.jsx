@@ -1,31 +1,55 @@
 import React from "react";
 import styled from "styled-components";
+import { createTickets } from "../../http/ticketsAPI";
+import { converDateToDDMMYY } from "../../utils/dateConvertor";
 import Button from "../Button";
 import Label from "../Label";
 
-export default function FilmTicket() {
+export default function FilmTicket({
+  film,
+  placesSelected,
+  formatSelected,
+  timeSelected,
+}) {
+  const onSubmitTicket = () => {
+    createTickets(placesSelected, timeSelected.sessionId).then((data) =>
+      console.log("data", data)
+    );
+  };
+
   return (
     <FilmTicketContainer>
       <FilmTicketCard>
         <Row>
-          <Label title="Сеанс" text="Веном 2" />
-          <Label title="Формат" text="2D" />
+          <Label title="Сеанс" text={film.name} />
+          <Label title="Формат" text={formatSelected.name} />
         </Row>
         <Row>
-          <Label title="Дата" text="15.11.21" />
-          <Label title="Час" text="11:30" />
+          <Label title="Дата" text={converDateToDDMMYY(timeSelected.date)} />
+          <Label title="Година" text={timeSelected.name} />
         </Row>
         <Row>
-          <Label title="Місця" text="" />
+          <Label
+            title="Місця"
+            text={placesSelected
+              .map(({ row, place }) => row + place)
+              .join(", ")}
+          />
         </Row>
 
         <Total>
           <TotalName>Всього</TotalName>
-          <TotalPrice>300 грн</TotalPrice>
+          <TotalPrice>
+            {placesSelected.length * timeSelected.price + " грн"}
+          </TotalPrice>
         </Total>
       </FilmTicketCard>
 
-      <Button>Оформити</Button>
+      {placesSelected.length > 0 ? (
+        <SubmitButton onClick={onSubmitTicket}>Оформити</SubmitButton>
+      ) : (
+        <SubmitButton className="disabled">Місця не вибрано</SubmitButton>
+      )}
     </FilmTicketContainer>
   );
 }
@@ -79,3 +103,12 @@ const Total = styled.div`
 const TotalName = styled.div``;
 
 const TotalPrice = styled.div``;
+
+const SubmitButton = styled(Button)`
+  user-select: none;
+  &.disabled {
+    background-color: var(--gray-5);
+    cursor: default;
+    pointer-events: none;
+  }
+`;

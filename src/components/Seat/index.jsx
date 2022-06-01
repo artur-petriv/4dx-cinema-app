@@ -59,25 +59,12 @@ const SeatContainer = styled.div`
     background-color: var(--brand-color);
     cursor: pointer;
     color: var(--gray-0);
-
-    /* &:hover {
-      background-color: var(--brand-color);
-      color: var(--gray-0);
-    } */
   }
 
   &.sold {
     border: 2px solid var(--gray-3);
     color: transparent;
-    background-color: transparent;
+    background-color: var(--gray-1);
+    pointer-events: none;
   }
-
-  /* ${(props) => {
-    if (props.available)
-      return "border-color: var(--brand-color); cursor: pointer;";
-    if (props.sold)
-      return "border-color: var(--gray-3); background-color: var(--gray-3);";
-    if (props.selected)
-      return "border-color: var(--brand-color); background-color: var(--brand-color); cursor: pointer; color: var(--gray-0);";
-  }} */
 `;

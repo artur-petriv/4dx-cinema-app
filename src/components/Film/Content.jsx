@@ -1,33 +1,8 @@
 import React from "react";
 import FilmDatepicker from "./Datepicker";
-import FilmTicket from "./Ticket";
-import FilmHall from "./Hall";
-import Container from "../Container";
 import Select from "../Filter/Select";
 import styled from "styled-components";
-
-const FiltersData = [
-  {
-    id: 1,
-    name: "Формат",
-    type: "select",
-    options: [
-      { id: 1, name: "2D", value: "2d" },
-      { id: 2, name: "3D", value: "3d" },
-      { id: 3, name: "4DX", value: "4dx" },
-    ],
-  },
-  {
-    id: 2,
-    name: "Время",
-    type: "select",
-    options: [
-      { id: 1, name: "11:45", value: "11:45" },
-      { id: 2, name: "13:00", value: "13:00" },
-      { id: 3, name: "17:45", value: "17:45" },
-    ],
-  },
-];
+import FilmMain from "./FilmMain";
 
 export default function FilmContentIndex({ film }) {
   const [formats, setFormats] = React.useState([]);
@@ -35,9 +10,9 @@ export default function FilmContentIndex({ film }) {
   const [formatSelected, setFormatSelected] = React.useState({});
   const [timeSelected, setTimeSelected] = React.useState({});
 
-  console.log("formatSelected", formatSelected);
-  console.log("times", times[formatSelected?.id]);
-  console.log("timeSelected", timeSelected);
+  // console.log("formatSelected", formatSelected);
+  // console.log("times", times[formatSelected?.id]);
+  // console.log("timeSelected", timeSelected);
 
   return (
     <FilmContent>
@@ -64,22 +39,18 @@ export default function FilmContentIndex({ film }) {
         </FilmFilters>
       </FilmOptions>
 
-      <FilmMain>
-        <FilmTicket />
-        <FilmHall formats={formats} sessionId={timeSelected.sessionId} />
-      </FilmMain>
+      <FilmMain
+        film={film}
+        sessionId={timeSelected.sessionId}
+        formatSelected={formatSelected}
+        timeSelected={timeSelected}
+      />
     </FilmContent>
   );
 }
 
 const FilmContent = styled.div`
   display: grid;
-  gap: 32px;
-`;
-
-const FilmMain = styled(Container)`
-  display: grid;
-  grid-template-areas: "ticket ticket ticket hall hall hall hall hall hall hall hall hall";
   gap: 32px;
 `;
 

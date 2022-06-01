@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { fetchHallRows, fetchTickets } from "../../http/filmAPI";
+import { fetchHallRows } from "../../http/filmAPI";
+import { fetchTickets } from "../../http/ticketsAPI";
 import ScreenSvg from "../../svg/ScreenSvg";
 import Seat from "../Seat";
 
-export default function FilmHall({ formats, sessionId }) {
+export default function FilmHall({
+  sessionId,
+  setPlacesSelected,
+  placesSelected,
+}) {
   const [rows, setRows] = React.useState({});
   const [places, setPlaces] = React.useState({});
-  const [placesSelected, setPlacesSelected] = React.useState([]);
 
   React.useEffect(() => {
     fetchHallRows().then((data) => {
@@ -33,11 +37,12 @@ export default function FilmHall({ formats, sessionId }) {
   React.useEffect(() => {
     if (Object.keys(rows).length === 0) return;
 
+    // Fetch tickets for new session
     fetchTickets(sessionId).then((data) => {
-      const ok = { ...rows };
+      const newRows = { ...rows };
 
       data?.forEach((place) => {
-        ok[place.hall_row.row] = ok[place.hall_row.row]?.map((item) =>
+        newRows[place.hall_row.row] = newRows[place.hall_row.row]?.map((item) =>
           place.place === item.place
             ? {
                 ...item,
@@ -47,9 +52,10 @@ export default function FilmHall({ formats, sessionId }) {
         );
       });
 
-      setPlaces(ok);
+      setPlacesSelected([]);
+      setPlaces(newRows);
     });
-  }, [rows, sessionId]);
+  }, [sessionId]);
 
   const onPlaceSelect = (row, hallRowId, place) => {
     const currentPlaces = { ...places };
@@ -78,10 +84,17 @@ export default function FilmHall({ formats, sessionId }) {
           }
           return true;
         })
-      : [...placesSelected, { hallRowId, place }];
+      : [...placesSelected, { hallRowId, row, place }];
+
+    // Sort places by rowId and places like ASC sorting
+    const sortedPlacesSelected = newPlacesSelected.sort((a, b) => {
+      if (a.hallRowId - b.hallRowId > 0) return 1;
+      if (a.hallRowId - b.hallRowId < 0) return -1;
+      return a.place - b.place;
+    });
 
     setPlaces(currentPlaces);
-    setPlacesSelected(newPlacesSelected);
+    setPlacesSelected(sortedPlacesSelected);
   };
 
   return (
