@@ -12,9 +12,6 @@ export default function FilmMainIndex({
 }) {
   const [placesSelected, setPlacesSelected] = React.useState([]);
 
-  console.log("================================");
-  console.log("FilmMainIndex render");
-
   return (
     <FilmMain>
       <FilmTicket

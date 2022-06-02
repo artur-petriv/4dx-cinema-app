@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import ImdbSvg from '../../svg/ImdbSvg';
+import React from "react";
+import styled from "styled-components";
+import ImdbSvg from "../../svg/ImdbSvg";
 
-export default function FilmRating({ rating = '0' }) {
+export default function FilmRating({ rating = "0" }) {
   return (
     <Rating>
       <RatingSvg />
@@ -12,7 +12,7 @@ export default function FilmRating({ rating = '0' }) {
 }
 
 const Rating = styled.div`
-  margin-top: 16px;
+  /* margin-top: 16px; */
   display: flex;
   align-items: center;
 `;

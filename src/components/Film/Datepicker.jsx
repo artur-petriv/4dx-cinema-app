@@ -12,25 +12,25 @@ import {
   getMonthName,
   getWeekDay,
 } from "../../utils/dateConvertor";
+import SwiperArrowSvg from "../../svg/SwiperArrowSvg";
+
+// Detect current day and make list of days for sessions [hardcoded]
+const day = "2022-05-24";
+const availableDaysList = determineDaysBetween(day, 7);
 
 export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
   const navigationPrevRef = React.useRef(null);
   const navigationNextRef = React.useRef(null);
   const [currentDay, setCurrentDay] = React.useState("");
 
-  // TODO: Detect current day and make list of days for sessions
-  const day = "2022-05-24";
-  const arr = determineDaysBetween(day, 7);
-
   const onSwiperChange = (swiper) => {
-    setCurrentDay(arr[swiper.activeIndex]);
+    setCurrentDay(availableDaysList[swiper.activeIndex]);
   };
 
   React.useEffect(() => {
-    fetchDaySessions(filmId, currentDay).then((data) => {
-      const sessions = data;
-      console.log("sessions", sessions);
+    if (!currentDay || !filmId) return;
 
+    fetchDaySessions(filmId, currentDay).then((sessions) => {
       // Find only unique formats, make array
       const formats = sessions.reduce((acc, { format }, index) => {
         if (index === 0) return [...acc, format];
@@ -44,24 +44,26 @@ export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
       const timeList = {};
 
       sessions.forEach((session, i) => {
-        timeList[session.formatId] = timeList[session.formatId]
+        const { id, formatId, time, date, price } = session;
+
+        timeList[formatId] = timeList[formatId]
           ? [
-              ...timeList[session.formatId],
+              ...timeList[formatId],
               {
                 id: i,
-                name: session.time.slice(0, -3),
-                sessionId: session.id,
-                date: session.date,
-                price: session.price,
+                sessionId: id,
+                name: time.slice(0, -3),
+                date,
+                price,
               },
             ]
           : [
               {
                 id: i,
-                name: session.time.slice(0, -3),
-                sessionId: session.id,
-                date: session.date,
-                price: session.price,
+                sessionId: id,
+                name: time.slice(0, -3),
+                date,
+                price,
               },
             ];
       });
@@ -69,7 +71,7 @@ export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
       setFormats(formats);
       setTimes(timeList);
     });
-  }, [currentDay, filmId, setFormats, setTimes]);
+  }, [currentDay, filmId]);
 
   return (
     <Datapicker>
@@ -92,7 +94,7 @@ export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
         }}
         style={{ width: "500px" }}
       >
-        {arr?.map((date, i) => (
+        {availableDaysList?.map((date, i) => (
           <SwiperSlide key={i}>
             <DatepickerCell>
               <Month className="month">{getMonthName(date)}</Month>
@@ -102,32 +104,10 @@ export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
           </SwiperSlide>
         ))}
         <SwiperArrow left ref={navigationPrevRef}>
-          <svg
-            width="14"
-            height="15"
-            viewBox="0 0 14 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.70694 12.793L4.41394 8.5H13.9999V6.5H4.41394L8.70694 2.207L7.29294 0.792999L0.585938 7.5L7.29294 14.207L8.70694 12.793Z"
-              fill="black"
-            />
-          </svg>
+          <SwiperArrowSvg left />
         </SwiperArrow>
         <SwiperArrow next ref={navigationNextRef}>
-          <svg
-            width="14"
-            height="15"
-            viewBox="0 0 14 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5.29306 12.793L9.58606 8.5H6.29425e-05V6.5H9.58606L5.29306 2.207L6.70706 0.792999L13.4141 7.5L6.70706 14.207L5.29306 12.793Z"
-              fill="black"
-            />
-          </svg>
+          <SwiperArrowSvg next />
         </SwiperArrow>
       </Swiper2>
     </Datapicker>
@@ -148,7 +128,7 @@ const Swiper2 = styled(Swiper)`
     height: 100%;
     width: 200px;
     background: linear-gradient(
-      135deg,
+      90deg,
       rgba(255, 255, 255, 0.95) 0%,
       rgba(255, 255, 255, 0.15) 100%
     );
@@ -162,6 +142,23 @@ const Swiper2 = styled(Swiper)`
       270deg,
       rgba(255, 255, 255, 0.95) 0%,
       rgba(255, 255, 255, 0.15) 100%
+    );
+  }
+
+  [data-theme="dark"] &:after,
+  [data-theme="dark"] &:before {
+    background: linear-gradient(
+      90deg,
+      rgba(25, 25, 31, 0.95) 0%,
+      rgba(25, 25, 31, 0.15) 100%
+    );
+  }
+
+  [data-theme="dark"] &:after {
+    background: linear-gradient(
+      270deg,
+      rgba(25, 25, 31, 0.95) 0%,
+      rgba(25, 25, 31, 0.15) 100%
     );
   }
 `;
@@ -215,7 +212,7 @@ const SwiperArrow = styled.div`
   cursor: pointer;
   position: absolute;
   top: 50%;
-  ${(props) => (props.left ? "left: 0;" : "right: 0;")}
+  ${(props) => (props.left ? "left: 0;" : "right: 0;")};
   z-index: 3;
   transform: translateY(-50%);
   opacity: 0.8;

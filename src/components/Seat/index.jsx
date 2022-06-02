@@ -54,11 +54,21 @@ const SeatContainer = styled.div`
     }
   }
 
+  [data-theme="dark"] &.available {
+    &:hover {
+      color: var(--gray-10);
+    }
+  }
+
   &.selected {
     border-color: var(--brand-color);
     background-color: var(--brand-color);
     cursor: pointer;
     color: var(--gray-0);
+  }
+
+  [data-theme="dark"] &.selected {
+    color: var(--gray-10);
   }
 
   &.sold {

@@ -3,16 +3,16 @@ import FilmDatepicker from "./Datepicker";
 import Select from "../Filter/Select";
 import styled from "styled-components";
 import FilmMain from "./FilmMain";
+import { observer } from "mobx-react-lite";
+import { Context } from "../..";
 
-export default function FilmContentIndex({ film }) {
-  const [formats, setFormats] = React.useState([]);
-  const [times, setTimes] = React.useState({});
+const FilmContentIndex = observer(({ film }) => {
+  const { session } = React.useContext(Context);
+
+  const [availableFormats, setAvailableFormats] = React.useState([]);
+  const [availableTimes, setAvailableTimes] = React.useState({});
   const [formatSelected, setFormatSelected] = React.useState({});
   const [timeSelected, setTimeSelected] = React.useState({});
-
-  // console.log("formatSelected", formatSelected);
-  // console.log("times", times[formatSelected?.id]);
-  // console.log("timeSelected", timeSelected);
 
   return (
     <FilmContent>
@@ -20,20 +20,20 @@ export default function FilmContentIndex({ film }) {
         <FilmDatepicker
           sessions={film.sessions}
           filmId={film.id}
-          setFormats={setFormats}
-          setTimes={setTimes}
+          setFormats={setAvailableFormats}
+          setTimes={setAvailableTimes}
         />
         <FilmFilters>
           <FilterStyled
             title="Формат"
             type="select"
-            items={formats}
+            items={availableFormats}
             onChange={setFormatSelected}
           />
           <FilterStyled
             title="Час"
             type="select"
-            items={times[formatSelected?.id]}
+            items={availableTimes[formatSelected?.id]}
             onChange={setTimeSelected}
           />
         </FilmFilters>
@@ -47,7 +47,7 @@ export default function FilmContentIndex({ film }) {
       />
     </FilmContent>
   );
-}
+});
 
 const FilmContent = styled.div`
   display: grid;
@@ -75,3 +75,5 @@ const FilmOptions = styled.div`
   border-radius: var(--border-radius-medium);
   box-shadow: var(--box-shadow);
 `;
+
+export default FilmContentIndex;

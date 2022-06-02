@@ -11,9 +11,9 @@ export default function FilmTicket({
   formatSelected,
   timeSelected,
 }) {
-  const onSubmitTicket = () => {
-    createTickets(placesSelected, timeSelected.sessionId).then((data) =>
-      console.log("data", data)
+  const onSubmitTickets = () => {
+    createTickets(placesSelected, timeSelected.sessionId).then((tickets) =>
+      console.log("tickets", tickets)
     );
   };
 
@@ -46,7 +46,7 @@ export default function FilmTicket({
       </FilmTicketCard>
 
       {placesSelected.length > 0 ? (
-        <SubmitButton onClick={onSubmitTicket}>Оформити</SubmitButton>
+        <SubmitButton onClick={onSubmitTickets}>Оформити</SubmitButton>
       ) : (
         <SubmitButton className="disabled">Місця не вибрано</SubmitButton>
       )}

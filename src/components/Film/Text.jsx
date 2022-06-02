@@ -1,15 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function FilmGenre({ title, text }) {
+export default function TextIndex({ title, text }) {
   return (
-    <Genre>
+    <Text>
       <strong>{title}: </strong>
       {text}
-    </Genre>
+    </Text>
   );
 }
 
-const Genre = styled.div`
-  margin-top: 8px;
-`;
+const Text = styled.div``;

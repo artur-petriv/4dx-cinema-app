@@ -14,6 +14,7 @@ export default function FilmHall({
   const [places, setPlaces] = React.useState({});
 
   React.useEffect(() => {
+    // Fetch all the rows and places for hall
     fetchHallRows().then((data) => {
       const k = {};
 

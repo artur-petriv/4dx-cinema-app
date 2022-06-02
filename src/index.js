@@ -7,6 +7,7 @@ import UserStore from "./store/UserStore";
 import FilmStore from "./store/FilmStore";
 import ModalStore from "./store/ModalStore";
 import ThemeProvider from "./providers/ThemeProvider";
+import SessionStore from "./store/Session";
 
 export const Context = React.createContext(null);
 
@@ -17,6 +18,7 @@ ReactDOM.render(
         user: new UserStore(),
         films: new FilmStore(),
         modal: new ModalStore(),
+        session: new SessionStore(),
       }}
     >
       <Router>
