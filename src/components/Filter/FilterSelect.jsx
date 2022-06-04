@@ -8,8 +8,6 @@ const FilterSelect = ({ items, className, setSelect }) => {
   const [selected, setSelected] = React.useState("");
 
   React.useEffect(() => {
-    //TODO: Check if need useCallback
-    console.log("FilterSelect", items);
     if (items.length === 0) return;
 
     const { name } = items[0];
@@ -22,7 +20,6 @@ const FilterSelect = ({ items, className, setSelect }) => {
   }
 
   function hideFilterList(option) {
-    console.log("hideFilterList", option);
     setIsVisible(false);
     if (!option) return;
     if (option.name === selected) return;

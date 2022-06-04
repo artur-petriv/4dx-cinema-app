@@ -9,10 +9,21 @@ import { Context } from "../..";
 const FilmContentIndex = observer(({ film }) => {
   const { session } = React.useContext(Context);
 
-  const [availableFormats, setAvailableFormats] = React.useState([]);
-  const [availableTimes, setAvailableTimes] = React.useState({});
-  const [formatSelected, setFormatSelected] = React.useState({});
-  const [timeSelected, setTimeSelected] = React.useState({});
+  const setSelectedTime = (time) => {
+    session.setTimeSelected(time);
+  };
+
+  const setSelectedFormat = (format) => {
+    session.setFormatSelected(format);
+  };
+
+  const setFormats = (formats) => {
+    session.setAvailableFormats(formats);
+  };
+
+  const setTimes = (times) => {
+    session.setAvailableTimes(times);
+  };
 
   return (
     <FilmContent>
@@ -20,30 +31,30 @@ const FilmContentIndex = observer(({ film }) => {
         <FilmDatepicker
           sessions={film.sessions}
           filmId={film.id}
-          setFormats={setAvailableFormats}
-          setTimes={setAvailableTimes}
+          setFormats={setFormats}
+          setTimes={setTimes}
         />
         <FilmFilters>
           <FilterStyled
             title="Формат"
             type="select"
-            items={availableFormats}
-            onChange={setFormatSelected}
+            items={session.availableFormats}
+            onChange={setSelectedFormat}
           />
           <FilterStyled
             title="Час"
             type="select"
-            items={availableTimes[formatSelected?.id]}
-            onChange={setTimeSelected}
+            items={session.availableTimes[session.formatSelected?.id]}
+            onChange={setSelectedTime}
           />
         </FilmFilters>
       </FilmOptions>
 
       <FilmMain
         film={film}
-        sessionId={timeSelected.sessionId}
-        formatSelected={formatSelected}
-        timeSelected={timeSelected}
+        sessionId={session.timeSelected.sessionId}
+        formatSelected={session.formatSelected}
+        timeSelected={session.timeSelected}
       />
     </FilmContent>
   );

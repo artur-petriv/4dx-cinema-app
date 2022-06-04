@@ -9,7 +9,6 @@ export default class SessionStore {
     this._timeSelected = {};
     this._placesSelected = [];
     this._hallPlaces = {};
-
     this._currentHallPlaces = {};
     makeAutoObservable(this);
   }

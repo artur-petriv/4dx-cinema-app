@@ -4,8 +4,6 @@ import FilterSelect from "./FilterSelect";
 import FilterSkeleton from "./FilterSkeleton";
 
 export default function Select({ items, className, type, title, onChange }) {
-  console.log("items", items);
-
   if (!items) return null;
 
   return (
