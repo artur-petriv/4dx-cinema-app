@@ -1,11 +1,12 @@
-import React from 'react';
-import ButtonIconSvg from './../../svg/ButtonIconSvg';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { Context } from './../../';
-import { observer } from 'mobx-react-lite';
-import { ThemeContext, themes } from '../../contexts/ThemeContext';
-import MoonButtonSvg from './../../svg/MoonButtonSvg';
+import React from "react";
+import ButtonIconSvg from "./../../svg/ButtonIconSvg";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { Context } from "./../../";
+import { observer } from "mobx-react-lite";
+import { ThemeContext, themes } from "../../contexts/ThemeContext";
+import MoonButtonSvg from "./../../svg/MoonButtonSvg";
+import Profile from "../Profile/index.";
 
 const HeaderButtons = observer(() => {
   const { user } = React.useContext(Context);
@@ -23,17 +24,18 @@ const HeaderButtons = observer(() => {
             onClick={() => {
               if (theme === themes.light) setTheme(themes.dark);
               if (theme === themes.dark) setTheme(themes.light);
-            }}>
+            }}
+          >
             {theme === themes.light ? <ButtonIconIcon /> : <MoonButtonSvg />}
           </ButtonIcon>
         )}
       </ThemeContext.Consumer>
 
       {user.isAuth ? (
-        <>
+        <Buttons>
           <LoginLinkButton to="/admin">Адмін панель</LoginLinkButton>
-          <LogOut onClick={signOut}>Вийти</LogOut>
-        </>
+          <Profile />
+        </Buttons>
       ) : (
         <LoginLinkButton to="login">Вхід</LoginLinkButton>
       )}
@@ -95,15 +97,10 @@ const LoginLinkButton = styled(Link)`
   }
 `;
 
-const LogOut = styled.div`
-  margin-left: 20px;
-  padding: 8px 20px;
-  background-color: var(--gray-1);
-  border-radius: 8px;
-  cursor: pointer;
-  line-height: 20px;
-  font-weight: 500;
-  color: var(--gray-10);
+const Buttons = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
 `;
 
 export default HeaderButtons;

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import Poster from '../Poster';
-import CardRating from './CardRating';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Poster from "../Poster";
+import CardRating from "./CardRating";
 
 export default function index({
   film: { id, img, name, genres, formats, ageLimitationId, rating },
@@ -18,7 +18,7 @@ export default function index({
           <CardDescription>
             {genres
               ?.map((genre) => genre.name)
-              .join(', ')
+              .join(", ")
               .toLowerCase()}
           </CardDescription>
         </CardWrap>
@@ -40,8 +40,11 @@ const Card = styled.div`
   flex: 2;
   transition: transform 0.3s, box-shadow 0.3s;
   &:hover {
-    transform: translateY(-4px);
+    /* transform: translateY(-4px); */
     box-shadow: var(--box-shadow-overflow);
+    /* & a {
+      -webkit-line-clamp: unset;
+    } */
   }
 `;
 
@@ -59,13 +62,13 @@ const CardWrap = styled.div`
 `;
 
 const CardTitleLink = styled(Link)`
-  font-size: var(--h7-font-size);
-  font-weight: var(--font-semi-bold);
+  font-size: var(--button-font-size);
+  font-weight: var(--font-bold);
   color: var(--gray-8);
   line-height: var(--line-big);
 `;
 
-const CardDescription = styled.p`
+const CardDescription = styled.div`
   margin: 0;
   line-height: var(--line-large);
   color: var(--gray-6);
