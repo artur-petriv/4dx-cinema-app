@@ -6,34 +6,22 @@ import FilmMain from "./FilmMain";
 import { observer } from "mobx-react-lite";
 import { Context } from "../..";
 
-const FilmContentIndex = observer(({ film }) => {
+const FilmContentIndex = observer(() => {
   const { session } = React.useContext(Context);
 
   const setSelectedTime = (time) => {
     session.setTimeSelected(time);
+    session.setSession({ id: time.sessionId });
   };
 
   const setSelectedFormat = (format) => {
     session.setFormatSelected(format);
   };
 
-  const setFormats = (formats) => {
-    session.setAvailableFormats(formats);
-  };
-
-  const setTimes = (times) => {
-    session.setAvailableTimes(times);
-  };
-
   return (
     <FilmContent>
       <FilmOptions>
-        <FilmDatepicker
-          sessions={film.sessions}
-          filmId={film.id}
-          setFormats={setFormats}
-          setTimes={setTimes}
-        />
+        <FilmDatepicker />
         <FilmFilters>
           <FilterStyled
             title="Формат"
@@ -50,12 +38,7 @@ const FilmContentIndex = observer(({ film }) => {
         </FilmFilters>
       </FilmOptions>
 
-      <FilmMain
-        film={film}
-        sessionId={session.timeSelected.sessionId}
-        formatSelected={session.formatSelected}
-        timeSelected={session.timeSelected}
-      />
+      <FilmMain />
     </FilmContent>
   );
 });

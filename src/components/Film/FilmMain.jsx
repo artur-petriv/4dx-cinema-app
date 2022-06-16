@@ -4,28 +4,11 @@ import FilmHall from "./Hall";
 import Container from "../Container";
 import styled from "styled-components";
 
-export default function FilmMainIndex({
-  film,
-  sessionId,
-  formatSelected,
-  timeSelected,
-}) {
-  const [placesSelected, setPlacesSelected] = React.useState([]);
-
+export default function FilmMainIndex() {
   return (
     <FilmMain>
-      <FilmTicket
-        placesSelected={placesSelected}
-        formatSelected={formatSelected}
-        timeSelected={timeSelected}
-        film={film}
-      />
-      <FilmHall
-        sessionId={sessionId}
-        price={timeSelected.price}
-        setPlacesSelected={setPlacesSelected}
-        placesSelected={placesSelected}
-      />
+      <FilmTicket />
+      <FilmHall />
     </FilmMain>
   );
 }

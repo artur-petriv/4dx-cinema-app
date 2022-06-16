@@ -1,10 +1,10 @@
-import { observer } from 'mobx-react-lite';
-import React from 'react';
-import { Context } from '../..';
-import styled from 'styled-components';
-import PopupSimple from './PopupSimple';
-import PopupForm from './PopupForm';
-import PopupSession from './PopupSession';
+import { observer } from "mobx-react-lite";
+import React from "react";
+import { Context } from "../..";
+import styled from "styled-components";
+import PopupSimple from "./PopupSimple";
+import PopupForm from "./PopupForm";
+import PopupSession from "./PopupSession";
 
 const Popup = () => {
   const { modal } = React.useContext(Context);
@@ -16,11 +16,11 @@ const Popup = () => {
       modal.setVisible(false);
     };
 
-    document.addEventListener('mousedown', listener);
-    document.addEventListener('touchstart', listener);
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
     return () => {
-      document.removeEventListener('mousedown', listener);
-      document.removeEventListener('touchstart', listener);
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
     };
   }, []);
 
@@ -28,9 +28,9 @@ const Popup = () => {
     <PopupOverlay>
       <Box ref={ref}>
         <CloseBtn onClick={() => modal.setVisible(false)} />
-        {modal.type === 'simple' && <PopupSimple />}
-        {modal.type === 'film' && <PopupForm />}
-        {modal.type === 'session' && <PopupSession />}
+        {modal.type === "simple" && <PopupSimple />}
+        {modal.type === "film" && <PopupForm />}
+        {modal.type === "session" && <PopupSession />}
       </Box>
     </PopupOverlay>
   );
@@ -72,7 +72,7 @@ const CloseBtn = styled.div`
   width: 28px;
   cursor: pointer;
   &::before {
-    content: '';
+    content: "";
     width: 3px;
     height: 28px;
     border-radius: 8px;
@@ -82,7 +82,7 @@ const CloseBtn = styled.div`
     transform: rotate(45deg);
   }
   &::after {
-    content: '';
+    content: "";
     width: 3px;
     height: 28px;
     border-radius: 8px;

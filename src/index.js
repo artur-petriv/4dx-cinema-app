@@ -4,10 +4,11 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import UserStore from "./store/UserStore";
+import FilmsStore from "./store/FilmsStore";
 import FilmStore from "./store/FilmStore";
 import ModalStore from "./store/ModalStore";
 import ThemeProvider from "./providers/ThemeProvider";
-import SessionStore from "./store/Session";
+import SessionStore from "./store/SessionStore";
 
 export const Context = React.createContext(null);
 
@@ -15,9 +16,10 @@ ReactDOM.render(
   <React.StrictMode>
     <Context.Provider
       value={{
-        user: new UserStore(),
-        films: new FilmStore(),
         modal: new ModalStore(),
+        user: new UserStore(),
+        films: new FilmsStore(),
+        film: new FilmStore(),
         session: new SessionStore(),
       }}
     >

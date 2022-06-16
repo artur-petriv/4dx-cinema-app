@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react/swiper-react";
 import { Navigation } from "swiper";
 import { fetchDaySessions } from "../../http/filmAPI";
-
+import { Context } from "../..";
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
 import {
@@ -13,12 +13,17 @@ import {
   getWeekDay,
 } from "../../utils/dateConvertor";
 import SwiperArrowSvg from "../../svg/SwiperArrowSvg";
+import { observer } from "mobx-react-lite";
 
 // Detect current day and make list of days for sessions [hardcoded]
 const day = "2022-05-24";
 const availableDaysList = determineDaysBetween(day, 7);
 
-export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
+const FilmDatepicker = observer(() => {
+  const {
+    film: { film },
+    session,
+  } = React.useContext(Context);
   const navigationPrevRef = React.useRef(null);
   const navigationNextRef = React.useRef(null);
   const [currentDay, setCurrentDay] = React.useState("");
@@ -28,9 +33,9 @@ export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
   };
 
   React.useEffect(() => {
-    if (!currentDay || !filmId) return;
+    if (!currentDay || !film.id) return;
 
-    fetchDaySessions(filmId, currentDay).then((sessions) => {
+    fetchDaySessions(film.id, currentDay).then((sessions) => {
       // Find only unique formats, make array
       const formats = sessions.reduce((acc, { format }, index) => {
         if (index === 0) return [...acc, format];
@@ -68,14 +73,14 @@ export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
             ];
       });
 
-      setFormats(formats);
-      setTimes(timeList);
+      session.setAvailableFormats(formats);
+      session.setAvailableTimes(timeList);
     });
-  }, [currentDay, filmId]);
+  }, [currentDay, film.id]);
 
   return (
     <Datapicker>
-      <Swiper2
+      <SwiperStyled
         spaceBetween={0}
         slidesPerView={5}
         centeredSlides={true}
@@ -109,13 +114,13 @@ export default function FilmDatepicker({ filmId, setFormats, setTimes }) {
         <SwiperArrow next ref={navigationNextRef}>
           <SwiperArrowSvg next />
         </SwiperArrow>
-      </Swiper2>
+      </SwiperStyled>
     </Datapicker>
   );
-}
+});
 
 // Styled Components
-const Swiper2 = styled(Swiper)`
+const SwiperStyled = styled(Swiper)`
   position: relative;
   z-index: 1;
 
@@ -221,3 +226,5 @@ const SwiperArrow = styled.div`
     opacity: 1;
   }
 `;
+
+export default FilmDatepicker;

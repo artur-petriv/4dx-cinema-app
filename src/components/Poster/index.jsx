@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
 
 export default function index({ imageUrl }) {
-	return (
+  return (
     <PosterContainer>
       <PosterImg src={imageUrl} />
     </PosterContainer>
@@ -11,11 +11,13 @@ export default function index({ imageUrl }) {
 
 // Styled
 const PosterContainer = styled.div`
-	display: flex;
+  display: flex;
+  /* width: 225px;
+  height: 360px; */
 `;
 
 const PosterImg = styled.img`
-	width: 100%;
+  width: 100%;
   border-radius: var(--border-radius-medium);
   display: block;
   object-fit: cover;

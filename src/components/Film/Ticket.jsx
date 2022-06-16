@@ -1,20 +1,35 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
 import styled from "styled-components";
+import { Context } from "../..";
 import { createTickets } from "../../http/ticketsAPI";
 import { converDateToDDMMYY } from "../../utils/dateConvertor";
 import Button from "../Button";
 import Label from "../Label";
 
-export default function FilmTicket({
-  film,
-  placesSelected,
-  formatSelected,
-  timeSelected,
-}) {
+const FilmTicket = observer(() => {
+  const {
+    session,
+    film: { film },
+  } = React.useContext(Context);
+
+  console.log(session.placesSelected);
+
   const onSubmitTickets = () => {
-    createTickets(placesSelected, timeSelected.sessionId).then((tickets) =>
-      console.log("tickets", tickets)
-    );
+    createTickets(session.placesSelected, session.session.id).then(() => {
+      // Change state for purchased places to "sold" and clear "placesSelected"
+      const hallPlaces = { ...session.hallPlaces };
+
+      session.placesSelected.forEach(
+        (place) =>
+          (hallPlaces[place.row] = hallPlaces[place.row]?.map((item) =>
+            place.place === item.place ? { ...item, status: "sold" } : item
+          ))
+      );
+
+      session.setHallPlaces(hallPlaces);
+      session.setPlacesSelected([]);
+    });
   };
 
   return (
@@ -22,16 +37,19 @@ export default function FilmTicket({
       <FilmTicketCard>
         <Row>
           <Label title="Сеанс" text={film.name} />
-          <Label title="Формат" text={formatSelected.name} />
+          <Label title="Формат" text={session.formatSelected.name} />
         </Row>
         <Row>
-          <Label title="Дата" text={converDateToDDMMYY(timeSelected.date)} />
-          <Label title="Година" text={timeSelected.name} />
+          <Label
+            title="Дата"
+            text={converDateToDDMMYY(session.timeSelected.date)}
+          />
+          <Label title="Година" text={session.timeSelected.name} />
         </Row>
         <Row>
           <Label
             title="Місця"
-            text={placesSelected
+            text={session.placesSelected
               .map(({ row, place }) => row + place)
               .join(", ")}
           />
@@ -40,19 +58,20 @@ export default function FilmTicket({
         <Total>
           <TotalName>Всього</TotalName>
           <TotalPrice>
-            {placesSelected.length * timeSelected.price + " грн"}
+            {session.placesSelected.length * session.timeSelected.price +
+              " грн"}
           </TotalPrice>
         </Total>
       </FilmTicketCard>
 
-      {placesSelected.length > 0 ? (
+      {session.placesSelected.length > 0 ? (
         <SubmitButton onClick={onSubmitTickets}>Оформити</SubmitButton>
       ) : (
         <SubmitButton className="disabled">Місця не вибрано</SubmitButton>
       )}
     </FilmTicketContainer>
   );
-}
+});
 
 // Styled Components
 const FilmTicketContainer = styled.div`
@@ -112,3 +131,5 @@ const SubmitButton = styled(Button)`
     pointer-events: none;
   }
 `;
+
+export default FilmTicket;

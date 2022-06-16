@@ -1,37 +1,35 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
 import styled from "styled-components";
+import { Context } from "../..";
 import { fetchHallRows } from "../../http/filmAPI";
 import { fetchTickets } from "../../http/ticketsAPI";
 import ScreenSvg from "../../svg/ScreenSvg";
 import Seat from "../Seat";
 
-export default function FilmHall({
-  sessionId,
-  setPlacesSelected,
-  placesSelected,
-}) {
+const FilmHall = observer(() => {
   const [rows, setRows] = React.useState({});
-  const [places, setPlaces] = React.useState({});
+  const { session } = React.useContext(Context);
 
   React.useEffect(() => {
     // Fetch all the rows and places for hall
     fetchHallRows().then((data) => {
-      const k = {};
+      const newRows = {};
 
       data.forEach(({ id, row, places }) => {
-        k[row] = [];
+        newRows[row] = [];
         Array(places)
           .fill()
           .forEach((n, index) => {
             const place = index + 1;
-            k[row] = [
-              ...k[row],
+            newRows[row] = [
+              ...newRows[row],
               { place, hallRowId: id, row: row, status: "available" },
             ];
           });
       });
 
-      setRows(k);
+      setRows(newRows);
     });
   }, []);
 
@@ -39,7 +37,7 @@ export default function FilmHall({
     if (Object.keys(rows).length === 0) return;
 
     // Fetch tickets for new session
-    fetchTickets(sessionId).then((data) => {
+    fetchTickets(session.session.id).then((data) => {
       const newRows = { ...rows };
 
       data?.forEach((place) => {
@@ -53,13 +51,13 @@ export default function FilmHall({
         );
       });
 
-      setPlacesSelected([]);
-      setPlaces(newRows);
+      session.setPlacesSelected([]);
+      session.setHallPlaces(newRows);
     });
-  }, [sessionId]);
+  }, [session.session.id]);
 
   const onPlaceSelect = (row, hallRowId, place) => {
-    const currentPlaces = { ...places };
+    const currentPlaces = { ...session.hallPlaces };
 
     // Change or toggle place status in "places" state object
     currentPlaces[row] = currentPlaces[row]?.map((item) =>
@@ -72,20 +70,20 @@ export default function FilmHall({
     );
 
     // Check if "hallRowId" and "place" already exists in "placesSelected" state
-    const isPlaceSelected = placesSelected.some(
+    const isPlaceSelected = session.placesSelected.some(
       (item) => item.hallRowId === hallRowId && item.place === place
     );
 
     // Remove object if place already exists or add new one
     const newPlacesSelected = isPlaceSelected
-      ? placesSelected.filter((item) => {
+      ? session.placesSelected.filter((item) => {
           if (item.hallRowId === hallRowId) {
             if (item.place === place) return false;
             return true;
           }
           return true;
         })
-      : [...placesSelected, { hallRowId, row, place }];
+      : [...session.placesSelected, { hallRowId, row, place }];
 
     // Sort places by rowId and places like ASC sorting
     const sortedPlacesSelected = newPlacesSelected.sort((a, b) => {
@@ -94,8 +92,8 @@ export default function FilmHall({
       return a.place - b.place;
     });
 
-    setPlaces(currentPlaces);
-    setPlacesSelected(sortedPlacesSelected);
+    session.setHallPlaces(currentPlaces);
+    session.setPlacesSelected(sortedPlacesSelected);
   };
 
   return (
@@ -105,20 +103,22 @@ export default function FilmHall({
         <ScreenTitle>Екран</ScreenTitle>
       </Screen>
       <Seats>
-        {Object.keys(places)?.map((row) => (
+        {Object.keys(session.hallPlaces)?.map((row) => (
           <Row key={row}>
             <RowTitle>{row}</RowTitle>
             <RowContent>
-              {places[row]?.map(({ place, status, hallRowId, row }) => (
-                <Seat
-                  key={place}
-                  place={place}
-                  hallRowId={hallRowId}
-                  status={status}
-                  row={row}
-                  onClickPlace={onPlaceSelect}
-                />
-              ))}
+              {session.hallPlaces[row]?.map(
+                ({ place, status, hallRowId, row }) => (
+                  <Seat
+                    key={place}
+                    place={place}
+                    hallRowId={hallRowId}
+                    status={status}
+                    row={row}
+                    onClickPlace={onPlaceSelect}
+                  />
+                )
+              )}
             </RowContent>
             <RowTitle>{row}</RowTitle>
           </Row>
@@ -126,7 +126,7 @@ export default function FilmHall({
       </Seats>
     </FilmHallContainer>
   );
-}
+});
 
 // Styled Components
 const FilmHallContainer = styled.div`
@@ -145,8 +145,6 @@ const Screen = styled.div``;
 const Seats = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
-  /* justify-content: center; */
   gap: 24px;
 `;
 
@@ -188,3 +186,5 @@ const ScreenTitle = styled.div`
   font-size: 16px;
   line-height: 1;
 `;
+
+export default FilmHall;
