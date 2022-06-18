@@ -47,11 +47,15 @@ const FilmCard = observer(() => {
               <Devider />
             </TitleSkeleton>
             <TextInfo>
-              <Skeleton
-                height={17}
-                borderRadius="var(--border-radius-small)"
-                count={6}
-              />
+              {Array(6)
+                .fill()
+                .map((index) => (
+                  <Skeleton
+                    key={index}
+                    height={17}
+                    borderRadius="var(--border-radius-small)"
+                  />
+                ))}
             </TextInfo>
             <FilmRatingSkeleton>
               <Skeleton

@@ -1,17 +1,27 @@
 import React from "react";
+import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
+import "react-loading-skeleton/dist/skeleton.css";
 
-export default function Label({ title, text }) {
+export default function Label({ title, text, loading }) {
   return (
     <LabelContainer>
       <LabelTitle>{title}</LabelTitle>
-      <LabelText>{text}</LabelText>
+      {loading ? (
+        <LabelText>
+          <Skeleton />
+        </LabelText>
+      ) : (
+        <LabelText>{text}</LabelText>
+      )}
     </LabelContainer>
   );
 }
 
 // Styled Components
-const LabelContainer = styled.div``;
+const LabelContainer = styled.div`
+  flex: 1 0;
+`;
 
 const LabelTitle = styled.div`
   color: var(--gray-4);

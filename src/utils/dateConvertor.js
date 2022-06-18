@@ -51,7 +51,7 @@ const determineDaysBetween = (startDate, count) => {
 };
 
 // Convert YYYY-MM-DD to DD.MM.YY
-const converDateToDDMMYY = (date) => {
+const convertDateToDDMMYY = (date) => {
   const newDate = new Date(date);
 
   return `${("0" + newDate.getDate()).slice(-2)}.${(
@@ -65,5 +65,5 @@ module.exports = {
   getMonthName,
   getMonthDay,
   determineDaysBetween,
-  converDateToDDMMYY,
+  convertDateToDDMMYY,
 };

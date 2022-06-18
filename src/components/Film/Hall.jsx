@@ -99,30 +99,32 @@ const FilmHall = observer(() => {
   return (
     <FilmHallContainer>
       <Screen>
-        <ScreenIcon />
+        <ScreenIcon className={session.loading && "loading"} />
         <ScreenTitle>Екран</ScreenTitle>
       </Screen>
       <Seats>
-        {Object.keys(session.hallPlaces)?.map((row) => (
-          <Row key={row}>
-            <RowTitle>{row}</RowTitle>
-            <RowContent>
-              {session.hallPlaces[row]?.map(
-                ({ place, status, hallRowId, row }) => (
-                  <Seat
-                    key={place}
-                    place={place}
-                    hallRowId={hallRowId}
-                    status={status}
-                    row={row}
-                    onClickPlace={onPlaceSelect}
-                  />
-                )
-              )}
-            </RowContent>
-            <RowTitle>{row}</RowTitle>
-          </Row>
-        ))}
+        {session.loading
+          ? "loading"
+          : Object.keys(session.hallPlaces)?.map((row) => (
+              <Row key={row}>
+                <RowTitle>{row}</RowTitle>
+                <RowContent>
+                  {session.hallPlaces[row]?.map(
+                    ({ place, status, hallRowId, row }) => (
+                      <Seat
+                        key={place}
+                        place={place}
+                        hallRowId={hallRowId}
+                        status={status}
+                        row={row}
+                        onClickPlace={onPlaceSelect}
+                      />
+                    )
+                  )}
+                </RowContent>
+                <RowTitle>{row}</RowTitle>
+              </Row>
+            ))}
       </Seats>
     </FilmHallContainer>
   );
@@ -177,6 +179,9 @@ const RowContent = styled.div`
 const ScreenIcon = styled(ScreenSvg)`
   width: 100%;
   stroke: var(--brand-color);
+  &.loading {
+    stroke: var(--gray-2);
+  }
 `;
 
 const ScreenTitle = styled.div`

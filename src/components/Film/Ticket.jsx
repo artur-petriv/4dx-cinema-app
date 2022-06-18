@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Context } from "../..";
 import { createTickets } from "../../http/ticketsAPI";
-import { converDateToDDMMYY } from "../../utils/dateConvertor";
+import { convertDateToDDMMYY } from "../../utils/dateConvertor";
 import Button from "../Button";
 import Label from "../Label";
 
@@ -13,7 +13,8 @@ const FilmTicket = observer(() => {
     film: { film },
   } = React.useContext(Context);
 
-  console.log(session.placesSelected);
+  const totalPrice =
+    session.placesSelected?.length * session.timeSelected?.price || 0;
 
   const onSubmitTickets = () => {
     createTickets(session.placesSelected, session.session.id).then(() => {
@@ -36,31 +37,41 @@ const FilmTicket = observer(() => {
     <FilmTicketContainer>
       <FilmTicketCard>
         <Row>
-          <Label title="Сеанс" text={film.name} />
-          <Label title="Формат" text={session.formatSelected.name} />
-        </Row>
-        <Row>
+          <Label loading={session.loading} title="Сеанс" text={film.name} />
           <Label
-            title="Дата"
-            text={converDateToDDMMYY(session.timeSelected.date)}
+            loading={session.loading}
+            title="Формат"
+            text={session.formatSelected.name}
           />
-          <Label title="Година" text={session.timeSelected.name} />
         </Row>
         <Row>
           <Label
+            loading={session.loading}
+            title="Дата"
+            text={
+              session.timeSelected.date &&
+              convertDateToDDMMYY(session.timeSelected.date)
+            }
+          />
+          <Label
+            loading={session.loading}
+            title="Година"
+            text={session.timeSelected.name}
+          />
+        </Row>
+        <Row>
+          <Label
+            loading={session.loading}
             title="Місця"
             text={session.placesSelected
-              .map(({ row, place }) => row + place)
-              .join(", ")}
+              ?.map(({ row, place }) => row + place)
+              ?.join(", ")}
           />
         </Row>
 
         <Total>
           <TotalName>Всього</TotalName>
-          <TotalPrice>
-            {session.placesSelected.length * session.timeSelected.price +
-              " грн"}
-          </TotalPrice>
+          <TotalPrice>{totalPrice + " грн"}</TotalPrice>
         </Total>
       </FilmTicketCard>
 
@@ -87,6 +98,7 @@ const Row = styled.div`
   justify-content: space-between;
   flex: 1;
   border-top: 1px solid var(--gray-1);
+  gap: 16px;
 
   &:first-child {
     padding: 0 0 16px;

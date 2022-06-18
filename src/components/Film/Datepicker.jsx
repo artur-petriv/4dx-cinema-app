@@ -14,6 +14,8 @@ import {
 } from "../../utils/dateConvertor";
 import SwiperArrowSvg from "../../svg/SwiperArrowSvg";
 import { observer } from "mobx-react-lite";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 // Detect current day and make list of days for sessions [hardcoded]
 const day = "2022-05-24";
@@ -31,6 +33,20 @@ const FilmDatepicker = observer(() => {
   const onSwiperChange = (swiper) => {
     setCurrentDay(availableDaysList[swiper.activeIndex]);
   };
+
+  React.useEffect(() => {
+    session.setLoading(true);
+    const timer = setTimeout(() => {
+      setCurrentDay(availableDaysList[0]);
+      session.setLoading(false);
+    }, 4000);
+
+    return () => {
+      console.log("unmount");
+      clearTimeout(timer);
+      session.reset();
+    };
+  }, []);
 
   React.useEffect(() => {
     if (!currentDay || !film.id) return;
@@ -80,41 +96,57 @@ const FilmDatepicker = observer(() => {
 
   return (
     <Datapicker>
-      <SwiperStyled
-        spaceBetween={0}
-        slidesPerView={5}
-        centeredSlides={true}
-        slideToClickedSlide={true}
-        initialSlide={0}
-        modules={[Navigation]}
-        onSlideChange={onSwiperChange}
-        onSwiper={onSwiperChange}
-        navigation={{
-          prevEl: navigationPrevRef.current,
-          nextEl: navigationNextRef.current,
-        }}
-        onBeforeInit={(swiper) => {
-          swiper.params.navigation.prevEl = navigationPrevRef.current;
-          swiper.params.navigation.nextEl = navigationNextRef.current;
-        }}
-        style={{ width: "500px" }}
-      >
-        {availableDaysList?.map((date, i) => (
-          <SwiperSlide key={i}>
-            <DatepickerCell>
-              <Month className="month">{getMonthName(date)}</Month>
-              <Number className="number">{getMonthDay(date)}</Number>
-              <Day className="day">{getWeekDay(date)}</Day>
-            </DatepickerCell>
-          </SwiperSlide>
-        ))}
-        <SwiperArrow left ref={navigationPrevRef}>
-          <SwiperArrowSvg left />
-        </SwiperArrow>
-        <SwiperArrow next ref={navigationNextRef}>
-          <SwiperArrowSvg next />
-        </SwiperArrow>
-      </SwiperStyled>
+      {session.loading ? (
+        <SwiperSkeleton>
+          <SwiperList>
+            {Array(5)
+              .fill()
+              .map((n, i) => (
+                <Skeleton
+                  key={i}
+                  height={72}
+                  width={90}
+                  borderRadius="var(--border-radius-small)"
+                />
+              ))}
+          </SwiperList>
+        </SwiperSkeleton>
+      ) : (
+        <SwiperStyled
+          spaceBetween={0}
+          slidesPerView={5}
+          centeredSlides={true}
+          slideToClickedSlide={true}
+          initialSlide={0}
+          modules={[Navigation]}
+          onSlideChange={onSwiperChange}
+          navigation={{
+            prevEl: navigationPrevRef.current,
+            nextEl: navigationNextRef.current,
+          }}
+          onBeforeInit={(swiper) => {
+            swiper.params.navigation.prevEl = navigationPrevRef.current;
+            swiper.params.navigation.nextEl = navigationNextRef.current;
+          }}
+          style={{ width: "500px" }}
+        >
+          {availableDaysList?.map((date, i) => (
+            <SwiperSlide key={i}>
+              <DatepickerCell>
+                <Month className="month">{getMonthName(date)}</Month>
+                <Number className="number">{getMonthDay(date)}</Number>
+                <Day className="day">{getWeekDay(date)}</Day>
+              </DatepickerCell>
+            </SwiperSlide>
+          ))}
+          <SwiperArrow left ref={navigationPrevRef}>
+            <SwiperArrowSvg left />
+          </SwiperArrow>
+          <SwiperArrow next ref={navigationNextRef}>
+            <SwiperArrowSvg next />
+          </SwiperArrow>
+        </SwiperStyled>
+      )}
     </Datapicker>
   );
 });
@@ -225,6 +257,18 @@ const SwiperArrow = styled.div`
   &:hover {
     opacity: 1;
   }
+`;
+
+const SwiperSkeleton = styled.div`
+  display: flex;
+`;
+
+const SwiperList = styled.div`
+  padding: 8px 0;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 12px;
 `;
 
 export default FilmDatepicker;

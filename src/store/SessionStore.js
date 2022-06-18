@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 export default class SessionStore {
   constructor() {
     this._session = {};
+    this._loading = true;
     this._availableFormats = [];
     this._availableTimes = {};
     this._formatSelected = {};
@@ -13,8 +14,24 @@ export default class SessionStore {
     makeAutoObservable(this);
   }
 
+  reset() {
+    this._session = {};
+    this._loading = true;
+    this._availableFormats = [];
+    this._availableTimes = {};
+    this._formatSelected = {};
+    this._timeSelected = {};
+    this._placesSelected = [];
+    this._hallPlaces = {};
+    this._currentHallPlaces = {};
+  }
+
   setSession(session) {
     this._session = session;
+  }
+
+  setLoading(boolean) {
+    this._loading = boolean;
   }
 
   setAvailableFormats(formats) {
@@ -47,6 +64,10 @@ export default class SessionStore {
 
   get session() {
     return this._session;
+  }
+
+  get loading() {
+    return this._loading;
   }
 
   get availableFormats() {

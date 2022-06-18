@@ -74,7 +74,7 @@ const PopupSession = observer(() => {
       !filmSelected.id ||
       !formatSelected.id
     ) {
-      alert("Не заповлене хочаб одне поле");
+      alert("Не заповнене хочаб одне поле");
       return;
     }
 
@@ -83,7 +83,6 @@ const PopupSession = observer(() => {
       filmId: filmSelected.id,
       formatId: formatSelected.id,
     }).then((data) => {
-      console.log(data);
       setFormValues(initialFormValues);
       modal.setVisible(false);
     });

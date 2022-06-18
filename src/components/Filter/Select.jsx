@@ -1,20 +1,30 @@
 import React from "react";
+import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
 import FilterSelect from "./FilterSelect";
-import FilterSkeleton from "./FilterSkeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
-export default function Select({ items, className, type, title, onChange }) {
+export default function Select({
+  loading,
+  items = [],
+  className,
+  type,
+  title,
+  onChange,
+}) {
   if (!items) return null;
 
   return (
     <FilterWrap className={className}>
-      {items?.length === 0 ? (
-        <FilterSkeleton type={type} />
+      <FilterTitle>{title}</FilterTitle>
+      {loading || items.length === 0 ? (
+        <Skeleton
+          style={{ minWidth: "120px", alignItems: "center" }}
+          height={41}
+          borderRadius="var(--border-radius-medium)"
+        />
       ) : (
-        <>
-          <FilterTitle>{title}</FilterTitle>
-          <FilterSelect items={items} setSelect={onChange} />
-        </>
+        <FilterSelect items={items} setSelect={onChange} />
       )}
     </FilterWrap>
   );

@@ -24,15 +24,17 @@ const FilmContentIndex = observer(() => {
         <FilmDatepicker />
         <FilmFilters>
           <FilterStyled
+            loading={session.loading}
             title="Формат"
             type="select"
             items={session.availableFormats}
             onChange={setSelectedFormat}
           />
           <FilterStyled
+            loading={session.loading}
             title="Час"
             type="select"
-            items={session.availableTimes[session.formatSelected?.id]}
+            items={session.availableTimes[session.formatSelected.id]}
             onChange={setSelectedTime}
           />
         </FilmFilters>

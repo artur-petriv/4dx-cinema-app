@@ -1,11 +1,11 @@
-import { observer } from 'mobx-react-lite';
-import React from 'react';
-import styled from 'styled-components';
-import { Context } from '../..';
-import FilterCheckboxList from './FilterCheckboxList';
-import FilterRadioList from './FilterRadioList';
-import FilterSelect from './FilterSelect';
-import FilterSkeleton from './FilterSkeleton';
+import { observer } from "mobx-react-lite";
+import React from "react";
+import styled from "styled-components";
+import { Context } from "../..";
+import FilterCheckboxList from "./FilterCheckboxList";
+import FilterRadioList from "./FilterRadioList";
+import FilterSelect from "./FilterSelect";
+import FilterSkeleton from "./FilterSkeleton";
 
 const Filter = observer(({ title, type, items, className }) => {
   const { films } = React.useContext(Context);
@@ -18,9 +18,12 @@ const Filter = observer(({ title, type, items, className }) => {
     />
   );
 
-  if (type === 'checkbox')
-    FilterType = <FilterCheckboxList items={items} title={title} className={className} />;
-  if (type === 'radio') FilterType = <FilterRadioList items={items} className={className} />;
+  if (type === "checkbox")
+    FilterType = (
+      <FilterCheckboxList items={items} title={title} className={className} />
+    );
+  if (type === "radio")
+    FilterType = <FilterRadioList items={items} className={className} />;
 
   return (
     <FilterWrap className={className}>
