@@ -1,17 +1,11 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable } from "mobx";
 
 export default class ModalStore {
   constructor() {
-    // this._options = {
-    //   visible: false,
-    //   type: "simple",
-    //   title: "Добавити вікову категорію",
-    //   name: "ageLimits",
-    // };
     this._visible = false;
-    this._type = 'simple';
-    this._title = 'Добавити вікову категорію';
-    this._name = 'genres';
+    this._type = "simple";
+    this._title = "Добавити вікову категорію";
+    this._name = "genres";
     makeAutoObservable(this);
   }
 

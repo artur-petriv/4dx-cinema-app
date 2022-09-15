@@ -6,6 +6,7 @@ import { fetchHallRows } from "../../http/filmAPI";
 import { fetchTickets } from "../../http/ticketsAPI";
 import ScreenSvg from "../../svg/ScreenSvg";
 import Seat from "../Seat";
+import SeatSkeleton from "../Seat/Skeleton";
 
 const FilmHall = observer(() => {
   const [rows, setRows] = React.useState({});
@@ -103,28 +104,46 @@ const FilmHall = observer(() => {
         <ScreenTitle>Екран</ScreenTitle>
       </Screen>
       <Seats>
-        {session.loading
-          ? "loading"
-          : Object.keys(session.hallPlaces)?.map((row) => (
-              <Row key={row}>
-                <RowTitle>{row}</RowTitle>
-                <RowContent>
-                  {session.hallPlaces[row]?.map(
-                    ({ place, status, hallRowId, row }) => (
-                      <Seat
-                        key={place}
-                        place={place}
-                        hallRowId={hallRowId}
-                        status={status}
-                        row={row}
-                        onClickPlace={onPlaceSelect}
-                      />
-                    )
-                  )}
-                </RowContent>
-                <RowTitle>{row}</RowTitle>
-              </Row>
-            ))}
+        {session.loading ? (
+          <>
+            {Array(4)
+              .fill(0)
+              .map((n, i) => (
+                <Row key={i}>
+                  <RowTitle>O</RowTitle>
+                  <RowContent>
+                    {Array(10)
+                      .fill(0)
+                      .map((n, i) => (
+                        <SeatSkeleton key={i} />
+                      ))}
+                  </RowContent>
+                  <RowTitle>O</RowTitle>
+                </Row>
+              ))}
+          </>
+        ) : (
+          Object.keys(session.hallPlaces)?.map((row) => (
+            <Row key={row}>
+              <RowTitle>{row}</RowTitle>
+              <RowContent>
+                {session.hallPlaces[row]?.map(
+                  ({ place, status, hallRowId, row }) => (
+                    <Seat
+                      key={place}
+                      place={place}
+                      hallRowId={hallRowId}
+                      status={status}
+                      row={row}
+                      onClickPlace={onPlaceSelect}
+                    />
+                  )
+                )}
+              </RowContent>
+              <RowTitle>{row}</RowTitle>
+            </Row>
+          ))
+        )}
       </Seats>
     </FilmHallContainer>
   );
